@@ -1,0 +1,14 @@
+
+---
+
+export function getStaticPaths() {
+    return [
+      {params: {portfolio: 'clifford'}},
+      {params: {portfolio: 'rover'}},
+      {params: {portfolio: 'spot'}},
+    ];
+  }
+  
+  const { portfolio } = Astro.params;
+  ---
+  <div>Good site, {portfolio}!</div> 

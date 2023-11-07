@@ -1,0 +1,50 @@
+---
+// import Cards from '@/components/Cards';
+import Layout from '@/components/Layout.astro';
+import ProjectCards from '@/components/ProjectCards';
+import '../styles/globals.css';
+---
+
+<Layout title='Brayan M. Cuenca Portfolio'>
+	
+  <div class='container mx-auto px-12  md:px-12'>
+    <section class='text-center min-w-min md:w-auto lg:w-auto'>
+      <h1
+        class='text-4xl md:text-5xl xl:text-6xl font-geist-medium mt-4  tracking-tight'
+      >
+        Hi, I'm Brayan.
+        <br />
+         I'm a <span class='text-orange-500'>Software Developer</span> based in
+		
+        San Francisco, CA.
+	
+      </h1>
+	  <hr class="border-b-1 border-orange-500 my-8 mx-auto w-full"/>
+      <p
+        class='text-lg md:text-lg xl:text-xl text-gray-800 mt-6   leading-loose '
+      >
+	  I'm a self-taught and passionate software engineer who enjoys crafting user experiences through user interface (UI) design. Currently, I'm on a journey to integrate AI into software, leaning more into SaaS, improving my craft, and overall finding myself as a developer.
+	</p>
+    </section>
+
+    <div class='mt-12 text-center'>
+      <h2
+        class='text-3xl md:text-3xl xl:text-5xl font-geist-medium mt-4 tracking-tight leading-tight'
+      >
+        Portfolio
+      </h2>
+	  
+      <p
+        class='text-lg md:text-lg xl:text-xl text-gray-700 mt-6 font-normal leading-relaxed'
+      >
+        Here are some of the projects I've worked on recently.
+      </p>
+	  <hr class="border-b-1 border-orange-500 my-8 mx-auto w-full"/>
+
+      <div id='portfolio' class='space-y-20'>
+        <ProjectCards />
+      </div>
+    </div>
+	
+  </div>
+</Layout>
