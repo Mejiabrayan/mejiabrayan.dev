@@ -1,6 +1,6 @@
 # mejiabrayan.dev
 
-![Portfolio](/portfolio.png)
+![Portfolio](/public/portfolio.png)
 
 This project is an open-source portfolio template website. It's designed to showcase your projects and skills in a clean, modern layout.
 
