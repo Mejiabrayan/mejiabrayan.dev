@@ -18,10 +18,6 @@ const itemMotion = {
   hidden: { opacity: 0, x: -100 },
 };
 
-const itemMotionDesktop = {
-  visible: { opacity: 1, x: 0 },
-  hidden: { opacity: 1, x: 0 },
-};
 const navLinks = [
   { name: 'Home', href: '/', id: 1 },
   { name: 'Portfolio', href: '#portfolio', id: 2 },
@@ -38,7 +34,7 @@ export default function Nav() {
       <div className='flex items-center space-x-8'>
         <div className='hidden xl:flex space-x-8'>
           {navLinks.map((link) => (
-            <a key={link.id} href={link.href} className='text-xl font-geist-regular'>
+            <a key={link.id} href={link.href} className='text-xl font-geist-regular hover:underline'>
               {link.name}
             </a>
           ))}
