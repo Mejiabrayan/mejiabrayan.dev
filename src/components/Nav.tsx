@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useMediaQuery } from 'usehooks-ts';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 const navMotion = {
   visible: {
@@ -34,7 +34,11 @@ export default function Nav() {
       <div className='flex items-center space-x-8'>
         <div className='hidden xl:flex space-x-8'>
           {navLinks.map((link) => (
-            <a key={link.id} href={link.href} className='text-xl font-geist-regular hover:underline'>
+            <a
+              key={link.id}
+              href={link.href}
+              className='text-xl font-geist-regular hover:underline'
+            >
               {link.name}
             </a>
           ))}
@@ -82,12 +86,11 @@ export default function Nav() {
         </motion.div>
       )}
 
-
-        <img
-          src='/avatar.png'
-          alt='Your Avatar'
-          className='hidden xl:block h-12 w-12 rounded-full shadow-lg'
-        />
+      <img
+        src='/avatar.png'
+        alt='Your Avatar'
+        className='hidden xl:block h-12 w-12 rounded-full shadow-lg'
+      />
     </nav>
   );
 }
