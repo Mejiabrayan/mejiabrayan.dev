@@ -5,7 +5,6 @@
 This project is an open-source portfolio template website. It's designed to showcase your projects and skills in a clean, modern layout.
 
 
-
 ## Tech Stack
 
 The project uses a combination of modern web technologies:
