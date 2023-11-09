@@ -1,4 +1,4 @@
-# mejiabrayan.dev
+# Astro Portfolio Template
 
 ![Portfolio](/public/portfolio.png)
 
