@@ -96,3 +96,7 @@ html {
   animation: jump 1s ease-in-out 0.3s;
   
 }
+
+html {
+  scroll-behavior: smooth;
+}

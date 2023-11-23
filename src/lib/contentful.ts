@@ -4,7 +4,7 @@ import type { EntryFieldTypes } from "contentful";
 export interface BlogPost {
   contentTypeId: "blogPost",
   fields: {
-    title: EntryFieldTypes.Text
+    title: EntryFieldTypes.Text,
     content: EntryFieldTypes.RichText,
     date: EntryFieldTypes.Date,
     description: EntryFieldTypes.Text,
@@ -12,10 +12,25 @@ export interface BlogPost {
   }
 }
 
-export interface fetchAllBlogPosts {
+
+
+export interface Project {
   contentTypeId: "project",
+  fields: {
+    title: EntryFieldTypes.Text,
+    description: EntryFieldTypes.Text,
+    date: EntryFieldTypes.Date,
+    content: EntryFieldTypes.RichText,
+    image: EntryFieldTypes.Object,
+    url: EntryFieldTypes.Text,
+    caseStudy: EntryFieldTypes.Object,
+    slug: EntryFieldTypes.Text
+
+  }
 }
 
+
+// creates a new Contentful client instance 
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV

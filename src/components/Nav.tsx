@@ -20,8 +20,9 @@ const itemMotion = {
 
 const navLinks = [
   { name: 'Home', href: '/', id: 1 },
-  { name: 'Portfolio', href: '#portfolio', id: 2 },
-  { name: 'Contact', href: '#contact', id: 3 },
+  { name: 'Projects', href: '#projects', id: 2 },
+  { name: 'Blog', href: '#blogs', id: 3 },
+  { name: 'Contact', href: '#contact', id: 4 },
 ];
 
 export default function Nav() {
@@ -30,19 +31,24 @@ export default function Nav() {
   console.log(matches);
 
   return (
-    <nav className='relative mx-8 mb-24 flex justify-between items-center pt-12 pb-6 font-geist-medium md:mx-16 lg:mx-32'>
-      <div className='flex items-center space-x-8'>
-        <div className='hidden xl:flex space-x-8'>
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className='text-xl font-geist-regular hover:underline'
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+    <nav className='relative mx-8 mb-24 flex justify-between items-center pt-12 pb-6 font-geist-medium md:mx-16 lg:mx-32 border-b border-gray-800'>
+      <div className='flex items-center space-x-4 xl:space-x-8'>
+        <h1 className='text-sm xl:text-base font-semibold text-white'>
+          Brayan M. Cuenca
+        </h1>
+        <span className='text-sm xl:text-base text-gray-400'>Software Engineer</span>
+      </div>
+
+      <div className='hidden xl:flex space-x-8'>
+        {navLinks.map((link) => (
+          <a
+            key={link.id}
+            href={link.href}
+            className='text-base font-geist-regular hover:underline text-gray-400'
+          >
+            {link.name}
+          </a>
+        ))}
       </div>
 
       {!matches && (
@@ -52,11 +58,11 @@ export default function Nav() {
         >
           <motion.span
             animate={{ rotateZ: toggled ? 45 : 0, y: toggled ? 8 : 0 }}
-            className='block h-0.5 w-8 bg-black'
+            className='block h-0.5 w-8 bg-gray-700'
           ></motion.span>
           <motion.span
             animate={{ width: toggled ? 0 : 24 }}
-            className='block h-0.5 w-6 bg-black'
+            className='block h-0.5 w-6 bg-gray-700'
           ></motion.span>
           <motion.span
             animate={{
@@ -64,7 +70,7 @@ export default function Nav() {
               y: toggled ? -8 : 0,
               width: toggled ? 32 : 16,
             }}
-            className='block h-0.5 w-4 bg-black'
+            className='block h-0.5 w-4 bg-gray-700'
           ></motion.span>
         </div>
       )}
@@ -74,9 +80,9 @@ export default function Nav() {
           variants={navMotion}
           animate='visible'
           initial='hidden'
-          className='fixed flex bg-white bottom-0 right-0 w-full h-screen items-center justify-center' // Move to the far right with right-0
+          className='fixed flex bg-[#0c0c10] bottom-0 right-0 w-full h-screen items-center justify-center text-white' // Move to the far right with right-0
         >
-          <div className='flex flex-col gap-24 text-lg'>
+          <div className='flex flex-col gap-24 text-xl'>
             {navLinks.map((link) => (
               <motion.a key={link.id} variants={itemMotion} href={link.href}>
                 {link.name}
@@ -85,12 +91,6 @@ export default function Nav() {
           </div>
         </motion.div>
       )}
-
-      <img
-        src='/avatar.png'
-        alt='Your Avatar'
-        className='hidden xl:block h-12 w-12 rounded-full shadow-lg'
-      />
     </nav>
   );
 }

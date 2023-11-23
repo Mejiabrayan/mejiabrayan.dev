@@ -1,48 +1,72 @@
 ---
 // import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
-import ProjectCards from '@/components/ProjectCards';
+import Projects from '@/components/Projects';
+import Section from '@/components/Section';
 import '../styles/globals.css';
+import { contentfulClient, type Project } from '@/lib/contentful';
+import { Button } from '@/components/ui/button';
+
+const entries = await contentfulClient.getEntries<Project>({
+  content_type: 'project',
+});
+
+const projects = entries.items.map((item) => {
+  const { title, image, description, slug } = item.fields;
+  return {
+    title,
+    image,
+    description,
+    slug,
+  };
+});
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <div class='container mx-auto px-4 md:px-8 lg:px-16 xl:px-20 2xl:px-32'>
-    <section class='text-center min-w-min md:w-auto lg:w-auto'>
-      <h1
-        class='text-4xl md:text-3xl xl:text-6xl font-geist-medium mt-4 tracking-tight'
-      >
-        Hi, I'm Brayan.
-        <br />
-         I'm a <span class='text-orange-500'>Software Developer</span> based in
-        San Francisco, CA.
-      </h1>
-      <hr class='border-b-1 border-orange-500 my-8 mx-auto w-full' />
-      <p class='text-lg md:text-lg xl:text-xl text-gray-800 mt-6 leading-loose'>
-        I'm a self-taught and passionate software engineer who enjoys crafting
-        user experiences through user interface (UI) design. Currently, I'm on a
-        journey to integrate AI into software, leaning more into SaaS, improving
-        my craft, and overall finding myself as a developer.
-      </p>
-    </section>
-
-    <section class='mt-12 text-center mb-12'>
-      <h2
-        class='text-3xl md:text-3xl xl:text-5xl font-geist-medium mt-4 tracking-tight leading-tight'
-      >
-        Portfolio
-      </h2>
-
-      <p
-        class='text-lg md:text-lg xl:text-xl text-gray-700 mt-6 font-normal leading-relaxed'
-      >
-        Here are some of the projects I've worked on recently.
-      </p>
-      <hr class='border-b-1 border-orange-500 my-8 mx-auto w-full' />
-
-      <div id='portfolio' class='space-y-20'>
-        <ProjectCards />
+  <div class='mx-auto bg-[#0b0d10] max-w-screen-xl h-screen'>
+    <Section>
+      <div class='md:flex-1'>
+        <p class='text-md md:text-lg xl:text-xl text-white leading-loose'>
+          Enthusiastic about the Web. I'm currently on a journey building tools
+          with AI, leaning more into SaaS, immersing myself in Typescript &
+          overall finding myself as a developer and the problems I want to
+          solve.
+        </p>
+        <Button className='mt-8' variant={'outline'}>
+          Let's work together
+        </Button>
       </div>
-    </section>
+    </Section>
 
+    <hr class='border-t border-gray-800' />
+    <section
+      id='projects'
+      class='px-4 md:px-8 lg:px-0 xl:px-32 2xl:px-40 mt-24 mb-12 text-left'
+    >
+      <h3 class='text-lg md:text-xl lg:text-xl text-white mb-4'>
+        Latest <br />
+        <span class='text-gray-400'>Projects</span>
+      </h3>
+      <p class='text-sm md:text-base xl:text-lg text-gray-500 leading-relaxed'>
+        Here are some of my latest projects. I'm always working on something
+        new, so check back often.
+      </p>
+
+      {
+        projects.map((project, index) => (
+          <div>
+            <a href={`/projects/${project.slug}/`}>
+              {' '}
+              <Projects
+                client:load
+                title={project.title}
+                image={project.image}
+                description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
+              />
+            </a>
+          </div>
+        ))
+      }
+    </section>
   </div>
 </Layout>

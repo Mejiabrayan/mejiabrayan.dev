@@ -1,0 +1,56 @@
+---
+import Layout from '@/components/Layout.astro';
+import { Button } from '@/components/ui/button';
+import { contentfulClient, type Project } from '@/lib/contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+export async function getStaticPaths() {
+  const { items } = await contentfulClient.getEntries<Project>({
+    content_type: 'project',
+  });
+
+  const pages = items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      image: item.fields.image,
+      content: documentToHtmlString(item.fields.content),
+      date: new Date(item.fields.date).toLocaleDateString(),
+    },
+  }));
+  return pages;
+}
+
+const { content, title, date, image } = Astro.props;
+---
+
+<html lang='en'>
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    <Layout title='Portfolio'>
+      <section class='text-center min-w-min md:w-auto lg:w-auto'>
+        <h1
+          class='text-4xl md:text-3xl xl:text-6xl font-geist-medium mt-4 tracking-tight text-white'
+        >
+          {title}
+        </h1>
+        <p
+          class='text-xl md:text-base xl:text-xl font-geist-light mt-4 text-white'
+        >
+          {date}
+        </p>
+        <article
+          set:html={content}
+          class='prose md:prose-base lg:prose-lg prose-pre:prose-lg text-white'
+        />
+        <div class='flex justify-center mt-8'>
+          <a href='/portfolio' class='text-white'>
+            Back to Portfolio
+          </a>
+        <hr class='border-b border-gray-800' />
+      </section>
+    </Layout>
+  </body>
+</html>

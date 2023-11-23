@@ -1,0 +1,36 @@
+---
+import { contentfulClient } from '../../lib/contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import type { BlogPost } from '../../lib/contentful';
+import Layout from '@/components/Layout.astro';
+
+export async function getStaticPaths() {
+  const { items } = await contentfulClient.getEntries<BlogPost>({
+    content_type: 'blogPost',
+  });
+  const pages = items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: documentToHtmlString(item.fields.content),
+      date: new Date(item.fields.date).toLocaleDateString(),
+    },
+  }));
+  return pages;
+}
+
+const { content, title, date } = Astro.props;
+---
+
+<html lang='en'>
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    <Layout title='{title}'>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl mb-8 text-white">{title}</h1>
+      <time>{date}</time>
+      <article set:html={content}  class="prose md:prose-base lg:prose-lg prose-pre:prose-lg text-white" />
+    </Layout>
+  </body>
+</html>
