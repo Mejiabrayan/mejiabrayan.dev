@@ -2,12 +2,14 @@
 // import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
 import Projects from '@/components/Projects';
+import type { ProjectTypes } from '../../src/lib/contentful';
+
 import Section from '@/components/Section';
 import '../styles/globals.css';
-import { contentfulClient, type Project } from '@/lib/contentful';
 import { Button } from '@/components/ui/button';
+import { contentfulClient } from '@/lib/contentful';
 
-const entries = await contentfulClient.getEntries<Project>({
+const entries = await contentfulClient.getEntries<ProjectTypes>({
   content_type: 'project',
 });
 
@@ -25,15 +27,29 @@ const projects = entries.items.map((item) => {
 <Layout title='Brayan M. Cuenca Portfolio'>
   <div class='mx-auto bg-[#0b0d10] max-w-screen-xl h-screen'>
     <Section>
-      <div class='md:flex-1'>
+      <div class=''>
         <p class='text-md md:text-lg xl:text-xl text-white leading-loose'>
           Enthusiastic about the Web. I'm currently on a journey building tools
           with AI, leaning more into SaaS, immersing myself in Typescript &
           overall finding myself as a developer and the problems I want to
           solve.
         </p>
-        <Button className='mt-8' variant={'outline'}>
+        <Button
+          className='mt-8 transition-colors duration-1000 ease-in-out hover:bg-[#0b0d10] hover:text-white'
+          variant={'outline'}
+        >
           Let's work together
+          <svg
+            class='w-4 h-4 ml-2 hover:transform hover:translate-x-1 transition-transform duration-500 ease-in-out'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='M5 12h14M12 5l7 7-7 7'></path>
+          </svg>
         </Button>
       </div>
     </Section>
@@ -61,7 +77,7 @@ const projects = entries.items.map((item) => {
                 client:load
                 title={project.title}
                 image={project.image}
-                description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
+                description={project.description[0]}
               />
             </a>
           </div>

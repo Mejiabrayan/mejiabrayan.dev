@@ -14,7 +14,7 @@ export interface BlogPost {
 
 
 
-export interface Project {
+export interface ProjectTypes {
   contentTypeId: "project",
   fields: {
     title: EntryFieldTypes.Text,

@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+
+const navLinks = [
+  { name: 'Home', href: '/', id: 1 },
+  { name: 'Projects', href: '#projects', id: 2 },
+  { name: 'Blog', href: '/blogs', id: 3 },
+  { name: 'Contact', href: '#contact', id: 4 },
+];
 
 const navMotion = {
   visible: {
@@ -18,13 +25,6 @@ const itemMotion = {
   hidden: { opacity: 0, x: -100 },
 };
 
-const navLinks = [
-  { name: 'Home', href: '/', id: 1 },
-  { name: 'Projects', href: '#projects', id: 2 },
-  { name: 'Blog', href: '#blogs', id: 3 },
-  { name: 'Contact', href: '#contact', id: 4 },
-];
-
 export default function Nav() {
   const [toggled, setToggled] = useState(false);
   const matches = useMediaQuery('(min-width: 1280px)');
@@ -36,7 +36,9 @@ export default function Nav() {
         <h1 className='text-sm xl:text-base font-semibold text-white'>
           Brayan M. Cuenca
         </h1>
-        <span className='text-sm xl:text-base text-gray-400'>Software Engineer</span>
+        <span className='text-sm xl:text-base text-gray-400'>
+          Software Engineer
+        </span>
       </div>
 
       <div className='hidden xl:flex space-x-8'>

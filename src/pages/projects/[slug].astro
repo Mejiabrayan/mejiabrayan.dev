@@ -1,11 +1,12 @@
 ---
 import Layout from '@/components/Layout.astro';
 import { Button } from '@/components/ui/button';
-import { contentfulClient, type Project } from '@/lib/contentful';
+import { contentfulClient, type ProjectTypes } from '@/lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const { items } = await contentfulClient.getEntries<Project>({
+  const { items } = await contentfulClient.getEntries<ProjectTypes>({
     content_type: 'project',
   });
 
@@ -42,14 +43,16 @@ const { content, title, date, image } = Astro.props;
           {date}
         </p>
         <article
-          set:html={content}
           class='prose md:prose-base lg:prose-lg prose-pre:prose-lg text-white'
-        />
+        >
+          {content}
+        </article>
+        <!-- <img src={image} class='w-full h-full' /> -->
+
         <div class='flex justify-center mt-8'>
-          <a href='/portfolio' class='text-white'>
-            Back to Portfolio
-          </a>
-        <hr class='border-b border-gray-800' />
+          <a href='/' class='text-white'> Back to Portfolio</a>
+          <hr class='border-b border-gray-800' />
+        </div>
       </section>
     </Layout>
   </body>
