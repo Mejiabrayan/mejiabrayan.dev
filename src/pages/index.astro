@@ -2,45 +2,59 @@
 // import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
 import Projects from '@/components/Projects';
-import type { ProjectTypes } from '../../src/lib/contentful';
-
+import type { BlogPost, ProjectTypes } from '../../src/lib/contentful';
+import { SocialMediaIcons } from '@/lib/icons';
 import Section from '@/components/Section';
 import '../styles/globals.css';
 import { Button } from '@/components/ui/button';
 import { contentfulClient } from '@/lib/contentful';
-
-const entries = await contentfulClient.getEntries<ProjectTypes>({
-  content_type: 'project',
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { BlogCard } from '@/components/BlogCard';
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: 'blogPost',
 });
 
-const projects = entries.items.map((item) => {
-  const { title, image, description, slug } = item.fields;
+const posts = entries.items.map((item) => {
+  const { title, date, description, slug } = item.fields;
   return {
     title,
-    image,
-    description,
     slug,
+    description,
+    date: new Date(date).toLocaleDateString(),
   };
 });
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <div class='mx-auto bg-[#0b0d10] max-w-screen-xl h-screen'>
+  <div class='container mx-auto w-auto min-h-screen'>
     <Section>
-      <div class=''>
-        <p class='text-md md:text-lg xl:text-xl text-white leading-loose'>
-          Enthusiastic about the Web. I'm currently on a journey building tools
-          with AI, leaning more into SaaS, immersing myself in Typescript &
-          overall finding myself as a developer and the problems I want to
-          solve.
-        </p>
+      <div class='relative text-white max-w-4xl mx-auto text-center'>
+        <h2
+          class='text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-snug md:leading-normal'
+        >
+          Enthusiastic about the Web.
+          <br class='hidden md:inline' />
+          <p class='text-xl text-gray-300 mt-3'>
+            I'm currently on a journey building tools with AI,
+            <br class='hidden md:inline' />
+             leaning more into SaaS, immersing myself in Typescript,
+            <br class='hidden md:inline' />
+             & overall finding myself as a developer and the problems I want to
+            solve.
+          </p>
+        </h2>
+
+        {/* Social Media Icons */}
+        <div class='flex justify-center mt-6'>
+          <SocialMediaIcons />
+        </div>
+
         <Button
-          className='mt-8 transition-colors duration-1000 ease-in-out hover:bg-[#0b0d10] hover:text-white'
-          variant={'outline'}
+          className='mt-8 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-black bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition ease-in-out duration-150'
         >
           Let's work together
           <svg
-            class='w-4 h-4 ml-2 hover:transform hover:translate-x-1 transition-transform duration-500 ease-in-out'
+            class='w-5 h-5 ml-3 group-hover:translate-x-1 transform transition-transform duration-500 ease-in-out'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
@@ -55,34 +69,29 @@ const projects = entries.items.map((item) => {
     </Section>
 
     <hr class='border-t border-gray-800' />
-    <section
-      id='projects'
-      class='px-4 md:px-8 lg:px-0 xl:px-32 2xl:px-40 mt-24 mb-12 text-left'
-    >
-      <h3 class='text-lg md:text-xl lg:text-xl text-white mb-4'>
-        Latest <br />
-        <span class='text-gray-400'>Projects</span>
-      </h3>
-      <p class='text-sm md:text-base xl:text-lg text-gray-500 leading-relaxed'>
-        Here are some of my latest projects. I'm always working on something
-        new, so check back often.
-      </p>
 
-      {
-        projects.map((project, index) => (
-          <div>
-            <a href={`/projects/${project.slug}/`}>
-              {' '}
-              <Projects
-                client:load
-                title={project.title}
-                image={project.image}
-                description={project.description[0]}
-              />
-            </a>
-          </div>
-        ))
-      }
+    <section class='mt-8 flex flex-col text-left'>
+      <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
+        Projects <span class='text-gray-400 text-2xl'>/</span>
+      </h2>
+      <Projects />
+    </section>
+    <section class='mt-8 flex flex-col text-left'>
+      <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
+        Blog <span class='text-gray-400 text-2xl'>/</span>
+      </h2>
+      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {
+          posts.map((post) => (
+            <BlogCard
+              date={post.date}
+              title={post.title}
+              description={post.description}
+              slug={post.slug}
+            />
+          ))
+        }
+      </div>
     </section>
   </div>
 </Layout>

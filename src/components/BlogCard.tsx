@@ -16,7 +16,7 @@ interface BlogCardProps {
   slug: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({
+export const BlogCard: React.FC<BlogCardProps> = ({
   title,
   date,
   description,
@@ -37,4 +37,4 @@ const BlogCard: React.FC<BlogCardProps> = ({
   );
 };
 
-export default BlogCard;
+

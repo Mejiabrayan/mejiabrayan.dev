@@ -52,6 +52,6 @@ interface ProjectItem {
       description:
         'Find Events Near You & Connect With Like-Minded Developers With MeetUp App.',
       link: 'https://github.com/Mejiabrayan/MeetUp-App',
-      caseStudy: 'https://mejiabrayan.github.io/MeetUp-App/',
+      caseStudy: 'https://mycasestudies.s3.us-east-2.amazonaws.com/Minimal+Company+Case+Study-1+(1).pdf',
     },
   ];

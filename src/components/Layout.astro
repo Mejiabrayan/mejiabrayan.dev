@@ -2,6 +2,7 @@
 import Nav from './Nav';
 
 import '../styles/globals.css';
+import { SocialMediaIcons } from '@/lib/icons';
 ---
 
 <!doctype html>
@@ -16,13 +17,36 @@ import '../styles/globals.css';
       rel='stylesheet'
     />
   </head>
-  <body class='flex flex-col max-w-screen-xl mx-auto h-screen bg-[#0b0d10]'>
+  <body class='flex flex-col max-w-screen-xl mx-auto h-screen bg-[#121213] '>
     <Nav client:load />
-
     <main
-      class='flex-grow mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 2xl:px-40'
+    class='flex-grow mx-auto px-20 md:px-30 lg:px-40 xl:px-50 2xl:px-48'
     >
-      <slot class="flex-grow" />
-    </main>
+    <slot class="flex-grow" />
+    <footer class=" text-white py-12 px-6 mb-12">
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center ">
+        <h1 class="lg:text-6xl xl:text-7xl font-bold text-left">
+          <a href="/" class="hover:text-yellow-300 transition-colors duration-300">
+            "Move The 
+            <br/>
+            Web Forward"
+          </a>
+        </h1>
+        <div class="flex justify-end">
+          <nav class="flex flex-wrap items-center text-lg px-2 gap-4">
+            <a href="/about" class="text-gray-400 hover:text-gray-300 ml-4 transition-colors duration-300">About</a>
+            <a href="/projects" class="text-gray-400 hover:text-gray-300 ml-4 transition-colors duration-300">Projects</a>
+            <a href="/contact" class="text-gray-400 hover:text-gray-300 ml-4 transition-colors duration-300">Contact</a>
+            <SocialMediaIcons />
+          </nav>
+        </div>
+      </div>
+      <div class="text-center text-gray-400 mt-4">
+        <p>&copy; {new Date().getFullYear()} Brayan Mejia. All rights reserved.</p>
+      </div>
+    </footer>
+    
+    
+  </main>
   </body>
 </html>

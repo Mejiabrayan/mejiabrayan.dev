@@ -87,6 +87,9 @@ html {
   50% {
     transform: translateY(-10px);
   }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 
@@ -99,4 +102,9 @@ html {
 
 html {
   scroll-behavior: smooth;
+}
+
+.noise{
+    background: rgb(182, 34, 58);
+    background-image: url(./noise.png);
 }

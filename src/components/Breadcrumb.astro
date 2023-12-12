@@ -5,32 +5,44 @@ const { slug } = Astro.props; // You'll replace this with your own logic for the
 // Example logic for breadcrumb parts
 // Replace this with your own logic based on the slug or page structure
 const breadcrumbParts = [
-  { href: "/", text: "Home" },
-  { href: `/${slug}`, text: `/${slug}`  }, // Dynamically set the title and link
+  { 
+    href: '/',
+    text: 'Home',
+    },
+  {
+    href: '/blog',
+    text: 'Blog',
+  },
+  {
+    href: `/blog/${slug}`,
+    text: 'Blog Post',
+  }, // Dynamically set the title and link
 ];
 
 // Tailwind CSS classes for styling
 const breadcrumbClasses = {
-  container: "text-sm text-gray-500",
-  item: "hover:text-gray-700",
-  separator: "mx-2",
-  current: "text-gray-400",
+  container: 'text-sm text-gray-500',
+  item: 'hover:text-gray-700',
+  separator: 'mx-2',
+  current: 'text-gray-400',
 };
 ---
 
-<nav aria-label="Breadcrumb" class={breadcrumbClasses.container}>
-  <ol class="flex">
-    {breadcrumbParts.map((part, index) => (
-      <li key={index} class="flex items-center">
-        {index !== 0 && (
-          <span class={breadcrumbClasses.separator}>/</span>
-        )}
-        {index === breadcrumbParts.length - 1 ? (
-          <span class={breadcrumbClasses.current}>{part.text}</span>
-        ) : (
-          <a href={part.href} class={breadcrumbClasses.item}>{part.text}</a>
-        )}
-      </li>
-    ))}
+<nav aria-label='Breadcrumb' class={breadcrumbClasses.container}>
+  <ol class='flex'>
+    {
+      breadcrumbParts.map((part, index) => (
+        <li class='flex items-center'>
+          {index !== 0 && <span class={breadcrumbClasses.separator}>/</span>}
+          {index === breadcrumbParts.length - 1 ? (
+            <span class={breadcrumbClasses.current}>{part.text}</span>
+          ) : (
+            <a href={part.href} class={breadcrumbClasses.item}>
+              {part.text}
+            </a>
+          )}
+        </li>
+      ))
+    }
   </ol>
 </nav>

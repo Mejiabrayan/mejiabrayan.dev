@@ -1,48 +1,66 @@
 import React from 'react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+  CardDescription,
+} from '@/components/ui/card';
 import { Button } from './ui/button';
-import { motion } from 'framer-motion';
+import { projectsItems } from '@/lib/projects';
 
-interface ProjectProps {
-  title?: string;
-  content?: any;
-  description?: string | any;
-  image?: string | any;
-}
-
-const Projects: React.FC<ProjectProps> = ({ title, image, description }) => {
+export default function ProjectCards() {
   return (
-    <div className='space-y-6 p-4 md:p-6'>
-      <div className='shadow-lg rounded-lg p-4 relative'>
-        <h3 className='font-bold text-xl text-white mb-4'>{title}</h3>
-
-        <div className='border-1 border-gray-300 rounded-lg overflow-hidden relative'>
-          <motion.img
-            alt=''
-            className='object-cover w-full h-48 aspect-auto'
-            height='300'
-            width='500'
-            src={'https://fakeimg.pl/600x400'} // Replace with actual image prop
-            initial={{ opacity: 0.5 }}
-            whileHover={{ opacity: 1, scale: 1.05 }}
-          />
-          <motion.div
-            className='absolute inset-0 flex items-center justify-center p-4'
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-          >
-            <p className='text-sm text-white leading-tight'>{description}</p>
-          </motion.div>
-        </div>
-
-        <div className='flex justify-end mt-2'>
-          <Button variant={'link'} className='text-white'>
-        View Project
-          </Button>
-        </div>
-      </div>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 place-items-baseline grid-auto-flow-row-dense auto-rows-minmax(150px, auto) sm:auto-rows-minmax(200px, auto) lg:auto-rows-minmax(250px, auto)'>
+    {projectsItems.map((project, index) => (
+      <Card
+        key={index}
+        className={`row-span-1 rounded-xl border-2 border-slate-400/10 backdrop-filter backdrop-blur-lg bg-opacity-20 p-4 dark:bg-neutral-900 ${
+          (index === 3 || index === 6) && 'lg:col-span-2'
+        }`}
+      >
+          <CardHeader>
+            <CardTitle className=' text-slate-50 text-center text-sm'>
+              {project.title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <img
+              src={project.image}
+              alt={project.title}
+              className='shadow rounded-md object-contain h-40 w-full'
+            />
+            <CardDescription className='font-mono mt-2  text-sm text-white text-center'>
+              {project.description}
+            </CardDescription>
+          </CardContent>
+          <CardFooter className='mt-2 flex items-center justify-center gap-4'>
+            <a
+              href={`/portfolio/${project.link
+                .toLowerCase()
+                .split(' ')
+                .join('-')}`}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-center'
+            >
+              <Button className='gap-2'>View Project</Button>
+            </a>
+            {project.caseStudy && (
+              <a
+                href={project.caseStudy}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Button className='gap-2' variant={'outline'}>
+                  Case Study
+                </Button>
+              </a>
+            )}
+          </CardFooter>
+        </Card>
+      ))}
     </div>
   );
-};
-
-export default Projects;
+}
