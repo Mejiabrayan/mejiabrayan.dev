@@ -18,7 +18,7 @@ export interface ProjectTypes {
   contentTypeId: "project",
   fields: {
     title: EntryFieldTypes.Text,
-    description: EntryFieldTypes.Text,
+    description?: EntryFieldTypes.Text,
     date: EntryFieldTypes.Date,
     content: EntryFieldTypes.RichText,
     image: EntryFieldTypes.Object,

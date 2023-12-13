@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 interface BlogCardProps {
   title: string;

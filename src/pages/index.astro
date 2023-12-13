@@ -2,96 +2,102 @@
 // import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
 import Projects from '@/components/Projects';
-import type { BlogPost, ProjectTypes } from '../../src/lib/contentful';
 import { SocialMediaIcons } from '@/lib/icons';
-import Section from '@/components/Section';
 import '../styles/globals.css';
 import { Button } from '@/components/ui/button';
-import { contentfulClient } from '@/lib/contentful';
-import Breadcrumb from '@/components/Breadcrumb.astro';
 import { BlogCard } from '@/components/BlogCard';
-const entries = await contentfulClient.getEntries<BlogPost>({
-  content_type: 'blogPost',
-});
 
-const posts = entries.items.map((item) => {
-  const { title, date, description, slug } = item.fields;
-  return {
-    title,
-    slug,
-    description,
-    date: new Date(date).toLocaleDateString(),
-  };
-});
+import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
+import { fetchProjects } from '../lib/projects/fetchProjects';
+let posts: any = [];
+try {
+  posts = await fetchContentfulPosts();
+} catch (error) {
+  console.error('Error fetching posts:', error);
+}
+
+let projects: any = [];
+try {
+  projects = await fetchProjects();
+} catch (error) {
+  console.error('Error fetching projects:', error);
+}
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <div class='container mx-auto w-auto min-h-screen'>
-    <Section>
+  <div class='container mx-auto w-auto min-h-screen pt-12'>
+    <section class='flex flex-col text-left'>
       <div class='relative text-white max-w-4xl mx-auto text-center'>
-        <h2
-          class='text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-snug md:leading-normal'
+        <h1
+          class='text-5xl font-bold tracking-tight leading-snug md:leading-normal mb-4'
         >
           Enthusiastic about the Web.
-          <br class='hidden md:inline' />
-          <p class='text-xl text-gray-300 mt-3'>
-            I'm currently on a journey building tools with AI,
-            <br class='hidden md:inline' />
-             leaning more into SaaS, immersing myself in Typescript,
-            <br class='hidden md:inline' />
-             & overall finding myself as a developer and the problems I want to
-            solve.
-          </p>
-        </h2>
+        </h1>
+        <p class='text-xl text-gray-300'>
+          I'm currently on a journey building tools with AI, leaning more into
+          SaaS, immersing myself in Typescript, & overall finding myself as a
+          developer and the problems I want to solve.
+        </p>
 
-        {/* Social Media Icons */}
-        <div class='flex justify-center mt-6'>
+        {/* Social Media Icons and CTA Button */}
+        <div class='flex justify-center items-center mt-6'>
           <SocialMediaIcons />
-        </div>
 
-        <Button
-          className='mt-8 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-black bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition ease-in-out duration-150'
-        >
-          Let's work together
-          <svg
-            class='w-5 h-5 ml-3 group-hover:translate-x-1 transform transition-transform duration-500 ease-in-out'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
+          <Button
+            variant='ghost'
+            className='inline-flex items-center px-6 py-3 ml-4'
           >
-            <path d='M5 12h14M12 5l7 7-7 7'></path>
-          </svg>
-        </Button>
+            Let's work together
+            <svg
+              class='w-5 h-5 ml-3 group-hover:translate-x-1 transform transition-transform duration-500 ease-in-out'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            >
+              <path d='M5 12h14M12 5l7 7-7 7'></path>
+            </svg>
+          </Button>
+        </div>
       </div>
-    </Section>
 
-    <hr class='border-t border-gray-800' />
+      <hr class='border-t border-gray-800 mt-12' />
 
-    <section class='mt-8 flex flex-col text-left'>
-      <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
-        Projects <span class='text-gray-400 text-2xl'>/</span>
-      </h2>
-      <Projects />
-    </section>
-    <section class='mt-8 flex flex-col text-left'>
-      <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
-        Blog <span class='text-gray-400 text-2xl'>/</span>
-      </h2>
-      <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {
-          posts.map((post) => (
-            <BlogCard
-              date={post.date}
-              title={post.title}
-              description={post.description}
-              slug={post.slug}
-            />
-          ))
-        }
-      </div>
+      <section class='mt-8 flex flex-col text-left'>
+        <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
+          Projects <span class='text-gray-400 text-2xl'>/</span>
+        </h2>
+        <Projects projects={projects} />
+      </section>
+      <section class='mt-8 flex flex-col text-left'>
+        <h2 class='text-3xl font-bold text-white mb-8 tracking-tight'>
+          Blog <span class='text-gray-400 text-2xl'>/</span>
+        </h2>
+        <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+          {
+            posts.map(
+              (post: {
+                slug: string;
+                date: string;
+                title: string;
+                description: string;
+                link: string;
+              }) => (
+                <a href={`/blogs/${post.slug}`} class='w-full'>
+                  <BlogCard
+                    date={post.date}
+                    title={post.title}
+                    description={post.description}
+                    slug={post.link}
+                  />
+                </a>
+              )
+            )
+          }
+        </div>
+      </section>
     </section>
   </div>
 </Layout>
