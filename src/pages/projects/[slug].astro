@@ -1,6 +1,5 @@
 ---
 import Layout from '@/components/Layout.astro';
-import { Button } from '@/components/ui/button';
 import { contentfulClient, type ProjectTypes } from '@/lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Image } from 'astro:assets';
@@ -47,13 +46,13 @@ const { content, title, date, image } = Astro.props;
         >
           {content}
         </article>
-        <!-- <img src={image} class='w-full h-full' /> -->
+        <!-- <img src={`${image}`} class='w-full h-full' /> -->
 
         <div class='flex justify-center mt-8'>
           <a href='/' class='text-white'> Back to Portfolio</a>
           <hr class='border-b border-gray-800' />
         </div>
       </section>
-    </Layout>
+    </Layout>ƒ
   </body>
 </html>

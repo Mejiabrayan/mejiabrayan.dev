@@ -1,41 +1,48 @@
 ---
-// Breadcrumb.astro
-const { slug } = Astro.props; // You'll replace this with your own logic for the breadcrumb parts
+import { ChevronRightIcon } from 'lucide-react';
 
-// Example logic for breadcrumb parts
-// Replace this with your own logic based on the slug or page structure
+const { slug, title } = Astro.props;
+
 const breadcrumbParts = [
-  { 
+  {
     href: '/',
     text: 'Home',
-    },
+  },
   {
-    href: '/blog',
+    href: '/blogs',
     text: 'Blog',
   },
   {
-    href: `/blog/${slug}`,
-    text: 'Blog Post',
-  }, // Dynamically set the title and link
+    href: `/blogs/${slug}`,
+    text: title,
+  },
 ];
 
-// Tailwind CSS classes for styling
 const breadcrumbClasses = {
   container: 'text-sm text-gray-500',
-  item: 'hover:text-gray-700',
+  item: 'hover:text-gray-700 hover:underline',
   separator: 'mx-2',
-  current: 'text-gray-400',
+  current: 'text-gray-400 font-bold',
+  icon: 'h-4 w-4 text-gray-400',
 };
+
 ---
 
 <nav aria-label='Breadcrumb' class={breadcrumbClasses.container}>
-  <ol class='flex'>
+  <ol class='flex items-center'>
     {
       breadcrumbParts.map((part, index) => (
         <li class='flex items-center'>
-          {index !== 0 && <span class={breadcrumbClasses.separator}>/</span>}
+          {index !== 0 && (
+            <ChevronRightIcon
+              className={breadcrumbClasses.icon}
+              aria-hidden='true'
+            />
+          )}
           {index === breadcrumbParts.length - 1 ? (
-            <span class={breadcrumbClasses.current}>{part.text}</span>
+            <span class={breadcrumbClasses.current} aria-current='page'>
+              {part.text}
+            </span>
           ) : (
             <a href={part.href} class={breadcrumbClasses.item}>
               {part.text}

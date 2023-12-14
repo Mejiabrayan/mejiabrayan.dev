@@ -8,16 +8,15 @@ export async function fetchProjects() {
   });
 
   return entries.items.map((item) => {
-    const { caseStudy, content, date, description, image, slug, title, url } =
-      item.fields;
+    const { caseStudy, content, date, image, slug, title, url } =
+        item.fields;
     return {
-      caseStudy: caseStudy,
+      caseStudy: item.fields.caseStudy,
       content: documentToHtmlString(item.fields.content),
       date: new Date(date).toLocaleDateString(),
       image: item.fields.image,
       slug: item.fields.slug,
       title: item.fields.title,
-      url: item.fields.url,
     };
   });
 }

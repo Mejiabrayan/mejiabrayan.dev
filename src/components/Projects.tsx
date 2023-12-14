@@ -7,52 +7,50 @@ import {
   CardFooter,
   CardDescription,
 } from '@/components/ui/card';
-import { Button } from './ui/button';
 import type { ProjectCardsProps } from 'types/contentful';
 
-const ProjectCards: React.FC<ProjectCardsProps> = ({ projects }) => {
+const ProjectCards: React.FC<ProjectCardsProps> = ({ projects } ) => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 place-items-baseline grid-auto-flow-row-dense auto-rows-minmax(150px, auto) sm:auto-rows-minmax(200px, auto) lg:auto-rows-minmax(250px, auto)'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 place-items-center grid-auto-flow-row-dense auto-rows-minmax(150px, auto) sm:auto-rows-minmax(200px, auto) lg:auto-rows-minmax(250px, auto)'>
       {projects.map((project, index) => (
         <Card
           key={index}
-          className={`row-span-1 rounded-xl border-2 border-slate-400/10 backdrop-filter backdrop-blur-lg bg-opacity-20 p-4 dark:bg-neutral-900 ${
+          className={`row-span-1 transform transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg rounded-xl p-4 h-full w-full backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-700 shadow-sm ${
             (index === 3 || index === 6) && 'lg:col-span-2'
           }`}
         >
           <CardHeader>
-            <CardTitle className='text-slate-50 text-center text-sm'>
+            <CardTitle className='text-white text-center text-2xl font-semibold leading-tight'>
               {project.title}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <img
-              src={project.image}
+              src={'https:' + project.image.fields.file.url}
               alt={project.title}
-              className='shadow rounded-md object-contain h-40 w-full'
+              className='rounded-lg object-cover h-40 w-full mb-4'
             />
-            <CardDescription className='font-mono mt-2 text-sm text-white text-center'>
+            <CardDescription className='text-gray-300 text-center text-sm'>
               {project.description}
             </CardDescription>
           </CardContent>
-          <CardFooter className='mt-2 flex items-center justify-center gap-4'>
+          <CardFooter className='mt-4 flex items-center justify-center gap-4'>
             <a
-              href={project.link}
+              href={`projects/${project.slug}`}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-center'
+              className='text-sm text-center text-white bg-transparent border border-gray-500 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out'
             >
-              <Button className='gap-2'>View Project</Button>
+              View Project
             </a>
             {project.caseStudy && (
               <a
                 href={project.caseStudy}
                 target='_blank'
                 rel='noopener noreferrer'
+                className='text-sm text-center text-white bg-transparent border border-gray-500 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-lg transition duration-300 ease-in-out'
               >
-                <Button className='gap-2' variant={'outline'}>
-                  Case Study
-                </Button>
+                Case Study
               </a>
             )}
           </CardFooter>

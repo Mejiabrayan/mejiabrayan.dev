@@ -1,39 +1,40 @@
-import React from 'react';
+import type { BlogCardsProps } from 'types/contentful';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from './ui/card';
 
-interface BlogCardProps {
-  title: string;
-  date: string;
-  description: string;
-  slug: string;
-}
-
-export const BlogCard: React.FC<BlogCardProps> = ({
-  title,
-  date,
-  description,
-  slug,
-}) => {
+export const BlogCard: React.FC<BlogCardsProps> = ({ posts }) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription>{description}</CardDescription>
-      </CardContent>
-      <CardFooter>
-        <p>{date}</p>
-      </CardFooter>
-    </Card>
+    <div className='flex flex-col gap-4'>
+      {posts.map((post, index) => (
+        <Card
+          key={index}
+          className={`rounded-lg h-full w-full backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-700 shadow-sm`}
+        >
+          <CardHeader className='p-4'>
+            <CardTitle className='text-lg text-white font-semibold mb-2'>
+              {post.title}
+            </CardTitle>
+            <CardDescription className='text-white text-sm'>
+              {post.description}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className='p-4 mt-auto'>
+            <a
+              href={`blogs/${post.slug}`}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-white text-sm hover:underline'
+            >
+              View Blog
+            </a>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 };
-
-
