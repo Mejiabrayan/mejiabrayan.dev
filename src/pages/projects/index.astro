@@ -1,0 +1,71 @@
+---
+import { contentfulClient } from '../../lib/contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import type { BlogPost, ProjectTypes } from '../../lib/contentful';
+import Layout from '@/components/Layout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+
+const entries = await contentfulClient.getEntries<ProjectTypes>({
+  content_type: 'project',
+});
+
+const projects = entries.items.map((item) => {
+  const { title, date, content, slug } = item.fields;
+  return {
+    title,
+    content,
+    slug,
+    date: new Date(date).toLocaleDateString(),
+  };
+});
+---
+<html lang='en'>
+  <head>
+    <title>My Projects</title>
+    <link href="/path_to_your_tailwind.css" rel="stylesheet">
+  </head>
+  <body>
+    <Layout title='{title}'>
+      <div class='mx-auto pt-12 pb-8 max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <h1 class='text-4xl md:text-5xl lg:text-6xl font-bold mb-12 leading-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600'>
+          Recent Projects
+        </h1>
+        <ul class='divide-y divide-cool-gray-700'>
+          {projects.map((project) => (
+            <li class='py-8'>
+              <article class='space-y-4 xl:grid xl:grid-cols-4 xl:space-y-0 xl:gap-4 xl:items-baseline'>
+                <dl class='text-sm font-medium leading-5 text-gray-400'>
+                  <dt class='sr-only'>Published on</dt>
+                  <dd>
+                    <time datetime='{project.date}'>{project.date}</time>
+                  </dd>
+                </dl>
+                <div class='space-y-5 xl:col-span-3'>
+                  <div>
+                    <h2 class='text-2xl font-bold leading-8 tracking-tight'>
+                      <a href={`/projects/${project.slug}`} class='text-white hover:text-gray-300'>
+                        {project.title}
+                      </a>
+                    </h2>
+                    <div class='prose text-gray-400 max-w-none'>
+                      {documentToHtmlString(project.content)}
+                    </div>
+                  </div>
+                  <div class='text-base leading-6'>
+                    <a
+                      href={`/projects/${project.slug}`}
+                      class='text-blue-400 hover:text-blue-300'
+                      aria-label={`Read more about "${project.title}"`}
+                    >
+                      Read more &rarr;
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
+  </body>
+</html>
