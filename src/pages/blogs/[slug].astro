@@ -1,12 +1,12 @@
 ---
 import { contentfulClient } from '../../lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import type { BlogPost } from '../../lib/contentful';
+import type { BlogTypes } from '../../lib/contentful';
 import Layout from '@/components/Layout.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
 
 export async function getStaticPaths() {
-  const { items } = await contentfulClient.getEntries<BlogPost>({
+  const { items } = await contentfulClient.getEntries<BlogTypes>({
     content_type: 'blogPost',
   });
   const pages = items.map((item) => ({
@@ -27,22 +27,29 @@ const { content, title, date } = Astro.props;
   <head>
     <title>{title}</title>
     <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <!-- Ensure Tailwind CSS is included -->
   </head>
   <body>
     <Layout title='{title}'>
       <Breadcrumb />
 
-      <div class='mx-auto my-12 max-w-4xl px-4 sm:px-6 lg:px-8'>
+      <!-- Main content area -->
+      <div class='mx-auto my-12 lg:px-8 bg-[#121213]'>
+        <!-- Article title -->
         <h1
-          class='text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-purple-600'
+          class='prose prose-h1 text-4xl md:text-5xl lg:text-5xl font-bold mb-8 leading-tight text-slate-50'
         >
           {title}
         </h1>
-        <time class='block mb-6 text-lg text-gray-400'>{date}</time>
+
+        <!-- Article date -->
+        <time class='prose prose-time block mb-6 text-lg text-gray-400'>
+          {date}
+        </time>
+
         <article
           set:html={content}
-          class=' text-gray-100 prose prose-invert prose-headings:text-transparent prose-headings:bg-clip-text prose-headings:bg-gradient-to-br prose-headings:from-blue-400 prose-headings:to-purple-600 prose-headings:font-geist-mono prose-blockquote:text-transparent prose-blockquote:bg-clip-text prose-blockquote:bg-gradient-to-br prose-blockquote:from-blue-400 prose-blockquote:to-purple-600 prose-blockquote:font-geist-mono prose-blockquote:font-bold prose-blockquote:font-semibold prose-blockquote:font-medium prose-blockquote:font-normal prose-blockquote:font-light prose-blockquote:font-thin prose-blockquote:font-extrabold prose-blockquote:font-black prose-blockquote:font-extralight prose-blockquote:font-normal prose-blockquote:font-medium prose-blockquote:font-semibold prose-blockquote:font-bold prose-blockquote:font-extrabold prose-blockquote:font-black prose-blockquote:font-extralight prose-blockquote
-           prose-blockquote:backdrop-blur-sm md:prose-lg lg:prose-xl max-w-none mb-12 prose-code:text-transparent prose-code:bg-clip-text prose-code:bg-gradient-to-br prose-code:from-blue-400 prose-code:to-purple-600 prose-code:font-geist-mono'
+          class='prose prose-invert prose-sm md:prose-base lg:prose-base prose-code:prose-code-sm prose-code:prose-code-xl prose-code:prose-code-2xl prose-li:prose-li-sm prose-li:prose-li-xl prose-li:prose-li-2xl'
         />
       </div>
     </Layout>

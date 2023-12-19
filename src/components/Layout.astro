@@ -17,11 +17,12 @@ import '../styles/globals.css';
     />
   </head>
   <body
-    class='relative bg-grainy flex flex-col max-w-screen-xl mx-auto h-screen bg-[#121213]'
+    class='relative container lg:max-w-screen-xl mx-auto bg-[#121213] antialiased'
   >
     <Nav client:only />
+
     <main
-      class='relative flex-grow mx-auto px-20 md:px-30 lg:px-40 xl:px-50 2xl:px-48 pb-10 mt-12'
+      class='relative flex-grow mx-auto px-0 md:px-0 lg:px-40 xl:px-50 2xl:px-48 pb-10 mt-12'
     >
       <div
         class='absolute -z-10 inset-0 h-full w-full bg-[radial-gradient(#e5e7eb_0.5px,transparent_0.5px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]'

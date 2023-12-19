@@ -1,4 +1,4 @@
-import type { SocialLinks } from "types";
+import type { SocialLinks, NavLinks } from 'types';
 
 export const socialLinks: SocialLinks = [
   {
@@ -7,3 +7,4 @@ export const socialLinks: SocialLinks = [
     twitter: 'https://twitter.com/cyperpunkdev',
   },
 ];
+

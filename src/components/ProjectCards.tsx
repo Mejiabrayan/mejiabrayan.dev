@@ -19,7 +19,10 @@ const ProjectCards: React.FC<ProjectCardsProps> = ({ projects }) => {
   );
 };
 
-const ProjectCardItem: React.FC<{ project: any, index: number }> = ({ project, index }) => {
+const ProjectCardItem: React.FC<{ project: any; index: number }> = ({
+  project,
+  index,
+}) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -67,9 +70,12 @@ const ProjectCardItem: React.FC<{ project: any, index: number }> = ({ project, i
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(201, 201, 201, 0.25), transparent 40%)`,
         }}
       />
+
       <Card
         className={`row-span-1 hover:shadow-lg rounded-xl p-4 h-full w-full backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-700 shadow-sm ${
-          (index === 3 || index === 6) && 'lg:col-span-2'
+          index === 3 || index === 6
+            ? 'col-span-2 sm:col-span-1 md:col-span-2 lg:col-span-2'
+            : ''
         }`}
       >
         <CardHeader>

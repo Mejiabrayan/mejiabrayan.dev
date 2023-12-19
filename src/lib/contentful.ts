@@ -1,13 +1,13 @@
 import contentful from 'contentful';
 import type { EntryFieldTypes } from 'contentful';
 
-export interface BlogPost {
+export interface BlogTypes {
   contentTypeId: 'blogPost';
   fields: {
     title: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
     date: EntryFieldTypes.Date;
-    description: EntryFieldTypes.Text;
+    description?: EntryFieldTypes.Text;
     slug: EntryFieldTypes.Text;
   };
 }

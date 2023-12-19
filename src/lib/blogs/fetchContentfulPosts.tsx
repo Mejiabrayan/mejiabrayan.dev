@@ -1,9 +1,9 @@
 
-import type { BlogPost } from '../contentful';
+import type { BlogTypes } from '../contentful';
 import { contentfulClient } from '../contentful';
 
 export async function fetchContentfulPosts() {
-  const entries = await contentfulClient.getEntries<BlogPost>({
+  const entries = await contentfulClient.getEntries<BlogTypes>({
     content_type: 'blogPost',
   });
 

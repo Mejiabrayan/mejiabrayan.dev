@@ -1,27 +1,27 @@
 ---
+
 import Layout from '@/components/Layout.astro';
 import { contentfulClient, type ProjectTypes } from '@/lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const { items } = await contentfulClient.getEntries<ProjectTypes>({
     content_type: 'project',
   });
-
   const pages = items.map((item) => ({
     params: { slug: item.fields.slug },
     props: {
       title: item.fields.title,
-      image: item.fields.image,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
+      image: item.fields.image,
+      description: item.fields.description,
     },
   }));
   return pages;
 }
 
-const { content, title, date, image } = Astro.props;
+const { content, title, date, image, description } = Astro.props;
 ---
 
 <html lang='en'>
@@ -30,29 +30,39 @@ const { content, title, date, image } = Astro.props;
   </head>
   <body>
     <Layout title='Portfolio'>
-      <section class='text-center min-w-min md:w-auto lg:w-auto'>
-        <h1
-          class='text-4xl md:text-3xl xl:text-6xl font-geist-medium mt-4 tracking-tight text-white'
-        >
-          {title}
-        </h1>
-        <p
-          class='text-xl md:text-base xl:text-xl font-geist-light mt-4 text-white'
-        >
-          {date}
-        </p>
-        <article
-          class='prose md:prose-base lg:prose-lg prose-pre:prose-lg text-white'
-        >
-          {content}
-        </article>
-        <!-- <img src={`${image}`} class='w-full h-full' /> -->
+      <section class='container mx-auto px-4 py-12'>
+        <div class='grid grid-cols-1 md:grid-cols-2 gap-8 items-start'>
+          <div class='order-2 md:order-1'>
+            <h1
+              class='text-4xl md:text-3xl xl:text-6xl font-medium tracking-tight text-white mb-4'
+            >
+              {title}
+            </h1>
+            <p class='text-xl font-light text-white mb-6'>
+              {date}
+            </p>
+            <p class='text-xl font-light text-white mb-6'>
+              {description}
+            </p>
 
-        <div class='flex justify-center mt-8'>
-          <a href='/' class='text-white'> Back to Portfolio</a>
-          <hr class='border-b border-gray-800' />
+            <a
+              href='/'
+              class='inline-block text-white underline hover:text-gray-300'
+            >
+              Back to Portfolio
+            </a>
+          </div>
+          <div class='order-1 md:order-2 px-5'>
+            <!-- @ts-ignore -->
+            <img
+              src={'https:' + image?.fields?.file?.url}
+              alt={image?.fields?.title}
+              class='w-full h-auto rounded-lg shadow-lg'
+            />
+          </div>
         </div>
+        <hr class='border-b border-gray-800 mt-12' />
       </section>
-    </Layout>ƒ
+    </Layout>
   </body>
 </html>
