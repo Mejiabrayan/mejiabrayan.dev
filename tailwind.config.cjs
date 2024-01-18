@@ -20,6 +20,16 @@ module.exports = {
         'geist-mono': ['Geist Mono', 'sans-serif'],
       },
       colors: {
+        'geist-background': 'hsl(var(--geist-background))',
+        'accents-1': 'hsl(var(--accents-1))',
+        'accents-2': 'hsl(var(--accents-2))',
+        'accents-3': 'hsl(var(--accents-3))',
+        'accents-4': 'hsl(var(--accents-4))',
+        'accents-5': 'hsl(var(--accents-5))',
+        'accents-6': 'hsl(var(--accents-6))',
+        'accents-7': 'hsl(var(--accents-7))',
+        'accents-8': 'hsl(var(--accents-8))',
+        'geist-foreground': 'hsl(var(--geist-foreground))',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -60,15 +70,21 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        infiniteSlider: {
+          "0%": { transform: "translateX(0)" },
+          "100%": {
+            transform: "translateX(calc(-250px * 5))",
+          },
+        },
         'accordion-down': {
           from: { height: 0 },
           to: { height: 'var(--radix-accordion-content-height)' },
-          "text-reveal": {
-            "0%": {
-              transform: "translate(0, 100%)",
+          'text-reveal': {
+            '0%': {
+              transform: 'translate(0, 100%)',
             },
-            "100%": {
-              transform: "translate(0, 0)",
+            '100%': {
+              transform: 'translate(0, 0)',
             },
           },
         },
@@ -82,6 +98,7 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'text-reveal': 'text-reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s',
+        ['infinite-slider']: 'infiniteSlider 20s linear infinite',
       },
     },
   },

@@ -4,8 +4,8 @@ export type SocialLinks = {
   twitter: string;
 }[];
 
-export type NavLinks = {
-  label: string;
-  href: string;
-  id: number;
+export type NavItems = {
+  name: string;
+  link: string;
+  icon?: Element;
 }[];

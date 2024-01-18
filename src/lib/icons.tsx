@@ -20,7 +20,7 @@ export const SocialMediaIcons: React.FC<SocialMediaIconProps> = ({
   };
 
   return (
-    <div className='social-media-icons text-white inline-flex gap-2'>
+    <div className='social-media-icons  dark:text-gray-200 inline-flex gap-2'>
       {socialLinks.map((link, index) =>
         Object.entries(link).map(([key, url]) => {
           const IconComponent = icons[key];

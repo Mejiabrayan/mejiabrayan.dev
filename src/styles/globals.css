@@ -1,7 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --geist-background: 0, 0%, 0%; /* #000 */
+  --accents-1: 0, 0%, 6.7%; /* #111 */
+  --accents-2: 0, 0%, 20%; /* #333 */
+  --accents-3: 0, 0%, 26.7%; /* #444 */
+  --accents-4: 0, 0%, 40%; /* #666 */
+  --accents-5: 0, 0%, 53.3%; /* #888 */
+  --accents-6: 0, 0%, 60%; /* #999 */
+  --accents-7: 0, 0%, 92%; /* #eaeaea */
+  --accents-8: 0, 0%, 98%; /* #fafafa */
+  --geist-foreground: 0, 0%, 100%; /* #fff */
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/public/fonts/Geist/Geist-Thin.otf') format('otf');
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,101 +37,99 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
-  }
- 
+  }  
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-  }
-}
- 
+  }  
+}  
+
 @layer base {
   * {
     @apply border-border;
-  }
+  }  
   body {
     @apply bg-background text-foreground;
-  }
-}
+  }  
+}  
 
 html {
- scroll-behavior: smooth;
-}
+  scroll-behavior: smooth;
+}  
 
 /* globals.css */
 @keyframes jump {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%,
   100% {
     transform: translateY(0);
-  }
-}
-
-
+  }  
+  50% {
+    transform: translateY(-10px);
+  }  
+  100% {
+    transform: translateY(0);
+  }  
+}  
 
 ::selection {
   background-color: #800080; /* Unique purple color for text selection */
   color: white; /* Text color inside the selected area */
-}
+}  
 
 .lucide-github:hover {
   transition: opacity 0.3s ease-in-out;
   animation: jump 1s ease-in-out 0.3s;
-  
-}
+}  
 
 /* Add this CSS to your stylesheet or component's CSS file */
 /* Add this CSS to your stylesheet or component's CSS file */
@@ -111,13 +137,42 @@ html {
   display: inline-flex;
   gap: 12px;
   color: white;
-}
+}  
 
 .social-icon {
   transition: transform 0.2s, color 0.2s;
-}
+}  
 
 .social-icon:hover {
   transform: scale(1.1) translateY(-5px);
   color: #your-hover-color; /* Change to your desired hover color */
-}
+}  
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #0000;
+  border-radius: 50px;
+  background: linear-gradient(#131411, #131241) padding-box,
+    linear-gradient(var(--angle), blue, green) border-box;
+  animation: 8s rotate linear infinite;  
+}  
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }  
+}  
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}  
+
+
+

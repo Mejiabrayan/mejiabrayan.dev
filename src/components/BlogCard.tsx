@@ -64,10 +64,10 @@ const BlogCardItem: React.FC<{ post: any }> = ({ post }) => {
         className={`rounded-lg h-full w-full backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-700 shadow-sm`}
       >
         <CardHeader className='p-4'>
-          <CardTitle className='text-lg text-white font-semibold mb-2'>
+          <CardTitle className='text-lg text-[#292929] dark:text-white font-semibold mb-2'>
             {post.title}
           </CardTitle>
-          <CardDescription className='text-white text-sm'>
+          <CardDescription className='text-[#292929] dark:text-white text-sm'>
             {post.description ?? ''}
           </CardDescription>
         </CardHeader>

@@ -1,5 +1,4 @@
 ---
-
 import Layout from '@/components/Layout.astro';
 import { contentfulClient, type ProjectTypes } from '@/lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -16,12 +15,13 @@ export async function getStaticPaths() {
       date: new Date(item.fields.date).toLocaleDateString(),
       image: item.fields.image,
       description: item.fields.description,
+      url: item.fields.url,
     },
   }));
   return pages;
 }
 
-const { content, title, date, image, description } = Astro.props;
+const { content, title, date, image, description, url } = Astro.props;
 ---
 
 <html lang='en'>
@@ -42,14 +42,16 @@ const { content, title, date, image, description } = Astro.props;
               {date}
             </p>
             <p class='text-xl font-light text-white mb-6'>
-              {description}
+              {description ?? ''}
             </p>
 
             <a
-              href='/'
+              href={url}
+              target='_blank'
+              rel='noopener noreferrer'
               class='inline-block text-white underline hover:text-gray-300'
             >
-              Back to Portfolio
+              View Project
             </a>
           </div>
           <div class='order-1 md:order-2 px-5'>

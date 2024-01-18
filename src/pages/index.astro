@@ -1,16 +1,11 @@
 ---
 // import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
-import Projects from '@/components/ProjectCards';
-import { SocialMediaIcons } from '@/lib/icons';
+
 import '../styles/globals.css';
-import { Button } from '@/components/ui/button';
-import { BlogCard } from '@/components/BlogCard';
 
 import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
 import { fetchProjects } from '../lib/projects/fetchProjects';
-import About from '@/components/About.astro';
-import { heading, about } from 'config/site';
 
 let posts: any = [];
 try {
@@ -27,41 +22,4 @@ try {
 }
 ---
 
-<Layout title='Brayan M. Cuenca Portfolio'>
-  <div class='flex flex-col mx-auto min-h-screen pt-12'>
-    {/* Hero Section */}
-    <section class='mb-12'>
-      <div class='max-w-2xl mx-auto'>
-        <h1
-          class='font-geist-medium font-medium  text-5xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tighter mb-4 text-white'
-        >
-          {heading}
-        </h1>
-        <p class='text-base lg:text-xl text-gray-300 mb-6'>
-          {about}
-        </p>
-        <div class='flex flex-col mt-6 space-y-4'>
-          <SocialMediaIcons />
-        </div>
-      </div>
-    </section>
-
-    {/* Projects Section */}
-    <section class='mb-12'>
-      <h2 class='text-3xl font-medium text-white mb-8'>Selected Work</h2>
-
-      <Projects client:load projects={projects} />
-    </section>
-
-    {/* Blog Section */}
-    <section class='mb-12'>
-      <h2 class='text-3xl font-medium text-white mb-8'>Thoughts</h2>
-      <BlogCard client:load posts={posts} />
-    </section>
-
-    {/* About Section */}
-    <section class='py-12'>
-      <About />
-    </section>
-  </div>
-</Layout>
+<Layout title='Brayan M. Cuenca Portfolio' />

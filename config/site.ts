@@ -1,14 +1,14 @@
-import type { NavLinks } from 'types';
+import type { NavItems } from 'types';
 
-export const navLinks: NavLinks = [
-  { label: 'Home', href: '/', id: 1 },
-  { label: 'Projects', href: '/projects', id: 2 },
-  { label: 'Blog', href: '/blogs', id: 3 },
-  { label: 'Contact', href: '#contact', id: 4 },
+export const navItems: NavItems = [
+  { name: 'Home', link: '/', icon: undefined },
+  { name: 'Projects', link: '/projects', icon: undefined },
+  { name: 'Blog', link: '/blogs', icon: undefined },
+  { name: 'Contact', link: '#contact', icon: undefined },
 ];
 
 export const aboutMe: string = `
-Greetings! I am Brayan Mejia, a seasoned Front-End Developer crafting digital experiences from the heart of innovation, San Francisco, CA. Since embarking on this journey in 2019, my hands have danced across keyboards, breathing life into web applications with a tapestry of technologies such as React, Next.js, and Supabase, to name a few.
+Greetings! I am Brayan Mejia, a seasoned Full-Stack Developer crafting digital experiences from the heart of innovation, San Francisco, CA. Since embarking on this journey in 2019, my hands have danced across keyboards, breathing life into web applications with a tapestry of technologies such as React, Next.js, and Supabase, to name a few.
 
 In the ever-evolving world of tech, I've honed my skills through diverse projects, each teaching me the delicate balance between form and function, aesthetics and efficiency. As a Freelance Front-End Developer, I've cultivated a reputation for meticulous attention to detail and a relentless pursuit of user-centric design.
 
@@ -19,8 +19,6 @@ export const email: string = '  mejiabrayan@protonmail.com';
 
 export const location: string = 'San Francisco, CA';
 
-export const about: string = `I'm currently on a journey building tools with AI, leaning more into
-SaaS, immersing myself in Typescript, & overall finding myself as a
-developer and the problems I want to solve.`;
+export const about: string = `I'm currently embarked on an exciting journey of crafting AI-powered tools, delving deeper into the realm of SaaS, immersing myself in the intricacies of Typescript, and, above all, exploring my identity as a developer and the intriguing challenges I aspire to tackle.`;
 
-export const heading: string = 'Enthusiastic about the Web ';
+export const heading: string = 'Full-Stack Developer';
