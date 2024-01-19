@@ -22,23 +22,22 @@ export function BentoGrids() {
     </BentoGrid>
   );
 }
-const Skeleton = () => (
-  <div className='flex flex-1 w-full h-full min-h-[6rem] rounded-xl   dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black'></div>
-);
 
-const ImageComponent = ({ src, alt }: any) => (
-  <img 
-    src={src} 
+const ImageComponent = ({ src, alt }:any) => (
+  <img
+    src={src}
     alt={alt}
     className='flex flex-1 w-full h-full min-h-[9rem] rounded dark:bg-dot-white/[0.2]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black'
   />
 );
+
+
 const items = [
   {
     title: 'OrangeLeaf Notes',
     description:
       'OrangeLeaf is a simple note-taking app that allows you to take notes and categorize them into different categories.',
-    header: <ImageComponent src='orangeleaf.png' alt='OrangeLeaf Notes' />,
+    header: <ImageComponent src='/orangeleaf.png' alt='OrangeLeaf Notes' />,
     className: 'md:col-span-2',
     icon: <IconClipboardCopy className='h-4 w-4 text-neutral-500' />,
   },

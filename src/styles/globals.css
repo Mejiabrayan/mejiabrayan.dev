@@ -29,7 +29,6 @@ body {
   src: url('/public/fonts/Geist/Geist-Thin.otf') format('otf');
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -61,7 +60,7 @@ body {
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-  }  
+  }
 
   .dark {
     --background: 222.2 84% 4.9%;
@@ -91,62 +90,60 @@ body {
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-  }  
-}  
+  }
+}
 
 @layer base {
   * {
     @apply border-border;
-  }  
+  }
   body {
     @apply bg-background text-foreground;
-  }  
-}  
+  }
+}
 
 html {
   scroll-behavior: smooth;
-}  
+}
 
 /* globals.css */
 @keyframes jump {
   0%,
   100% {
     transform: translateY(0);
-  }  
+  }
   50% {
     transform: translateY(-10px);
-  }  
+  }
   100% {
     transform: translateY(0);
-  }  
-}  
+  }
+}
 
 ::selection {
-  background-color: #800080; /* Unique purple color for text selection */
-  color: white; /* Text color inside the selected area */
-}  
+  background-color: #000080;
+  color: white;
+}
 
 .lucide-github:hover {
   transition: opacity 0.3s ease-in-out;
   animation: jump 1s ease-in-out 0.3s;
-}  
+}
 
-/* Add this CSS to your stylesheet or component's CSS file */
-/* Add this CSS to your stylesheet or component's CSS file */
 .social-media-icons {
   display: inline-flex;
   gap: 12px;
   color: white;
-}  
+}
 
 .social-icon {
   transition: transform 0.2s, color 0.2s;
-}  
+}
 
 .social-icon:hover {
   transform: scale(1.1) translateY(-5px);
   color: #your-hover-color; /* Change to your desired hover color */
-}  
+}
 
 .circle {
   display: flex;
@@ -174,4 +171,3 @@ html {
   initial-value: 0deg;
   inherits: false;
 }
-

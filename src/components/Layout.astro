@@ -3,8 +3,8 @@ import '../styles/globals.css';
 import { Navbar } from '@/components/Navbar';
 import { InfiniteSlider } from '@/components/InfiniteSlider';
 import { BentoGrids } from '@/components/BentoGrid';
+import FadeInWrapper  from '@/components/FadeInWrapper';
 ---
-
 <!doctype html>
 <html lang='en'>
   <head>
@@ -25,7 +25,7 @@ import { BentoGrids } from '@/components/BentoGrid';
       class='absolute top-0 z-[-2] h-screen w-screen bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(25,118,210,0.3),rgba(255,255,255,0))]'
     >
     </div> -->
-
+<FadeInWrapper client:load>
     <main class='flex-grow container mx-auto p-8 mt-20 rounded-md shadow-lg'>
       <section class='flex items-center space-x-4 mb-8' data-aos='fade-down'>
         <div class='flex justify-center items-center'>
@@ -45,19 +45,21 @@ import { BentoGrids } from '@/components/BentoGrid';
           <p class='text-sm lg:text-base text-accents-6'>Front-End Developer</p>
         </div>
       </section>
-      <section class='mb-8' id='about'>
+      <section class='mb-8' id='about' data-aos='fade-down'>
         <h2 class='text-lg mb-4'>About Me</h2>
         <p class='text-sm md:text-base lg:text-base text-accents-6'>
           I'm a <span class='text-transition'>Front-End Developer</span>,
           transitioning from <span class='text-accents-7'>security</span>
-          into the tech world with a <span class='text-accents-7'>zeal</span> for
-          <span class='text-accents-7'
-            >crafting intuitive and dynamic web applications.
-          </span> Leveraging a creative background and a <span
-            class='text-accents-7'>continuous learning ethos</span
-          >, I build modern digital solutions that <span class='text-accents-7'
+          into the <span class='text-accents-7'>tech world</span> with a zeal for
+          crafting <span class='text-accents-7'
+            >intuitive and dynamic web applications</span
+          >. Leveraging a <span class='text-accents-7'>creative background</span
+          > and a
+          <span class='text-accents-7'>continuous learning ethos</span>, I build
+          modern digital solutions that <span class='text-accents-7'
             >empower</span
-          > and <span class='text-accents-7'>inspire</span>.
+          >
+          and <span class='text-accents-7'>inspire</span>.
         </p>
       </section>
       <section class='mb-8'>
@@ -70,6 +72,7 @@ import { BentoGrids } from '@/components/BentoGrid';
         <BentoGrids client:only />
       </section>
     </main>
+    </FadeInWrapper>
   </body>
 </html>
 
