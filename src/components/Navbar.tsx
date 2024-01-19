@@ -4,17 +4,17 @@ export function Navbar() {
   const navItems = [
     {
       name: 'Work',
-      link: '/',
+      link: '/#work',
       icon: <IconHeart className='h-4 w-4 text-neutral-500 dark:text-accents-8' />,
     },
     {
       name: 'About',
-      link: '/about',
+      link: '/#about',
       icon: <IconUser className='h-4 w-4 text-neutral-500 dark:text-accents-8' />,
     },
     {
       name: 'Contact',
-      link: '/contact',
+      link: '/#contact',
       icon: (
         <IconMessage className='h-4 w-4 text-neutral-500 dark:text-accents-8' />
       ),

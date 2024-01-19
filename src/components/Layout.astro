@@ -27,14 +27,25 @@ import { BentoGrids } from '@/components/BentoGrid';
     </div> -->
 
     <main class='flex-grow container mx-auto p-8 mt-20 rounded-md shadow-lg'>
-      <section class='flex items-center space-x-4 mb-8'>
-        <div class='circle'></div>
+      <section class='flex items-center space-x-4 mb-8' data-aos='fade-down'>
+        <div class='flex justify-center items-center'>
+          <div
+            class='gradient-border rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-10 lg:h-10'
+          >
+            <img
+              src='/blue.jpeg'
+              alt='Brayan Mejia Cuenca'
+              class='object-center w-full h-full'
+            />
+          </div>
+        </div>
+
         <div>
           <h1 class='text-base lg:text-xl'>Brayan Mejia Cuenca</h1>
           <p class='text-sm lg:text-base text-accents-6'>Front-End Developer</p>
         </div>
       </section>
-      <section class='mb-8'>
+      <section class='mb-8' id='about'>
         <h2 class='text-lg mb-4'>About Me</h2>
         <p class='text-sm md:text-base lg:text-base text-accents-6'>
           I'm a <span class='text-transition'>Front-End Developer</span>,
@@ -54,7 +65,7 @@ import { BentoGrids } from '@/components/BentoGrid';
         <InfiniteSlider client:only />
       </section>
 
-      <section class='mb-8'>
+      <section class='mb-8' id='work'>
         <h2 class='text-lg mb-4'>Projects</h2>
         <BentoGrids client:only />
       </section>

@@ -153,26 +153,25 @@ html {
   justify-content: center;
   align-items: center;
   padding: 25px;
-  height: 10px;
-  width: 10px;
-  border: 1px solid #0000;
+  min-height: 50px; /* Minimum height for visibility on mobile */
+  min-width: 50px; /* Minimum width for visibility on mobile */
+  border: 1px solid #000; /* Adjusted for visibility */
   border-radius: 50px;
   background: linear-gradient(#131411, #131241) padding-box,
     linear-gradient(var(--angle), blue, green) border-box;
-  animation: 8s rotate linear infinite;  
-}  
+  animation: 8s rotate linear infinite;
+}
 
-@keyframes rotate {
-  to {
-    --angle: 360deg;
-  }  
-}  
+@media (max-width: 600px) {
+  .circle {
+    min-height: 40px; /* Adjust size for smaller screens */
+    min-width: 40px;
+  }
+}
 
 @property --angle {
   syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
-}  
-
-
+}
 
