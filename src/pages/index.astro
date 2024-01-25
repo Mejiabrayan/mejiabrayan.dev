@@ -6,6 +6,8 @@ import '../styles/globals.css';
 
 import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
 import { fetchProjects } from '../lib/projects/fetchProjects';
+import { InfiniteSlider } from '@/components/InfiniteSlider';
+import { BentoGrids } from '@/components/BentoGrid';
 
 let posts: any = [];
 try {
@@ -22,4 +24,53 @@ try {
 }
 ---
 
-<Layout title='Brayan M. Cuenca Portfolio' />
+<Layout title='Brayan M. Cuenca Portfolio' >
+  <section class='flex items-center space-x-4 mb-8'>
+    <div class='flex justify-center items-center'>
+      <div
+        class='gradient-border rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-10 lg:h-10'
+      >
+        <img
+          src='/blue.jpeg'
+          alt='Brayan Mejia Cuenca'
+          class='object-center w-full h-full'
+        />
+      </div>
+    </div>
+
+    <div>
+      <h1 class='text-base lg:text-xl'>Brayan Mejia Cuenca</h1>
+      <p class='text-sm lg:text-base text-accents-6'>
+        Front-End Developer
+      </p>
+    </div>
+  </section>
+  <section class='mb-8' id='about' data-aos='fade-down'>
+    <h2 class='text-lg mb-4'>About Me</h2>
+    <p class='text-sm md:text-base lg:text-base text-accents-6'>
+      I'm a <span class='text-transition'>Front-End Developer</span>,
+      transitioning from <span class='text-accents-7'>security</span>
+      into the <span class='text-accents-7'>tech world</span> with a zeal for
+      crafting <span class='text-accents-7'
+        >intuitive and dynamic web applications</span
+      >. Leveraging a <span class='text-accents-7'
+        >creative background</span
+      > and a
+      <span class='text-accents-7'>continuous learning ethos</span>, I
+      build modern digital solutions that <span class='text-accents-7'
+        >empower</span
+      >
+      and <span class='text-accents-7'>inspire</span>.
+    </p>
+  </section>
+  <section class='mb-8'>
+    <h2 class='text-lg mb-4'>Skills</h2>
+    <InfiniteSlider client:only />
+  </section>
+
+  <section class='mb-8' id='work'>
+    <h2 class='text-lg mb-4'>Projects</h2>
+    <BentoGrids client:only projects={projects} />
+    </section>
+
+  </Layout>

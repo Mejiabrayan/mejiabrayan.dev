@@ -1,36 +1,38 @@
 import { BentoGrid, BentoGridItem } from '@/components/bento-grid';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import {
   IconClipboardCopy,
   IconFileBroken,
   IconSignature,
   IconTableColumn,
 } from '@tabler/icons-react';
+import type { ProjectCardsProps } from 'types/contentful';
 
-export function BentoGrids() {
+export const BentoGrids: React.FC<ProjectCardsProps> = ({ projects }) => {
   return (
     <BentoGrid className='max-w-xl mx-auto md:auto-rows-[20rem]'>
-      {items.map((item, i) => (
+      {projects.map((project, i) => (
         <BentoGridItem
           key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={item.className}
-          icon={item.icon}
+          title={project.title}
+          content={project.description}
+          date={project.date}
+          image={<ImageComponent src={project.image} alt={project.title} />}
+          slug={project.slug}
+          className={items[i].className}
         />
       ))}
     </BentoGrid>
   );
-}
+};
 
-const ImageComponent = ({ src, alt }:any) => (
+const ImageComponent = ({ src, alt }: any) => (
   <img
-    src={src}
+    src={'https:' + src?.fields?.file?.url}
     alt={alt}
-    className='flex flex-1 w-full h-full min-h-[9rem] rounded dark:bg-dot-white/[0.2]  border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black'
+    className='flex flex-1 w-full h-full min-h-[9rem] rounded dark:bg-dot-white/[0.2] border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black'
   />
 );
-
 
 const items = [
   {

@@ -27,15 +27,12 @@ const { content, title, date } = Astro.props;
   <head>
     <title>{title}</title>
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <!-- Ensure Tailwind CSS is included -->
   </head>
   <body>
     <Layout title='{title}'>
       <Breadcrumb />
 
-      <!-- Main content area -->
       <div class='mx-auto my-12 lg:px-8'>
-        <!-- Article title -->
         <h1
           class='prose prose-h1 text-4xl md:text-5xl lg:text-5xl font-bold mb-8 leading-tight text-slate-50'
         >

@@ -1,9 +1,11 @@
 export interface ProjectItem {
   title: string;
-  image: any;
+  image: any | React.ReactNode;
   description: string;
   slug: string;
   caseStudy?: string;
+  date: string;
+  className?: string;
 }
 
 export interface ProjectCardsProps {

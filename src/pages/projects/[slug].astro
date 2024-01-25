@@ -21,50 +21,48 @@ export async function getStaticPaths() {
   return pages;
 }
 
-const { content, title, date, image, description, url } = Astro.props;
+const { content, title, date, image, url } = Astro.props;
 ---
-
+<!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <title>{title}</title>
-  </head>
-  <body>
-    <Layout title='Portfolio'>
-      <section class='container mx-auto px-4 py-12'>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-8 items-start'>
-          <div class='order-2 md:order-1'>
-            <h1
-              class='text-4xl md:text-3xl xl:text-6xl font-medium tracking-tight text-white mb-4'
-            >
-              {title}
-            </h1>
-            <p class='text-xl font-light text-white mb-6'>
-              {date}
-            </p>
-            <p class='text-xl font-light text-white mb-6'>
-              {description ?? ''}
-            </p>
-
-            <a
-              href={url}
-              target='_blank'
-              rel='noopener noreferrer'
-              class='inline-block text-white underline hover:text-gray-300'
-            >
-              View Project
-            </a>
-          </div>
-          <div class='order-1 md:order-2 px-5'>
-            <!-- @ts-ignore -->
-            <img
-              src={'https:' + image?.fields?.file?.url}
-              alt={image?.fields?.title}
-              class='w-full h-auto rounded-lg shadow-lg'
-            />
-          </div>
-        </div>
-        <hr class='border-b border-gray-800 mt-12' />
-      </section>
-    </Layout>
-  </body>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>{title}</title>
+  <!-- Link to Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-geist-background text-gray-100 font-sans">
+  <!-- The Layout component should be defined elsewhere in your code and included here. -->
+  <Layout title='Portfolio'>
+    <div class='flex flex-col space-y-6 lg:space-y-0 lg:flex-row lg:space-x-12 lg:items-center px-4 py-12 max-w-7xl mx-auto'>
+      <div class='lg:w-1/2 lg:order-1'>
+        <h1 class='text-4xl lg:text-5xl font-medium leading-tight'>
+          {title}
+        </h1>
+        <p class='text-xl'>
+          {date}
+        </p>
+        <!-- Ensure your framework can parse and set HTML content correctly with set:html -->
+        <div class='text-lg leading-relaxed' set:html={content}></div>
+        <a
+          href={url}
+          target='_blank'
+          rel='noopener noreferrer'
+          class='text-blue-500 hover:text-blue-400 mt-4 inline-block'
+        >
+          View Project
+        </a>
+      </div>
+      <div class='lg:w-1/2 lg:order-2'>
+        <!-- @ts-ignore is typically used in TypeScript to ignore type checking errors. -->
+        <img
+          src={'https:' + image?.fields?.file?.url}
+          alt={image?.fields?.title}
+          class='w-full h-auto rounded-lg shadow-white shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105'
+        />
+      </div>
+    </div>
+  </Layout>
+</body>
 </html>
