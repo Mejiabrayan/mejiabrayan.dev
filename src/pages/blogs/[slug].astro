@@ -23,32 +23,54 @@ export async function getStaticPaths() {
 const { content, title, date } = Astro.props;
 ---
 
+<!doctype html>
 <html lang='en'>
   <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{title}</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <link
+      href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css'
+      rel='stylesheet'
+    />
   </head>
-  <body>
+  <body class='bg-geist-background text-accents-7 font-geist-regular'>
     <Layout title='{title}'>
-      <Breadcrumb />
+      <!-- Breadcrumb outside the header -->
+      <div class='container mx-auto p-4'>
+        <Breadcrumb />
+      </div>
 
-      <div class='mx-auto my-12 lg:px-8'>
-        <h1
-          class='prose prose-h1 text-4xl md:text-5xl lg:text-5xl font-bold mb-8 leading-tight text-slate-50'
-        >
-          {title}
-        </h1>
+      <header
+        class='relative overflow-hidden text-center rounded max-w-3xl mx-auto p-8'
+      >
+        <img
+          src='/bluetwo.jpeg'
+          alt='Header Background'
+          class='absolute inset-0 z-0 w-full h-full object-cover saturate-100 opacity-40'
+        />
+        <div class='relative z-10 p-8'>
+          <h1 class='prose prose-2xl font-geist-bold text-accents-7'>
+            {title}
+          </h1>
+        </div>
+      </header>
 
-        <!-- Article date -->
-        <time class='prose prose-time block mb-6 text-lg text-gray-400'>
+      <div class='text-center mt-4'>
+        <time class='text-lg font-medium text-accents-4'>
           {date}
         </time>
-
-        <article
-          set:html={content}
-          class='prose prose-invert prose-sm md:prose-base lg:prose-base prose-code:prose-code-sm prose-code:prose-code-xl prose-code:prose-code-2xl prose-li:prose-li-sm prose-li:prose-li-xl prose-li:prose-li-2xl'
-        />
       </div>
+
+      <main class='rounded-md shadow-lg mx-auto p-8 max-w-3xl'>
+        <article
+          class='prose prose-base md:prose-base lg:prose-xl mx-auto dark:text-accents-7 prose-blockquote:text-accents-5 prose-code:text-accents-5
+           prose-figure:text-accents-5 prose-ol:text-accents-5 prose-ul:text-accents-5 prose-li:text-accents-5 prose-h1:text-accents-9 prose-h2:text-accents-9 prose-h3:text-accents-9 prose-h3:text-accents-7
+       prose-h4:text-accents-6 prose-h5:text-accents-6 prose-h6:text-accents-9'
+        >
+          <div set:html={content} />
+        </article>
+      </main>
     </Layout>
   </body>
 </html>

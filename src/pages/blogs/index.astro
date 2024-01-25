@@ -28,7 +28,7 @@ const posts = entries.items.map((item) => {
     <body class='bg-geist-background text-foreground'>
       <header class='relative overflow-hidden'>
         <!-- TODO: Implement parallax scrolling for the image header in the future -->
-        <div class='absolute inset-0 z-10 opacity-40 saturate-100 '>
+        <div class='absolute inset-0 z-10 opacity-40 saturate-100'>
           <img
             src='/bluetwo.jpeg'
             alt='Header Background'
@@ -47,10 +47,11 @@ const posts = entries.items.map((item) => {
             <div class='rounded-md p-4 hover:shadow-lg my-4'>
               <a
                 href={`/blogs/${post.slug}/`}
-                class='text-2xl font-geist-mono hover:underline'
+                class='text-2xl font-geist-mono transition duration-300 ease-in-out hover:text-blue-500'
               >
                 <h2 class='text-accents-7 tracking-tight'>{post.title}</h2>
               </a>
+              
               <time class='text-accents-4'>{post.date}</time>
               <p class='mt-2 text-accents-6 text-sm lg:text-sm xl:text-base'>
                 {post.description}
@@ -61,6 +62,8 @@ const posts = entries.items.map((item) => {
       </div>
     </body>
   </Layout>
+
+  xw
 
 
 </html>
