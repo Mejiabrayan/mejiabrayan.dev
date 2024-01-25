@@ -21,7 +21,7 @@ import FadeInWrapper from '@/components/FadeInWrapper';
   <body
     class='relative flex flex-col min-h-screen bg-geist-background dark -tracking-tight font-geist-light dark:text-accents-7 max-w-2xl justify-center mx-auto'
   >
-    <Navbar client:only />
+    <Navbar client:load />
     <FadeInWrapper client:load>
       <main class='flex-grow container mx-auto p-8 mt-20 rounded-md shadow-lg'>
       <slot  />
