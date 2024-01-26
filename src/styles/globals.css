@@ -171,3 +171,34 @@ html {
   initial-value: 0deg;
   inherits: false;
 }
+
+
+.parallax {
+  position: relative;
+  background-image: url('/bluetwo.jpeg');
+  min-height: 150px; 
+  width: 60%;
+  margin: 0 auto;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .parallax {
+    background-attachment: fixed;
+    min-height: 150px; 
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .parallax {
+    background-attachment: fixed;
+    min-height: 150px; 
+    width: 100%;
+    
+  }
+}

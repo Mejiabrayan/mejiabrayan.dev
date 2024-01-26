@@ -57,7 +57,7 @@ const { content, title, date, image, url } = Astro.props;
           </a>
         </div>
         <div class='lg:w-1/2 lg:order-2'>
-          <!-- @ts-ignore is typically used in TypeScript to ignore type checking errors. -->
+          <!-- @ts-ignore -->
           <img
             src={'https:' + image?.fields?.file?.url}
             alt={image?.fields?.title}

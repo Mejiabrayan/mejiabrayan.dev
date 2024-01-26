@@ -1,5 +1,6 @@
 import { FloatingNav } from './floating-navbar';
 import {
+  IconArticle,
   IconHeart,
   IconHome,
   IconMessage,
@@ -18,12 +19,12 @@ export function Navbar() {
       name: 'Blogs',
       link: '/blogs',
       icon: (
-        <IconUser className='h-4 w-4 text-neutral-500 dark:text-accents-8' />
+        <IconArticle className='h-4 w-4 text-neutral-500 dark:text-accents-8' />
       ),
     },
     {
-      name: 'Contact',
-      link: '/#contact',
+      name: 'Lab',
+      link: '/lab',
       icon: (
         <IconMessage className='h-4 w-4 text-neutral-500 dark:text-accents-8' />
       ),
@@ -31,7 +32,7 @@ export function Navbar() {
   ];
   return (
     <>
-      <FloatingNav navItems={navItems} />
+      <FloatingNav navItems={navItems}  />
     </>
   );
 }
