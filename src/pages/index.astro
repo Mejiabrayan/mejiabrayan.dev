@@ -24,8 +24,9 @@ try {
 }
 ---
 
-<Layout title='Brayan M. Cuenca Portfolio' >
+<Layout title='Brayan M. Cuenca Portfolio'>
   <section class='flex items-center space-x-4 mb-8'>
+
     <div class='flex justify-center items-center'>
       <div
         class='gradient-border rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-10 lg:h-10'
@@ -33,58 +34,53 @@ try {
         <img
           src='/bluetwo.jpeg'
           alt='Brayan Mejia Cuenca'
-          class='object-center w-full h-full '
+          class='object-center w-full h-full'
         />
       </div>
     </div>
 
     <div>
-      <h1 class='text-base lg:text-xl'>Brayan Mejia Cuenca</h1>
-      <p class='text-sm lg:text-base text-accents-6'>
-        Front-End Developer
-      </p>
+      <h1 class='text-base lg:text-xl xl:text-2xl hover:italic'>Brayan Mejia Cuenca</h1>
+      <p class='text-sm lg:text-base xl:text-xl text-accents-6'>Front-End Developer</p>
     </div>
   </section>
   <section class='mb-8' id='about' data-aos='fade-down'>
     <h2 class='text-lg mb-4'>About Me</h2>
-    <p class='text-sm md:text-base lg:text-base text-accents-6'>
-      I'm a <span class='text-transition'>Front-End Developer</span>,
+    <p class='text-sm md:text-base lg:text-base prose-p:2xl:text-xl text-accents-5 '>
+      I'm a <span class='text-accents-7'>Front-End Developer</span>,
       transitioning from <span class='text-accents-7'>security</span>
-      into the <span class='text-accents-7'>tech world</span> with a zeal for
-      crafting <span class='text-accents-7'
-        >intuitive and dynamic web applications</span
-      >. Leveraging a <span class='text-accents-7'
-        >creative background</span
-      > and a
-      <span class='text-accents-7'>continuous learning ethos</span>, I
-      build modern digital solutions that <span class='text-accents-7'
-        >empower</span
-      >
+      into the <span class='text-accents-7'>tech world</span> with a zeal for crafting
+      <span class='text-accents-7'>intuitive and dynamic web applications</span
+      >. Leveraging a <span class='text-accents-7'>creative background</span> and
+      a
+      <span class='text-accents-7'>continuous learning ethos</span>, I build
+      modern digital solutions that <span class='text-accents-7'>empower</span>
       and <span class='text-accents-7'>inspire</span>.
     </p>
   </section>
   <section class='mb-8'>
-    <h2 class='text-lg mb-4'>Skills</h2>
+    <h2 class='md:text-lg lg:text-xl xl:text-3xl mb-4'>Skills</h2>
     <InfiniteSlider client:only />
   </section>
 
   <section class='mb-8' id='work'>
-    <h2 class='text-lg mb-4'>Projects</h2>
+    <h2 class='md:text-lg lg:text-xl xl:text-3xl mb-4'>Projects</h2>
     <BentoGrids client:only projects={projects} />
-    </section>
-    
-    <section class='bg-opacity-50 bg-zinc-900 rounded-md p-4 my-8'>
-      <h2 class='text-xl text-white mb-2'>Latest from Lab</h2>
-      <div class='flex justify-between items-center p-4 bg-geist-dark rounded-md'>
-        <div class='text-geist-light'> 
-          <!-- Content about the latest lab work -->
-          <p class="text-center">Coming soon...</p>
-        </div>
-        <div>
-          <a href='/lab' class='text-geist-light hover:text-blue-500'>
-            <!-- &gt;
-          </a> -->
-        </div>
+  </section>
+
+  <section class='bg-opacity-50 bg-zinc-900 rounded-md p-4 my-8'>
+    <h2 class='text-xl text-white mb-2'>Latest from Lab</h2>
+    <div class='flex justify-between items-center p-4 bg-geist-dark rounded-md'>
+      <div class='text-geist-light'>
+        <!-- Content about the latest lab work -->
+        <p class='text-center'>Coming soon...</p>
       </div>
-    </section>
-  </Layout>
+      <div>
+        <a href='/lab' class='text-geist-light hover:text-blue-500'>
+          <!-- &gt;
+          </a> -->
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

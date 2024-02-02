@@ -25,7 +25,7 @@ const posts = entries.items.map((item) => {
   </head>
   <Layout title='Brayan M. Cuenca Portfolio'>
     <body class='bg-geist-background text-foreground'>
-      <header class='relative overflow-hidden'>
+      <header class='relative'>
         <div class='absolute inset-0 z-10 opacity-40 saturate-100'>
           <img
             src='/bluetwo.jpeg'
@@ -33,9 +33,8 @@ const posts = entries.items.map((item) => {
             class='w-full h-full object-cover rounded'
           />
         </div>
-        <!-- Blog title with higher z-index -->
         <div class='relative z-20 text-center py-8'>
-          <h1 class='text-4xl font-geist-bold text-accents-7'>My Blog</h1>
+          <h1 class='text-4xl font-geist-bold text-accents-6'>My Blog</h1>
         </div>
       </header>
 
@@ -51,7 +50,7 @@ const posts = entries.items.map((item) => {
               </a>
 
               <time class='text-accents-4'>{post.date}</time>
-              <p class='mt-2 text-accents-6 text-sm lg:text-sm xl:text-base'>
+              <p class='prose prose-sm sm:prose lg:prose-lg xl:prose-xl mt-2'>
                 {post.description}
               </p>
             </div>
@@ -60,4 +59,5 @@ const posts = entries.items.map((item) => {
       </div>
     </body>
   </Layout>
+
 </html>

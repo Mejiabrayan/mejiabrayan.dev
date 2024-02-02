@@ -7,6 +7,24 @@
   padding: 0;
 }
 
+@layer components {
+  .overlay {
+    position: fixed;
+    inset: 0;
+
+    opacity: 0.1;
+    width: 100%;
+
+    background-image: url(/noise.png);
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: 256px;
+
+    mix-blend-mode: overlay;
+    user-select: none;
+  }
+}
+
 :root {
   --geist-background: 0, 0%, 0%; /* #000 */
   --accents-1: 0, 0%, 6.7%; /* #111 */
@@ -172,11 +190,10 @@ html {
   inherits: false;
 }
 
-
 .parallax {
   position: relative;
   background-image: url('/bluetwo.jpeg');
-  min-height: 150px; 
+  min-height: 150px;
   width: 60%;
   margin: 0 auto;
   background-attachment: fixed;
@@ -189,7 +206,7 @@ html {
 @media screen and (max-width: 768px) {
   .parallax {
     background-attachment: fixed;
-    min-height: 150px; 
+    min-height: 150px;
     width: 100%;
   }
 }
@@ -197,8 +214,7 @@ html {
 @media screen and (max-width: 600px) {
   .parallax {
     background-attachment: fixed;
-    min-height: 150px; 
+    min-height: 150px;
     width: 100%;
-    
   }
 }

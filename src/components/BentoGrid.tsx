@@ -10,7 +10,7 @@ import type { ProjectCardsProps } from 'types/contentful';
 
 export const BentoGrids: React.FC<ProjectCardsProps> = ({ projects }) => {
   return (
-    <BentoGrid className='max-w-xl mx-auto md:auto-rows-[20rem]'>
+    <BentoGrid className='max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto md:auto-rows-[20rem]'>
       {projects.map((project, i) => (
         <BentoGridItem
           key={i}
