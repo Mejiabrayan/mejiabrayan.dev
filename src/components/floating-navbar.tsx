@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { cn } from '@/lib/utils';
 

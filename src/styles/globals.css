@@ -201,11 +201,12 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 50%;
+  
 }
 
 @media screen and (max-width: 768px) {
   .parallax {
-    background-attachment: fixed;
+    background-attachment: scroll; /* Change from fixed to scroll */
     min-height: 150px;
     width: 100%;
   }
