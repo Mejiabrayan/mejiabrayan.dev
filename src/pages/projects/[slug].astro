@@ -1,6 +1,7 @@
 ---
 import Layout from '@/components/Layout.astro';
-import { contentfulClient, type ProjectTypes } from '@/lib/contentful';
+import { contentfulClient } from '@/lib/contentful';
+import type { ProjectTypes } from '@/lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 export async function getStaticPaths() {
@@ -43,10 +44,7 @@ const { content, title, date, image, url } = Astro.props;
           <p class='text-xl'>
             {date}
           </p>
-          <!-- Ensure your framework can parse and set HTML content correctly with set:html -->
-          <p>
-            {content}
-          </p>
+          <p set:html={content} />
           <a
             href={url}
             target='_blank'
