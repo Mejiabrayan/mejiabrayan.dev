@@ -120,10 +120,6 @@ html {
   }
 }
 
-::selection {
-  background-color: #000080;
-  color: white;
-}
 
 .lucide-github:hover {
   transition: opacity 0.3s ease-in-out;
@@ -176,13 +172,11 @@ html {
   background-image: url('/bluetwo.jpeg');
   min-height: 300px;
   width: 70%;
-  margin:auto;
+  margin: auto;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 30%;
- 
 }
 
 @media screen and (max-width: 768px) {

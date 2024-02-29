@@ -1,12 +1,6 @@
 import { FlaskConical } from 'lucide-react';
 import { FloatingNav } from './floating-navbar';
-import {
-  IconArticle,
-  IconHeart,
-  IconHome,
-  IconMessage,
-  IconUser,
-} from '@tabler/icons-react';
+import { IconArticle, IconHeart } from '@tabler/icons-react';
 
 enum NavItemName {
   Work = 'Work',

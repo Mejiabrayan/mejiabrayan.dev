@@ -18,10 +18,8 @@ import FadeInWrapper from '@/components/FadeInWrapper';
     />
   </head>
   <body
-    class='relative flex flex-col min-h-screen bg-geist-background -tracking-tight font-geist-light dark:text-accents-7 max-w-xl md:max-w-2x lg:max-5xl xl:max-7xl justify-center mx-auto'
+    class='selection:bg-blue-700 selection:text-accents-6 relative container bg-geist-background -tracking-tight font-geist-light dark:text-accents-7 max-w-xl md:max-w-2x lg:max-5xl xl:max-7xl justify-center mx-auto'
   >
-    <div class='overlay pointer-events-none z-20'></div>
-
     <Navbar client:only />
     <FadeInWrapper client:load>
       <main
