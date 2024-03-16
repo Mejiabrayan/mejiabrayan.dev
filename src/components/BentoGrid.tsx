@@ -30,7 +30,7 @@ const ImageComponent = ({ src, alt }: any) => (
   <img
     src={'https:' + src?.fields?.file?.url}
     alt={alt}
-    className='flex flex-1 w-full h-full min-h-[9rem] rounded dark:bg-dot-white/[0.2] border border-transparent dark:border-white/[0.2] bg-neutral-100 dark:bg-black'
+    className='flex flex-1 w-full h-full min-h-[9rem] rounded bg-dot-white/[0.2] border border-white/[0.2] bg-black'
   />
 );
 

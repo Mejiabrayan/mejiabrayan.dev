@@ -1,5 +1,4 @@
 ---
-// import Cards from '@/components/Cards';
 import Layout from '@/components/Layout.astro';
 
 import '../styles/globals.css';
@@ -8,6 +7,8 @@ import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
 import { fetchProjects } from '../lib/projects/fetchProjects';
 import { InfiniteSlider } from '@/components/InfiniteSlider';
 import { BentoGrids } from '@/components/BentoGrid';
+import BlurryCursor from '@/components/Cursor';
+import { CornerRightDown } from 'lucide-react';
 
 let posts: any = [];
 try {
@@ -25,31 +26,25 @@ try {
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <section class='flex items-center space-x-4 mb-8'>
+  <BlurryCursor client:only isActive={true} />
 
-    <div class='flex justify-center items-center'>
-      <div
-        class='gradient-border rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-10 lg:h-10'
-      >
-        <img
-          src='/bluetwo.jpeg'
-          alt='Brayan Mejia Cuenca'
-          class='object-center w-full h-full'
-        />
-      </div>
+  <section
+    class='relative overflow-hidden flex flex-col justify-center items-start h-screen gap-4'
+  >
+    <div
+      class='rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-20 lg:h-20'
+    >
+      <img
+        src='/bluetwo.jpeg'
+        alt='Brayan Mejia Cuenca'
+        class='object-center w-full h-full'
+      />
     </div>
+    <h1 class='text-base lg:text-xl xl:text-2xl'>Brayan Mejia Cuenca</h1>
 
-    <div>
-      <h1 class='text-base lg:text-xl xl:text-2xl'>Brayan Mejia Cuenca</h1>
-      <p class='text-sm lg:text-base xl:text-xl text-accents-6'>Front-End Developer</p>
-    </div>
-  </section>
-  <section class='mb-8' id='about' data-aos='fade-down'>
-    <h2 class='text-xl md:text-2xl mb-4'>About Me</h2>
-    <p class='text-sm md:text-base lg:text-base prose-p:2xl:text-xl text-accents-5 '>
-      I'm a <span class='text-accents-7'>Front-End Developer</span>,
-      transitioning from <span class='text-accents-7'>security</span>
-      into the <span class='text-accents-7'>tech world</span> with a zeal for crafting
+    <p class='text-xl md:text-2xl lg:text-3xl text-accents-5'>
+      I'm a <span class='text-accents-7'>Full-Stack Developer</span> with a interest
+      for crafting
       <span class='text-accents-7'>intuitive and dynamic web applications</span
       >. Leveraging a <span class='text-accents-7'>creative background</span> and
       a
@@ -58,29 +53,22 @@ try {
       and <span class='text-accents-7'>inspire</span>.
     </p>
   </section>
-  <section class='mb-8'>
-    <h2 class='md:text-lg lg:text-xl xl:text-3xl mb-4'>Skills</h2>
+
+  <section class='m-12 gap-[50px] relative'>
+    <h2 class='md:text-xl lg:text-2xl xl:text-4xl mb-4'>Skills</h2>
     <InfiniteSlider client:only />
-  </section>
-
-  <section class='mb-8' id='work'>
-    <h2 class='md:text-lg lg:text-xl xl:text-3xl mb-4'>Projects</h2>
-    <BentoGrids client:only projects={projects} />
-  </section>
-
-  <section class='bg-opacity-50 rounded-md p-4 my-8'>
-    <h2 class='text-xl text-white mb-2'>Latest from Lab</h2>
-    <div class='flex justify-between items-center p-4 bg-geist-dark rounded-md'>
-      <div class='text-geist-light'>
-        <!-- Content about the latest lab work -->
-        <p class='text-center'>Coming soon...</p>
-      </div>
-      <div>
-        <a href='/lab' class='text-geist-light hover:text-blue-500'>
-          <!-- &gt;
-          </a> -->
-        </a>
-      </div>
+    <div class='relative h-[30vh] w-full md:w-1/2 lg:w-1/2 mt-16'>
+      <p class='absolute text-lg md:text-xl lg:text-2xl text-accents-6'>
+        <span class='text-accents-7'>Continuous learning </span> is a core value
+        of mine. I'm always looking to expand my skillset and learn new technologies.
+        Here are some of the projects I've worked on:
+        <CornerRightDown className='inline-block w-6 h-6' />
+      </p>
     </div>
+  </section>
+
+  <section class='m-12' id='work'>
+    <h2 class='md:text-xl lg:text-2xl xl:text-4xl mb-4'>Projects</h2>
+    <BentoGrids client:only projects={projects} />
   </section>
 </Layout>

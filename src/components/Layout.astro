@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import { Navbar } from '@/components/Navbar';
 
 import FadeInWrapper from '@/components/FadeInWrapper';
+import BlurryCursor from './Cursor';
 ---
 
 <!doctype html>
@@ -18,49 +19,14 @@ import FadeInWrapper from '@/components/FadeInWrapper';
     />
   </head>
   <body
-    class='relative flex flex-col min-h-screen bg-geist-background -tracking-tight font-geist-light dark:text-accents-7 max-w-xl md:max-w-2x lg:max-5xl xl:max-7xl justify-center mx-auto'
+    class='container mx-auto w-full max-w-6xl bg-geist-background text-accents-7'
   >
-    <div class='overlay pointer-events-none z-20'></div>
-
     <Navbar client:only />
-    <FadeInWrapper client:load>
-      <main
-        class='flex-grow p-4 mt-20 rounded-md shadow-lg w-full max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-full mx-auto'
-      >
+    <FadeInWrapper client:only>
+   
+      <main>
         <slot />
       </main>
     </FadeInWrapper>
   </body>
 </html>
-
-<script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  })();
-
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
-  }
-
-  window.localStorage.setItem('theme', theme);
-
-  const handleToggleClick = () => {
-    const element = document.documentElement;
-    element.classList.toggle('dark');
-
-    const isDark = element.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  };
-
-  document
-    .getElementById('themeToggle')
-    .addEventListener('click', handleToggleClick);
-</script>

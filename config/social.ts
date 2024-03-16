@@ -1,4 +1,4 @@
-import type { SocialLinks, NavLinks } from 'types';
+import type { SocialLinks} from 'types';
 
 export const socialLinks: SocialLinks = [
   {

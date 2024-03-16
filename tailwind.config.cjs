@@ -13,11 +13,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'geist-medium': ['Geist Medium', 'sans-serif'],
-        'geist-bold': ['Geist Bold', 'sans-serif'],
-        'geist-regular': ['Geist Regular', 'sans-serif'],
-        'geist-light': ['Geist Light', 'sans-serif'],
-        'geist-mono': ['Geist Mono', 'sans-serif'],
+      
       },
       colors: {
         'geist-background': 'hsl(var(--geist-background))',
