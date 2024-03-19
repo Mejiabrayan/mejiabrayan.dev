@@ -35,25 +35,6 @@ export const FloatingNav = ({
           <a href='/'>Home</a>
           <span className='absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px' />
         </button>
-<<<<<<< HEAD
-        {navItems.map(
-          (
-            navItem: { name: string; link: string; icon?: JSX.Element },
-            idx: number
-          ) => (
-            <a
-              key={`link=${idx}`}
-              href={navItem.link}
-              className={cn(
-                'relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500'
-              )}
-            >
-              <span className='block sm:hidden'>{navItem.icon}</span>
-              <span className='hidden sm:block text-sm'>{navItem.name}</span>
-            </a>
-          )
-        )}
-=======
         {navItems.map((navItem: any, idx: number) => (
           <a
             key={`link=${idx}`}
@@ -66,7 +47,6 @@ export const FloatingNav = ({
             <span className='hidden sm:block text-sm'>{navItem.name}</span>
           </a>
         ))}
->>>>>>> 8f0d702
       </motion.div>
     </AnimatePresence>
   );
