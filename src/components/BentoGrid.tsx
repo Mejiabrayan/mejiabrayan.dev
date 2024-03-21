@@ -1,13 +1,39 @@
 import { BentoGrid, BentoGridItem } from '@/components/bento-grid';
 
 import type { ProjectCardsProps } from 'types/contentful';
+import { motion } from 'framer-motion';
 
 export const BentoGrids: React.FC<ProjectCardsProps> = ({ projects }) => {
+  const fadeAnimationVariants = {
+    initial: {
+      opacity: 0,
+      y: 100,
+    },
+    animate: (index: number) => ({
+      opacity: 1,
+      y: 0,
+
+      transition: {
+        delay: 0.04 * index,
+      },
+    }),
+  };
+
   return (
     <BentoGrid className='max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto md:auto-rows-[20rem]'>
-      {projects.map((project, i) => (
+      {projects.map((project, index) => (
+        <motion.div 
+        variants={fadeAnimationVariants}
+        initial='initial'
+        whileInView='animate'
+        viewport={{
+          once: true,
+        }}
+        custom={index}
+        
+          key={index}
+        >
         <BentoGridItem
-          key={i}
           title={project.title}
           content={project.description}
           date={project.date}
@@ -15,6 +41,7 @@ export const BentoGrids: React.FC<ProjectCardsProps> = ({ projects }) => {
           slug={project.slug}
           className='md:col-span-1'
         />
+        </motion.div>
       ))}
     </BentoGrid>
   );
@@ -27,36 +54,3 @@ const ImageComponent = ({ src, alt }: any) => (
     className='flex flex-1 w-full h-full min-h-[9rem] rounded bg-dot-white/[0.2] border border-white/[0.2] bg-black'
   />
 );
-
-// const items = [
-//   {
-//     title: 'OrangeLeaf Notes',
-//     description:
-//       'OrangeLeaf is a simple note-taking app that allows you to take notes and categorize them into different categories.',
-//     header: <ImageComponent src='/orangeleaf.png' alt='OrangeLeaf Notes' />,
-//     className: 'md:col-span-2',
-//     icon: <IconClipboardCopy className='h-4 w-4 text-neutral-500' />,
-//   },
-//   {
-//     title: 'RapidDrafts',
-//     description:
-//       'RapidDrafts is your comprehensive drafting assistant, designed to streamline your content creation process with speed and precision.',
-//     header: <ImageComponent src='/rapiddrafts.png' alt='RapidDrafts' />,
-//     className: 'md:col-span-1',
-//     icon: <IconFileBroken className='h-4 w-4 text-neutral-500' />,
-//   },
-//   {
-//     title: 'LogoAICreator',
-//     description: `LogoAIcreator.com is an innovative SaaS platform utilizing AI, specifically OpenAI's DALL-E9, to craft striking logos for businesses and brands. Our tech-savvy approach, powered by Next.js and React, ensures a user-friendly experience.`,
-//     header: <ImageComponent src='/logoaicreator.png' alt='LogoAICreator' />,
-//     className: 'md:col-span-1',
-//     icon: <IconSignature className='h-4 w-4 text-neutral-500' />,
-//   },
-//   {
-//     title: 'Time Tracker',
-//     description: `Time Tracker is a sleek Next.js 13 + Supabase application designed to streamline time tracking. With intuitive features, real-time updates, and seamless integration with Supabase, it's the perfect tool to help individuals and teams boost productivity. Say goodbye to time management hassles and hello to efficiency with Time Tracker.`,
-//     header: <ImageComponent src='/time-tracker.png' alt='Time Tracker' />,
-//     className: 'md:col-span-2',
-//     icon: <IconTableColumn className='h-4 w-4 text-neutral-500' />,
-//   },
-// ];
