@@ -47,10 +47,13 @@ export const BentoGrids: React.FC<ProjectCardsProps> = ({ projects }) => {
   );
 };
 
-const ImageComponent = ({ src, alt }: any) => (
-  <img
-    src={'https:' + src?.fields?.file?.url}
-    alt={alt}
-    className='flex flex-1 w-full h-full min-h-[9rem] rounded bg-dot-white/[0.2] border border-white/[0.2] bg-black'
-  />
-);
+const ImageComponent = ({ src, alt }: any) => {
+  const imageUrl = `https:${src?.fields?.file?.url}?w=400&fm=webp`;
+  return (
+    <img
+      src={imageUrl}
+      alt={alt}
+      className='flex flex-1 w-full h-full min-h-[9rem] rounded bg-dot-white/[0.2] border border-white/[0.2] bg-black'
+    />
+  );
+};
