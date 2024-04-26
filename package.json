@@ -36,13 +36,15 @@
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.22.0",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "latest",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.2.2",
     "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "latest",
+    "postcss": "latest",
     "sass": "^1.72.0"
   }
 }

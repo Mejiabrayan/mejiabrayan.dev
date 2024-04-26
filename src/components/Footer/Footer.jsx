@@ -20,11 +20,10 @@ const Logos = ({scrollProgress}) => {
     const y = useTransform(scrollProgress, [0, 1], [-225, 0])
     return (
         <div className="h-[250px] bg-black overflow-hidden">
-            <motion.div style={{y}} className="h-full bg-black flex justify-center gap-10 items-center p-10">
+            <motion.div style={{y}} className="h-full flex justify-center gap-10 items-center p-10">
                 {
                     [...Array(5)].map((_, i) => {
-                        return <img key={`img_${i}`} className="w-[80px] h-[80px]" src={`/medias/${i+1}.jpg`} />
-                    })
+                        return <img key={`img_${i}`} className="w-[80px] h-[80px]" src={`./medias/${i+1}.jpg`} />                    })
                 }
             </motion.div>
         </div>

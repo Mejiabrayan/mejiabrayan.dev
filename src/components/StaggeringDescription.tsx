@@ -18,7 +18,7 @@ const StaggeringDescription = () => {
   };
 
   const paragraphContent = [
-    { text: 'Continuous learning ', isAccent: true },
+    { text: 'Continuous learning', isAccent: true },
     {
       text: "is a core value of mine. I'm always looking to expand my skillset and learn new technologies. Here are some of the projects I've worked on",
       isAccent: false,
@@ -29,19 +29,19 @@ const StaggeringDescription = () => {
     <motion.div className='absolute text-lg md:text-xl lg:text-2xl text-accents-6'>
       {paragraphContent.map((segment, index) => (
         <motion.p
-          key={index}
-          className={segment.isAccent ? 'text-accents-7' : ''}
-          variants={fadeAnimationVariants}
-          initial='initial'
-          whileInView='animate'
-          viewport={{
-            once: true,
-          }}
-          custom={index}
+        key={index}
+        className={segment.isAccent ? 'text-accents-7' : ''}
+        variants={fadeAnimationVariants}
+        initial='initial'
+        whileInView='animate'
+        viewport={{
+          once: true,
+        }}
+        custom={index}
         >
-          {segment.text} <CornerRightDown className='inline-block w-6 h-6' />
+          {segment.text}
         </motion.p>
-      ))}
+      ))} <CornerRightDown className='inline-block w-6 h-6' />
     </motion.div>
   );
 };

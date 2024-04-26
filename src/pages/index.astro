@@ -8,7 +8,8 @@ import { fetchProjects } from '../lib/projects/fetchProjects';
 import { InfiniteSlider } from '@/components/InfiniteSlider';
 import { BentoGrids } from '@/components/BentoGrid';
 import BlurryCursor from '@/components/Cursor';
-import StaggeringDescription from './StaggeringDescription';
+import StaggeringDescription from '@/components/StaggeringDescription';
+import Footer from '@/components/footer.astro';
 
 let posts: any = [];
 try {
@@ -26,7 +27,7 @@ try {
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <BlurryCursor client:only isActive={true} />
+  <!-- <BlurryCursor client:only isActive={true} /> -->
 
   <section
     class='relative overflow-hidden flex flex-col justify-center items-start h-screen gap-4'
@@ -35,35 +36,44 @@ try {
       class='rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-20 lg:h-20'
     >
       <img
-        src='/bluetwo.jpeg'
+        src='/avatar.webp'
         alt='Brayan Mejia Cuenca'
-        class='object-center w-full h-full'
+        class='object-center object-cover grayscale w-full h-full'
       />
     </div>
     <h1 class='text-base lg:text-xl xl:text-2xl'>Brayan Mejia Cuenca</h1>
 
     <p class='text-xl md:text-2xl lg:text-3xl text-accents-5'>
-      I'm a <span class='text-accents-7'>Full-Stack Developer</span> with a interest
-      for crafting
-      <span class='text-accents-7'>intuitive and dynamic web applications</span
-      >. Leveraging a <span class='text-accents-7'>creative background</span> and
-      a
-      <span class='text-accents-7'>continuous learning ethos</span>, I build
-      modern digital solutions that <span class='text-accents-7'>empower</span>
-      and <span class='text-accents-7'>inspire</span>.
+      I'm a <span class='text-[#AEFA1B] font-pixelify'>Frontend developer</span>
+      with a interest for crafting
+      <span class='text-accents-7 font-pixelify'
+        >intuitive and dynamic web applications</span
+      >. Leveraging a <span class='text-accents-7 font-pixelify'
+        >creative background</span
+      > and a
+      <span class='text-accents-7 font-pixelify'>continuous learning ethos</span
+      >, I build modern digital solutions that <span
+        class='text-accents-7 font-pixelify'>empower</span
+      >
+      and <span class='text-accents-7 font-pixelify'>inspire</span>
     </p>
   </section>
 
   <section class='m-12 gap-[50px] relative'>
-    <h2 class='md:text-xl lg:text-2xl xl:text-4xl mb-4'>Skills</h2>
+    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>
+      Skills
+    </h2>
     <InfiniteSlider client:only />
     <div class='relative h-[30vh] w-full md:w-1/2 lg:w-1/2 mt-16'>
-      <StaggeringDescription client:only />
+      <StaggeringDescription client:visible />
     </div>
   </section>
 
   <section class='m-12' id='work'>
-    <h2 class='md:text-xl lg:text-2xl xl:text-4xl mb-4'>Projects</h2>
-    <BentoGrids client:only projects={projects} />
+    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>
+      Projects
+    </h2>
+    <BentoGrids client:visible projects={projects} />
   </section>
+  <Footer />
 </Layout>

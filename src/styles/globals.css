@@ -1,9 +1,9 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  /* --geist-alternative: #010202; */
   --geist-background: 0, 0%, 0%; /* #000 */
   --accents-1: 0, 0%, 6.7%; /* #111 */
   --accents-2: 0, 0%, 20%; /* #333 */
@@ -24,6 +24,7 @@
 body,
 html {
   font-family: 'Geist', sans-serif;
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
@@ -32,19 +33,18 @@ html {
 
 @font-face {
   font-family: 'Geist';
-  src: url('/public/fonts/Geist/Geist-Thin.otf') format('otf');
+  src: url('/fonts/Geist/Geist-Thin.otf') format('otf');
 }
 
 @font-face {
   font-family: 'Pixelify';
-  src: url('/public/fonts/Pixelify/static/PixelifySans-Regular.ttf') format('ttf');
+  src: url('/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf')
+    format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-
-h1 {
+#name {
   font-family: 'Pixelify', system-ui;
-
 }

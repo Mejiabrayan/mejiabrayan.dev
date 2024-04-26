@@ -1,9 +1,6 @@
 ---
 import '../styles/globals.css';
 import { Navbar } from '@/components/Navbar';
-
-import FadeInWrapper from '@/components/FadeInWrapper';
-import BlurryCursor from './Cursor';
 ---
 
 <!doctype html>
@@ -19,14 +16,12 @@ import BlurryCursor from './Cursor';
     />
   </head>
   <body
-    class='container mx-auto w-full max-w-6xl bg-geist-background text-accents-7'
+    class='isolate container mx-auto w-full max-w-5xl bg-geist-background text-accents-7'
   >
     <Navbar />
-  
-   
-      <main>
-        <slot />
-      </main>
-   
+
+    <main>
+      <slot />
+    </main>
   </body>
 </html>

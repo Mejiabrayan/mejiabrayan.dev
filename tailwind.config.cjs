@@ -13,10 +13,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-      
+        pixelify: ['"Pixelify"', 'system-ui', 'sans-serif'], // Add your custom font here     },
       },
       colors: {
         'geist-background': 'hsl(var(--geist-background))',
+
         'accents-1': 'hsl(var(--accents-1))',
         'accents-2': 'hsl(var(--accents-2))',
         'accents-3': 'hsl(var(--accents-3))',
@@ -67,9 +68,9 @@ module.exports = {
       },
       keyframes: {
         infiniteSlider: {
-          "0%": { transform: "translateX(calc(-250px * 5))" },
-          "100%": {
-            transform: "translateX(0)",
+          '0%': { transform: 'translateX(calc(-250px * 5))' },
+          '100%': {
+            transform: 'translateX(0)',
           },
         },
         'accordion-down': {

@@ -19,7 +19,7 @@ export interface ProjectTypes {
     description?: EntryFieldTypes.Text;
     date: EntryFieldTypes.Date;
     content: EntryFieldTypes.RichText;
-    image: EntryFieldTypes.Object;
+  image: EntryFieldTypes.Object;
     url: EntryFieldTypes.Text;
     caseStudy: EntryFieldTypes.Object;
     slug: EntryFieldTypes.Text;
