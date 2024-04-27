@@ -17,7 +17,6 @@ module.exports = {
       },
       colors: {
         'geist-background': 'hsl(var(--geist-background))',
-
         'accents-1': 'hsl(var(--accents-1))',
         'accents-2': 'hsl(var(--accents-2))',
         'accents-3': 'hsl(var(--accents-3))',
