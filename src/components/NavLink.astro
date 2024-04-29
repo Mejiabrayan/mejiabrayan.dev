@@ -1,0 +1,23 @@
+---
+import { cn } from '@/lib/utils';
+---
+
+<a
+  href={Astro.props.link}
+  class={cn(
+    'relative text-neutral-50 items-center flex space-x-1 hover:text-neutral-300',
+    Astro.props.isActive && 'text-white'
+  )}
+>
+  <span class='block sm:hidden'>{Astro.props.icon}</span>
+  {
+    Astro.props.isActive ? (
+      <button class='border text-sm font-medium relative border-white/[0.2] text-white px-4 py-2 rounded-full'>
+        {Astro.props.name}
+        <span class='absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-[#AEFA1B] to-transparent h-px' />
+      </button>
+    ) : (
+      <span class='hidden sm:block text-sm'>{Astro.props.name}</span>
+    )
+  }
+</a>
