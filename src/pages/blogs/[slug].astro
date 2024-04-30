@@ -3,7 +3,7 @@ import { contentfulClient } from '../../lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { BlogTypes } from '../../lib/contentful';
 import Layout from '@/components/Layout.astro';
-import Breadcrumb from '@/components/Breadcrumb.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 export async function getStaticPaths() {
   const { items } = await contentfulClient.getEntries<BlogTypes>({
@@ -23,17 +23,18 @@ export async function getStaticPaths() {
 const { content, title, date } = Astro.props;
 ---
 
-<!doctype html>
+<!doctype html transition:animate='none'>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{title}</title>
+    <ViewTransitions />
+
   </head>
   <body>
     <Layout title='{title}'>
-     
-
+      <div transition:animate="slide">
       <header
         class='flex flex-col justify-center items-center w-full max-w-2xl text-center mx-auto mb-4 px-24 md:px-0 space-y-12 mt-12 md:mt-24 lg:mt-32'
       >
@@ -48,7 +49,7 @@ const { content, title, date } = Astro.props;
         </time>
       </div>
 
-      <main>
+      <main  >
         <article
           class='px-2 md:px-0 mx-auto prose prose-base md:prose-lg tracking-tight text-accents-7 prose-blockquote:text-accents-5 prose-code:text-accents-5
            prose-figure:text-accents-5 prose-ol:text-accents-5 prose-ul:text-accents-5 prose-li:text-accents-5 prose-h1:text-accents-9 prose-h2:text-accents-9 prose-h3:text-accents-9 prose-h3:text-accents-7
@@ -57,6 +58,7 @@ const { content, title, date } = Astro.props;
           <p set:html={content} />
         </article>
       </main>
+    </div>
     </Layout>
   </body>
 </html>
