@@ -1,4 +1,5 @@
 import { BentoGrid, BentoGridItem } from '@/components/bento-grid';
+import { ViewTransitions } from "astro:transitions";
 
 import type { ProjectCardsProps } from 'types/contentful';
 import { motion } from 'framer-motion';

@@ -10,6 +10,7 @@ import { BentoGrids } from '@/components/BentoGrid';
 import BlurryCursor from '@/components/Cursor';
 import StaggeringDescription from '@/components/StaggeringDescription';
 import Footer from '@/components/footer.astro';
+import { BlogCard } from '@/components/CardComponent';
 
 let posts: any = [];
 try {
@@ -44,7 +45,9 @@ try {
     <h1 class='text-base lg:text-xl xl:text-2xl'>Brayan Mejia Cuenca</h1>
 
     <p class='text-xl md:text-2xl lg:text-3xl text-accents-5'>
-      I'm a <span class='text-[#AEFA1B] font-pixelify text-balance'>Frontend developer</span>
+      I'm a <span class='text-[#AEFA1B] font-pixelify text-balance'
+        >Frontend developer</span
+      >
       with a interest for crafting
       <span class='dark:text-accents-7 text-neutral-500 font-pixelify'
         >intuitive and dynamic web applications</span
@@ -75,5 +78,11 @@ try {
     </h2>
     <BentoGrids client:visible projects={projects} />
   </section>
-  <Footer />
+  <section class='m-12' id='blog'>
+    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>Blog</h2>
+    <div class=''>
+      <BlogCard client:visible posts={posts} />
+    </div>
+    <Footer />
+  </section>
 </Layout>
