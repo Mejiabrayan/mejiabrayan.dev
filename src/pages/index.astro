@@ -1,5 +1,5 @@
 ---
-import Layout from '@/components/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 
 import '../styles/globals.css';
 
@@ -7,7 +7,6 @@ import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
 import { fetchProjects } from '../lib/projects/fetchProjects';
 import { InfiniteSlider } from '@/components/InfiniteSlider';
 import { BentoGrids } from '@/components/BentoGrid';
-import BlurryCursor from '@/components/Cursor';
 import StaggeringDescription from '@/components/StaggeringDescription';
 import Footer from '@/components/footer.astro';
 import { BlogCard } from '@/components/CardComponent';
@@ -28,8 +27,6 @@ try {
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <!-- <BlurryCursor client:only isActive={true} /> -->
-
   <section
     class='relative flex flex-col justify-center items-start h-screen gap-4'
   >
@@ -83,6 +80,6 @@ try {
     <div class=''>
       <BlogCard client:visible posts={posts} />
     </div>
-    <Footer />
   </section>
+  <Footer />
 </Layout>

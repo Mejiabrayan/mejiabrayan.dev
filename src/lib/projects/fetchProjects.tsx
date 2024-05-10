@@ -8,7 +8,7 @@ export async function fetchProjects() {
   });
 
   return entries.items.map((item) => {
-    const { caseStudy, content, date, image, slug, title, url } =
+    const {  date,  } =
         item.fields;
     return {
       caseStudy: item.fields.caseStudy,

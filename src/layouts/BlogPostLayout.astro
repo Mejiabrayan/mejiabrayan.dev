@@ -1,0 +1,48 @@
+---
+import '../styles/globals.css';
+const { frontmatter } = Astro.props;
+import Layout from './Layout.astro';
+---
+
+<html>
+  <head>
+    <title>{frontmatter.title}</title>
+  </head>
+  <body>
+    <Layout>
+      <div class='min-h-screen flex flex-col justify-center items-center'>
+        <main
+          class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
+        >
+          <header class='relative rounded-xl overflow-hidden mb-8'>
+            <img
+              class='w-full h-64 object-cover opacity-60'
+              src={frontmatter.heroImage}
+              alt='hero image'
+              draggable='false'
+            />
+            <div
+              class='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100'
+            >
+            </div>
+            <div class='absolute inset-0 flex items-center justify-center p-4'>
+              <h1 class='text-white text-3xl font-bold text-center'>
+                {frontmatter.title}
+              </h1>
+            </div>
+        </header>
+          <time class='block mb-8 text-sm text-accents-6'>
+            {
+              new Date(frontmatter.date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })
+            }
+          </time>
+          <slot />
+        </main>
+      </div>
+    </Layout>
+  </body>
+</html>

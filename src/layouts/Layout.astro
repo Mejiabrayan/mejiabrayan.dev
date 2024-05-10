@@ -1,7 +1,6 @@
 ---
 import '../styles/globals.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Navbar from './Navbar.astro';
+import Navbar from '../components/Navbar.astro';
 ---
 
 <!doctype html>
@@ -17,7 +16,7 @@ import Navbar from './Navbar.astro';
     />
   </head>
   <body
-    class='isolate container mx-auto w-full max-w-5xl bg-geist-background text-accents-7'
+    class='container mx-auto w-full max-w-4xl bg-geist-background space-y-12 antialiased'
   >
     <Navbar />
 

@@ -8,7 +8,7 @@ export async function fetchContentfulPosts() {
   });
 
   return entries.items.map((item) => {
-    const { title, date, description, slug } = item.fields;
+    const {  date, } = item.fields;
     return {
       title: item.fields.title,
       slug: item.fields.slug,

@@ -2,7 +2,7 @@
 import { contentfulClient } from '../../lib/contentful';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { ProjectTypes } from '../../lib/contentful';
-import Layout from '@/components/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 
 const entries = await contentfulClient.getEntries<ProjectTypes>({
   content_type: 'project',

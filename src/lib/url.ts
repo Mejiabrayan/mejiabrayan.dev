@@ -1,3 +1,3 @@
-export function getURL(url: string) {
+export function getURL(url: any) {
   return new URL(url).pathname;
 }
