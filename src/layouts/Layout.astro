@@ -1,6 +1,7 @@
 ---
 import '../styles/globals.css';
-import Navbar from '../components/Navbar.astro';
+import { FloatingNav } from '@/components/FloatingNavbar';
+import { ViewTransitions } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -14,12 +15,12 @@ import Navbar from '../components/Navbar.astro';
       href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css'
       rel='stylesheet'
     />
+    <ViewTransitions />
   </head>
   <body
-    class='container mx-auto w-full max-w-4xl bg-geist-background space-y-12 antialiased'
+    class='container mx-auto w-full max-w-4xl bg-geist-background space-y-12 antialiased selection:bg-primary-accent selection:text-black'
   >
-    <Navbar />
-
+    <FloatingNav client:only />
     <main>
       <slot />
     </main>

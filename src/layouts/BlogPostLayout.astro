@@ -7,17 +7,37 @@ import Layout from './Layout.astro';
 <html>
   <head>
     <title>{frontmatter.title}</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta
+      name='description'
+      content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics."
+    />
+    <meta
+      name='keywords'
+      content='web development, front-end, full-stack, design, portfolio, blog'
+    />
+    <meta name='author' content='Brayan Mejia Cuenca' />
+    <meta property='og:title' content=`${frontmatter.title}` />
+    <meta
+      property='og:description'
+      content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics."
+    />
+    <meta property='og:url' content='https://mejiabrayan.dev/blogs' />
+    <meta property='og:image' content='/mejiabrayan.webp' />
   </head>
+
   <body>
     <Layout>
-      <div class='min-h-screen flex flex-col justify-center items-center'>
+      <div class='min-h-screen flex flex-col justify-center items-center'               transition:name='img'
+      >
         <main
           class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
         >
           <header class='relative rounded-xl overflow-hidden mb-8'>
             <img
-              class='w-full h-64 object-cover opacity-60'
-              src={frontmatter.heroImage}
+              class='w-full h-64 object-cover opacity-60 rounded-xl'
+              src={frontmatter.image}
               alt='hero image'
               draggable='false'
             />
@@ -26,11 +46,17 @@ import Layout from './Layout.astro';
             >
             </div>
             <div class='absolute inset-0 flex items-center justify-center p-4'>
-              <h1 class='text-white text-3xl font-bold text-center'>
+              <h1
+                class='text-white text-3xl font-bold text-center'
+                
+              >
                 {frontmatter.title}
               </h1>
             </div>
-        </header>
+            <!-- <span class='block isolate text-xs text-gray-400 mt-2 text-center'>
+              {frontmatter.attributedAuthor  || ''}
+            </span> -->
+          </header>
           <time class='block mb-8 text-sm text-accents-6'>
             {
               new Date(frontmatter.date).toLocaleDateString('en-US', {

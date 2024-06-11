@@ -1,0 +1,52 @@
+---
+import {
+  getCollection,
+  type CollectionEntry,
+  getEntries,
+} from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blogs');
+  return blogPosts.map((blog) => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }));
+}
+type Props = {
+  blog: CollectionEntry<'blogs'>;
+};
+const { blog } = Astro.props;
+const { Content } = await blog.render(); // Render the content of the blog post
+
+const relatedPosts = blog.data.relatedPosts
+  ? await getEntries(blog.data.relatedPosts)
+  : [];
+---
+<Layout>
+    <div class='meta'>
+      <time datetime={(new Date(blog.data.date)).toISOString()}>
+        {
+          (new Date(blog.data.date)).toLocaleDateString(undefined, {
+            dateStyle: 'medium',
+            timeZone: 'UTC',
+          })
+        }
+      </time>
+    </div>
+    <Content />
+    {
+      relatedPosts.length > 0 && (
+        <div>
+          <h2>Related Posts</h2>
+          <div>
+            {relatedPosts.map((p) => (
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </Layout>

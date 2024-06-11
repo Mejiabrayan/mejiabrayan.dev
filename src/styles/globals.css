@@ -5,6 +5,7 @@
 :root {
   /* --geist-alternative: #010202; */
   --geist-background: 0, 0%, 0%; /* #000 */
+  --geist-secondary: 3.5%, 3.5%, 3.5%; /* #0e0e0e */
   --accents-1: 0, 0%, 6.7%; /* #111 */
   --accents-2: 0, 0%, 20%; /* #333 */
   --accents-3: 0, 0%, 26.7%; /* #444 */

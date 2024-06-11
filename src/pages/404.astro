@@ -1,0 +1,26 @@
+---
+import Grid from '@/components/Grid.astro';
+import Layout from '../layouts/Layout.astro';
+import '../styles/globals.css';
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>404 Page</title>
+  </head>
+  <body>
+    <Layout>
+      <div class='relative flex flex-col items-center justify-center h-screen'>
+        <Grid />
+        <h1 class='text-5xl text-center text-accents-6 font-pixelify'>
+         404 Page Not Found
+        </h1>
+        <p class='text-lg text-center'>
+          The page you are looking for does not exist.
+        </p>
+      </div>
+    </Layout></body
+  >
+</html>

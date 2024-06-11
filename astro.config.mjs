@@ -13,7 +13,7 @@ export default defineConfig({
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://shiki.style/themes
-      theme: 'one-dark-pro',
+      theme: 'vitesse-dark',
       tailwind: true,
       // Alternatively, provide multiple themes
       // See note below for using dual light/dark themes

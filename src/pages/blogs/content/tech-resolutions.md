@@ -1,0 +1,31 @@
+---
+title: 'Tech Resolutions: My 2024 Quest for New Skills and Tools'
+layout: src/layouts/BlogPostLayout.astro
+author: Brayan Mejia Cuenca
+description: "As we approach the end of the year, I find myself reflecting on the multitude of new tech tools emerging in l.
+
+"
+date: Dec 19 2023
+image: '/gradient-green.webp'
+attributedImg: mike
+---
+
+ As we approach the end of the year, I find myself reflecting on the multitude of new tech tools emerging in the market. While it's easy to get swayed by the latest trends, I prefer to choose tools that not only address my current challenges but also synergize with my existing skill set (but trust me it's difficult not to dabble in them all 😅).
+
+However, I've identified a few technologies that I'm particularly excited to explore in the coming year. Here's my list for 2024, in no particular order:
+
+1. [Golang](https://go.dev/): Stepping beyond my comfort zone with JavaScript, I'm eager to dive into the intricacies of Golang. But exactly is Golang anyway? This language has piqued my interest with its impressive features and robust performance. Given that it's a preferred backend language at Uber (where I currently work in tech security), my curiosity has only deepened. I see Golang as an opportunity to expand my programming horizons and bring a new level of dimensions to my backend development skills.
+
+2. [HTMX](https://htmx.org/): Without delving too much into this one, let's just say HTMX has been on my radar since I first started hearing about it on X (formerly known as Twitter) for its simplicity and power in enhancing web applications. HTMX according to their website:
+
+   > htmx gives you access to [AJAX](https://htmx.org/docs/#ajax), [CSS Transitions](https://htmx.org/docs/#css_transitions), [WebSockets](https://htmx.org/docs/#websockets) and [Server Sent Events](https://htmx.org/docs/#sse) directly in HTML, using [attributes](https://htmx.org/reference/#attributes), so you can build [modern user interfaces](https://htmx.org/examples/) with the [simplicity](https://en.wikipedia.org/wiki/HATEOAS) and [power](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) of hypertext
+
+   pretty cool, huh? 😎
+
+3. [Python](https://python.org/): With the tech world increasingly pivoting towards AI, Python has become more relevant than ever. Not only is it a cornerstone language in AI development, but its versatility and ease of learning make it an exciting addition to my tech stack. I'm looking forward to exploring Python's capabilities, especially in the realm of machine learning and data analysis. Plus Jupiter notes is the 🐐. 
+
+4. [Spline 3D Tool](https://spline.design/): In my search for innovative and 'shiny' tools, Spline 3D has caught my eye. I plan to integrate this tool into my web development projects to create more dynamic and visually appealing interfaces. Its ability to blend design and functionality is something I can't wait to experiment with honestly.
+
+5. [TypeScript](https://www.typescriptlang.org/): As a seasoned JavaScript developer, my brief encounters with TypeScript have been transformative. The robust typing system it offers has been a game-changer, enhancing code reliability and maintainability. I'm committed to deepening my expertise in TypeScript, as it has become an indispensable part of my development process, and when I say indispensable—where "any" is no longer just an option, but a memory with a laugh. 😅
+
+As I embark on this journey of learning and experimentation, I look forward to sharing my experiences and insights with you all. Stay tuned for updates on my progress and the projects that emerge from this exciting tech stack! In the meantime, what are some new tools you're learning this year?

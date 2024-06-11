@@ -1,33 +1,46 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import '../../styles/globals.css';
-import { ViewTransitions } from 'astro:transitions';
-
-const postmd = await Astro.glob('/src/pages/blogs/*.md');
+import { getCollection } from 'astro:content';
+const blogPosts = await getCollection('blogs');
+const postmd = await Astro.glob('/src/pages/blogs/content/*.md');
 ---
 
 <html lang='en'>
   <head>
     <title>Brayan M. Cuenca Portfolio | Blogs</title>
-    <ViewTransitions />
+    <meta name='description' content='Brayan M. Cuenca Portfolio Blogs' />
+    <meta name='author' content='Brayan M. Cuenca' />
+    <meta name='keywords' content='Brayan M. Cuenca, Portfolio, Blogs' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   </head>
   <Layout title='Brayan M. Cuenca Portfolio'>
     <body>
-      <header class='text-accents-8 py-16'>
+      <header class='text-accents-8 py-16' transition:name='img'>
         <div class='container mx-auto px-4'>
           <h1 class='text-4xl font-bold tracking-tight text-center'>Blogs</h1>
+          <p class='mt-4 text-center text-accents-6'>
+            I like to write about things I learn.
+          </p>
         </div>
       </header>
-      <main class='container mx-auto px-4 py-8'>
+      <div
+        class='absolute inset-0 -z-10 opacity-10 bg-[linear-gradient(to_left,#C9FF18_0.5px,transparent_0.5px),linear-gradient(to_top,#999_1px,transparent_0.5px)] bg-[size:6rem_4rem]
+        [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_70%,transparent_110%)]'
+      >
+      </div>
+      <main class='relative container mx-auto px-4 py-8 overflow-hidden'>
         {
           postmd.map((md) => (
             <article class='mb-8'>
               <li>
                 <a
                   href={md.url}
-                  class='transition duration-300 ease-in-out hover:text-blue-500 hover:cursor-pointer'
+                  aria-label={`Read more about ${md.frontmatter.title}`}
                 >
-                  <h2 class='text-accents-8 text-2xl font-bold'>
+                  <h2
+                    transition:name='img'
+                    class='text-accents-8 text-balance text-2xl font-bold transition duration-300 ease-in-out hover:text-primary-accent hover:cursor-pointer'
+                  >
                     {md.frontmatter.title}
                   </h2>
                 </a>
@@ -39,4 +52,6 @@ const postmd = await Astro.glob('/src/pages/blogs/*.md');
       </main>
     </body>
   </Layout>
+
+
 </html>

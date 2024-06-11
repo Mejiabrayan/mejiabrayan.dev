@@ -1,87 +1,91 @@
-import type { BlogCardsProps } from 'types/contentful';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { useRef, useState } from 'react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import type { MarkdownInstance } from 'astro';
 
-export const BlogCard: React.FC<BlogCardsProps> = ({ posts }) => {
+interface BlogCardItemProps {
+  post: MarkdownInstance<Record<string, any>>;
+}
+
+export const BlogCard: React.FC<{
+  posts: MarkdownInstance<Record<string, any>>[];
+}> = ({ posts }) => {
+  const fadeAnimationVariants = {
+    initial: { opacity: 0, y: 100 },
+    animate: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.04 * index,
+      },
+    }),
+  };
+
+  //  needs to be fixed since children do not stagger properly
   return (
-    <div className='flex flex-col gap-4'>
+    <div
+      className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center'
+    >
       {posts.map((post, index) => (
-        <BlogCardItem key={index} post={post} />
+        <motion.div
+          key={index}
+          variants={fadeAnimationVariants}
+          initial='initial'
+          whileInView='animate'
+          viewport={{ once: true }}
+        >
+          <CardComponent post={post} />
+        </motion.div>
       ))}
     </div>
   );
 };
 
-const BlogCardItem: React.FC<{ post: any }> = ({ post }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current || isFocused) return;
-
-    const rect = divRef.current.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const handleFocus = () => {
-    setIsFocused(true);
-    setOpacity(1);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
+const CardComponent: React.FC<BlogCardItemProps> = ({ post }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   return (
     <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className='relative'
+      onMouseMove={(e) => {
+        const { left, top } = e.currentTarget.getBoundingClientRect();
+        mouseX.set(e.clientX - left);
+        mouseY.set(e.clientY - top);
+      }}
+      className='group relative max-w-2xl lg:max-w-[350px] w-full rounded-xl bg-neutral-950 flex flex-col'
+      style={{ height: '450px' }}
     >
-      <div
-        className='pointer-events-none absolute -inset-0 opacity-0 transition duration-500 rounded-xl'
+      <div className='absolute right-5 top-0 h-px w-80 bg-gradient-to-l from-transparent via-white/30 via-10% to-transparent' />
+      <motion.div
+        className='pointer-events-none bottom-0 absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100'
         style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(201, 201, 201, 0.25), transparent 40%)`,
+          background: useMotionTemplate`radial-gradient(200px circle at ${mouseX}px ${mouseY}px, rgba(51, 51, 51, 0.4), transparent 80%)`,
         }}
       />
-      <Card
-        className={`rounded-lg h-full w-full backdrop-filter backdrop-blur-lg bg-opacity-40 border border-gray-700 shadow-sm`}
-      >
-        <CardHeader className='p-4'>
-          <CardTitle className='text-lg text-[#292929] dark:text-white font-semibold mb-2'>
-            {post.title}
-          </CardTitle>
-          <CardDescription className='text-[#292929] dark:text-white text-sm'>
-            {post.description ?? ''}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className='p-4 mt-auto'>
-          <a
-            href={`blogs/${post.slug}`}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='text-white text-sm hover:underline'
-          >
-            View Blog
-          </a>
-        </CardContent>
-      </Card>
+      <div className='relative flex flex-col justify-between gap-4 rounded-xl border border-white/10 px-4 py-5 flex-grow'>
+        <div className='space-y-2'>
+          <img
+            src={post.frontmatter.heroImage}
+            className='rounded-xl h-32 w-full object-cover opacity-75'
+            draggable={false}
+          />
+          <div className='flex flex-row items-center justify-center pt-2'>
+            <h3 className='text-base text-balance font-semibold text-neutral-200'>
+              {post.frontmatter.title}
+            </h3>
+            <p className='text-[12px] text-neutral-300 select-none min-w-fit'>
+              {post.frontmatter.date}
+            </p>
+          </div>
+          <p className='text-sm leading-tight text-neutral-400 pb-3'>
+            {post.frontmatter.description.slice(0, 100) + '...'}
+          </p>
+        </div>
+        <a
+          href={`/blogs/content/${post.file?.split('/').pop()?.split('.')[0]}`}
+          className='inline-flex items-center justify-center text-sm py-2 px-4 font-medium bg-transparent text-accents-7 border border-white/10 rounded-xl duration-300 hover:bg-accents-6/0 hover:text-accents-7 w-full'
+        >
+          Read More
+        </a>
+      </div>
     </div>
   );
 };

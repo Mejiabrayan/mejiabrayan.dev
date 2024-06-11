@@ -26,22 +26,22 @@ const StaggeringDescription = () => {
   ];
 
   return (
-    <motion.div className='absolute text-lg md:text-xl lg:text-2xl text-accents-6'>
+    <motion.div className='absolute text-lg md:text-xl lg:text-6xl text-accents-6'>
       {paragraphContent.map((segment, index) => (
         <motion.p
-        key={index}
-        className={segment.isAccent ? 'text-accents-7' : ''}
-        variants={fadeAnimationVariants}
-        initial='initial'
-        whileInView='animate'
-        viewport={{
-          once: true,
-        }}
-        custom={index}
+          key={index}
+          className={segment.isAccent ? 'text-accents-7' : ''}
+          variants={fadeAnimationVariants}
+          initial='initial'
+          whileInView='animate'
+          viewport={{
+            once: true,
+          }}
+          custom={index}
         >
           {segment.text}
         </motion.p>
-      ))} <CornerRightDown className='inline-block w-6 h-6' />
+      ))}
     </motion.div>
   );
 };

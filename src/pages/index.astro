@@ -1,29 +1,15 @@
 ---
 import Layout from '@/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+const blogPosts = await getCollection('blogs');
 
-import '../styles/globals.css';
-
-import { fetchContentfulPosts } from '../lib/blogs/fetchContentfulPosts';
-import { fetchProjects } from '../lib/projects/fetchProjects';
-import { InfiniteSlider } from '@/components/InfiniteSlider';
-import { BentoGrids } from '@/components/BentoGrid';
-import StaggeringDescription from '@/components/StaggeringDescription';
 import Footer from '@/components/footer.astro';
-import { BlogCard } from '@/components/CardComponent';
+import { BlogCard } from '@/components/BlogCard';
+import { ProjectCard } from '@/components/ProjectCard';
+import PostCard from '@/components/PostCard.astro';
 
-let posts: any = [];
-try {
-  posts = await fetchContentfulPosts();
-} catch (error) {
-  console.error('Error fetching posts:', error);
-}
-
-let projects: any = [];
-try {
-  projects = await fetchProjects();
-} catch (error) {
-  console.error('Error fetching projects:', error);
-}
+const postmd = await Astro.glob('/src/pages/blogs/content/*.md');
+const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
@@ -37,48 +23,47 @@ try {
         src='/avatar.webp'
         alt='Brayan Mejia Cuenca'
         class='object-center object-cover grayscale w-full h-full'
+        draggable='false'
       />
     </div>
-    <h1 class='text-base lg:text-xl xl:text-2xl'>Brayan Mejia Cuenca</h1>
+    <h1 class='text-base lg:text-xl xl:text-2xl text-accents-7'>
+      Brayan Mejia Cuenca
+    </h1>
 
-    <p class='text-xl md:text-2xl lg:text-3xl text-accents-6'>
-      I'm a <span class='text-[#AEFA1B] font-pixelify text-balance'
-        >Frontend developer</span
-      >
-      with a interest for crafting
-      <span class='dark:text-accents-7 text-neutral-500 font-pixelify'
-        >intuitive and dynamic web applications</span
-      >. Leveraging a <span class='text-accents-7 font-pixelify'
-        >creative background</span
-      > and a
-      <span class='text-accents-7 font-pixelify'>continuous learning ethos</span
-      >, I build modern digital solutions that <span
-        class='text-accents-7 font-pixelify'>empower</span
-      >
-      and <span class='text-accents-7 font-pixelify'>inspire</span>
+    <p class='text-xl md:text-2xl lg:text-4xl text-accents-7 tracking-tighter'>
+      I'm a <span class='italic'>Front-End</span>
+      <span class='text-primary-accent font-pixelify text-balance'>
+        Developer
+      </span>
+      who loves to craft on the web. my work is focused on creating
+      <span class='text-primary-accent font-pixelify'>intuitive</span>
+      <span class='italic'>&</span>
+      <span class='text-primary-accent font-pixelify'>dynamic</span> web apps. These
+      days I'm working as freelancer and continously improving what I do best:
+      <span class='text-primary-accent italic'>Building</span>
     </p>
   </section>
 
-  <section class='m-12 gap-[50px] relative'>
-    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>
-      Skills
-    </h2>
-    <InfiniteSlider client:only />
-    <div class='relative h-[30vh] w-full md:w-1/2 lg:w-1/2 mt-16'>
-      <StaggeringDescription client:visible />
-    </div>
-  </section>
-
-  <section class='m-12' id='work'>
-    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>
+  <section
+    id='projects'
+    class='flex flex-col justify-center items-start space-y-6'
+  >
+    <h2 class='italic text-accents-7 text-2xl lg:text-3xl xl:text-5xl'>
       Projects
     </h2>
-    <BentoGrids client:visible projects={projects} />
+    <p class='text-accents-6 text-base lg:text-lg'>
+      A curated list of projects
+    </p>
+    <ProjectCard projects={projectmd} client:only />
   </section>
-  <section class='m-12' id='blog'>
-    <h2 class='font-pixelify md:text-xl lg:text-2xl xl:text-4xl mb-4'>Blog</h2>
-    <div class=''>
-      <BlogCard client:visible posts={posts} />
+
+  <section class='space-y-6 mt-6' id='blog'>
+    <h2 class='text-2xl lg:text-2xl xl:text-5xl text-accents-7 italic'>Blog</h2>
+    <p class='text-accents-6 text-base lg:text-lg'>A collection of thoughts</p>
+    <div>
+      <!-- <BlogCard client:visible posts={postmd} /> -->
+
+      <PostCard post={blogPosts} />
     </div>
   </section>
   <Footer />
