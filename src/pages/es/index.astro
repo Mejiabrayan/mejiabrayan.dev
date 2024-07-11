@@ -6,7 +6,7 @@ const blogPosts = await getCollection('blogs');
 import  ProjectCard  from '@/components/ProjectCard.astro';
 import PostCard from '@/components/PostCard.astro';
 
-const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
+const projectmd = await Astro.glob('/src/content/projects/*.md');
 import { GithubIcon } from 'lucide-react';
 import ScrambleTitle from '@/components/Scrambled';
 ---
