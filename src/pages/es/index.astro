@@ -6,7 +6,6 @@ const blogPosts = await getCollection('blogs');
 import { ProjectCard } from '@/components/ProjectCard';
 import PostCard from '@/components/PostCard.astro';
 
-const postmd = await Astro.glob('/src/pages/blogs/content/*.md');
 const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
 import { GithubIcon } from 'lucide-react';
 import ScrambleTitle from '@/components/Scrambled';
@@ -43,14 +42,14 @@ import ScrambleTitle from '@/components/Scrambled';
     />
 
     <p class='text-xl md:text-2xl lg:text-4xl text-accents-7 tracking-tighter'>
-      I'm a <span class='italic'>Full-Stack</span>
+      Soy un <span class='italic'>Desarrollador</span>
       <span class='text-primary-accent font-pixelify text-balance'>
-        Developer
+        Full-Stack
       </span>
-      who loves to craft on the web. My work is focused on creating
-      <span class='text-primary-accent font-pixelify'>intuitive</span>
-      <span class='italic'>&</span>
-      <span class='text-primary-accent font-pixelify'>dynamic</span> web apps.
+      que ama crear en la web. Mi trabajo se enfoca en crear aplicaciones web
+      <span class='text-primary-accent font-pixelify'>intuitivas</span>
+      <span class='italic'>y</span>
+      <span class='text-primary-accent font-pixelify'>dinámicas</span>.
     </p>
   </section>
 
