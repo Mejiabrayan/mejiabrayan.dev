@@ -29,7 +29,7 @@ import Layout from './Layout.astro';
 
   <body>
     <Layout>
-      <div class='min-h-screen flex flex-col justify-center items-center'               transition:name='img'
+      <div class='min-h-screen flex flex-col justify-center items-center' transition:name='img'
       >
         <main
           class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
@@ -38,7 +38,7 @@ import Layout from './Layout.astro';
             <img
               class='w-full h-64 object-cover opacity-60 rounded-xl'
               src={frontmatter.image}
-              alt='hero image'
+              alt={frontmatter.title}
               draggable='false'
             />
             <div
