@@ -7,7 +7,7 @@ description: "As we approach the end of the year, I find myself reflecting on th
 "
 date: Dec 19 2023
 image: '/gradient-green.webp'
-attributedImg: mike diaz
+attributedImg: mike
 ---
 
  As we approach the end of the year, I find myself reflecting on the multitude of new tech tools emerging in the market. While it's easy to get swayed by the latest trends, I prefer to choose tools that not only address my current challenges but also synergize with my existing skill set (but trust me it's difficult not to dabble in them all 😅).

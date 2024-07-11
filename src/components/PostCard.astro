@@ -31,11 +31,11 @@ const posts = await getCollection('blogs');
               </p>
             </div>
             <p class='text-sm leading-tight text-neutral-400 pb-3'>
-              {post.data.description.slice(0, 100) + '...'}
+              {post.data.description}
             </p>
           </div>
           <a
-            href={`/blogs/content/${post.slug}`}
+            href={`/blogs/${post.slug}`}
             class='inline-flex items-center justify-center text-sm py-2 px-4 font-medium bg-transparent text-accents-7 border border-white/10 rounded-xl duration-300 hover:bg-accents-6/0 hover:text-accents-7 w-full'
           >
             Read More

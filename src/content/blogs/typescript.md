@@ -2,7 +2,7 @@
 title: 'Creating Reusable TypeScript React Components: A Simple Guide'
 layout: src/layouts/BlogPostLayout.astro
 author: Brayan Mejia Cuenca
-description: "It not only enhances code maintainability but also accelerates development by enabling developers to leverage pre-built solutions. In this blog, we'll dive into creating reusable TypeScript React components, accompanied by code examples that demonstrate best practices and techniques.
+description: "It not only enhances code maintainability but also accelerates development by enabling developers to leverage pre-built solutions. 
 "
 date: 08 Aug 2023
 image: '/stock.webp'

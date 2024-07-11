@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 const blogPosts = await getCollection('blogs');
 
-import { ProjectCard } from '@/components/ProjectCard';
+import  ProjectCard  from '@/components/ProjectCard.astro';
 import PostCard from '@/components/PostCard.astro';
 
 const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
@@ -63,7 +63,7 @@ import ScrambleTitle from '@/components/Scrambled';
     <p class='text-accents-6 text-base lg:text-lg'>
       A curated list of projects
     </p>
-    <ProjectCard projects={projectmd} client:only />
+    <ProjectCard projects={projectmd}  />
   </section>
 
   <section class='space-y-6 h-screen mt-6 mb-8' id='blog'>

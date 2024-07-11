@@ -1,25 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-const blogPosts = await getCollection('blogs');
 
-import { ProjectCard } from '@/components/ProjectCard';
+const blogPosts = await getCollection('blogs');
+const projectPosts = await getCollection('projects');
+
+import  ProjectCard  from '@/components/ProjectCard.astro';
 import PostCard from '@/components/PostCard.astro';
 
-const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
-import { GithubIcon } from 'lucide-react';
 import ScrambleTitle from '@/components/Scrambled';
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <a
-    href='https://github.com/mejiabrayan'
-    target='_blank'
-    rel='noopener noreferrer'
-    class='fixed top-4 right-4 text-accents-8 hover:text-accents-6 transition-colors duration-300 h-5 md:h-5 lg:h-6 xl:h-8 w-5 md:w-5 lg:w-6 xl:w-8'
-  >
-    <GithubIcon />
-  </a>
+
   <section
     class='relative flex flex-col justify-center items-start h-screen gap-4'
   >
@@ -63,7 +56,7 @@ import ScrambleTitle from '@/components/Scrambled';
     <p class='text-accents-6 text-base lg:text-lg'>
       A curated list of projects
     </p>
-    <ProjectCard projects={projectmd} client:only />
+    <ProjectCard projects={projectPosts} />
   </section>
 
   <section class='space-y-6 h-screen mt-6 mb-8' id='blog'>
