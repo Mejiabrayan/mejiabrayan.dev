@@ -2,7 +2,6 @@
 import '../styles/globals.css';
 import { FloatingNav } from '@/components/FloatingNavbar';
 
-import Footer from '@/components/footer.astro';
 import { ViewTransitions } from 'astro:transitions';
 ---
 
@@ -25,7 +24,6 @@ import { ViewTransitions } from 'astro:transitions';
     <FloatingNav client:only />
     <main>
       <slot />
-      <Footer />
     </main>
   </body>
 </html>

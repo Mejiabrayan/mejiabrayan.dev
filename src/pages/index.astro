@@ -1,12 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 const blogPosts = await getCollection('blogs');
 
 import { ProjectCard } from '@/components/ProjectCard';
 import PostCard from '@/components/PostCard.astro';
 
-const postmd = await Astro.glob('/src/pages/blogs/content/*.md');
 const projectmd = await Astro.glob('/src/pages/projects/content/*.md');
 import { GithubIcon } from 'lucide-react';
 import ScrambleTitle from '@/components/Scrambled';

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { useState, useEffect } from "react";
 import { clsx } from "clsx";
 
@@ -35,7 +36,7 @@ const useScrambleText = ({ title, animationDelay, paused, once }: Props) => {
     const scrambleDuration = 400; // Duration for which each letter scrambles before settling
     const start = Date.now();
     const interval = setInterval(() => {
-      setLetters((currentLetters) => {
+      setLetters(() => {
         const timeElapsed = Date.now() - start;
 
         const newLetters = title.split("").map((finalLetter, index) => {
