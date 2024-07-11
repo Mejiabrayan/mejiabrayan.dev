@@ -3,7 +3,7 @@ title: 'Galleria'
 layout: src/layouts/ProjectLayout.astro
 overview: 'Galleria is a photo management platform designed to optimize and streamline the handling of digital assets.'
 date: 10 May 2024
-cover: '/assets/galleria.png'
+cover: '/assets/galleria.webp'
 ---
 
 Galleria is a photo management platform designed to optimize and streamline the handling of digital assets. Built with a focus on performance and user experience, Galleria leverages advanced technologies to provide seamless media upload, storage, and retrieval capabilities. This project is ideal for photographers, designers, and content creators who need efficient and reliable media management solutions.
