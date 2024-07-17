@@ -6,13 +6,21 @@ type Props = {
   animationDelay: number;
   paused?: boolean;
   once?: boolean;
-
 };
 
-const ScrambleTitle: React.FC<Props> = ({ title, animationDelay, paused, once }) => {
+const ScrambleTitle: React.FC<Props> = ({
+  title,
+  animationDelay,
+  paused,
+  once,
+}) => {
   const letters = useScrambleText({ title, animationDelay, paused, once });
 
-  return <div className="text-base lg:text-xl xl:text-2xl text-accents-7">{letters}</div>;
+  return (
+    <div className='text-base lg:text-xl xl:text-2xl text-accents-7'>
+      <span key={title}>{letters}</span>
+    </div>
+  );
 };
 
 export default ScrambleTitle;

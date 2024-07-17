@@ -13,8 +13,6 @@
     "@astrojs/check": "^0.3.1",
     "@astrojs/react": "^3.0.4",
     "@astrojs/tailwind": "^5.0.2",
-    "@contentful/rich-text-html-renderer": "^16.3.5",
-    "@contentful/rich-text-react-renderer": "^15.19.6",
     "@fontsource-variable/pixelify-sans": "^5.0.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -27,9 +25,7 @@
     "astro": "^3.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "contentful": "^10.6.12",
     "framer-motion": "^11.1.8",
-    "gsap": "^3.12.5",
     "lucide": "^0.298.0",
     "lucide-react": "^0.292.0",
     "react": "^18.2.0",
@@ -46,7 +42,6 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "latest",
-    "postcss": "latest",
-    "sass": "^1.72.0"
+    "postcss": "latest"
   }
 }

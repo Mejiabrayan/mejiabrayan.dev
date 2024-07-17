@@ -1,0 +1,85 @@
+---
+
+---
+
+<canvas id='background'></canvas>
+
+<script>
+  const canvas = document.getElementById('background') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const characters =
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-={}[]|;:,.<>?/~▲`';
+  const gridSize = 20;
+  const charGrid: { x: number; y: number; char: string; opacity: number }[] =
+    [];
+
+  function initGrid() {
+    for (let y = 0; y < canvas.height; y += gridSize) {
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        charGrid.push({
+          x,
+          y,
+          char: characters[Math.floor(Math.random() * characters.length)],
+          opacity: 0.1,
+        });
+      }
+    }
+  }
+
+  function drawBackground() {
+    if (ctx) {
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '12px monospace';
+
+    charGrid.forEach((item) => {
+      ctx.fillStyle = `rgba(100, 100, 100, ${item.opacity})`;
+      ctx.fillText(item.char, item.x, item.y);
+    });
+  }
+  }
+
+  function animateCharacters() {
+    const numToAnimate = Math.floor(charGrid.length * 0.01); // Animate 1% of characters
+    for (let i = 0; i < numToAnimate; i++) {
+      const index = Math.floor(Math.random() * charGrid.length);
+      charGrid[index].opacity = 0.3; // Slightly darker
+      setTimeout(
+        () => {
+          charGrid[index].opacity = 0.1; // Return to original opacity
+        },
+        500 + Math.random() * 500
+      ); // Random duration between 500-1000ms
+    }
+  }
+
+  function update() {
+    drawBackground();
+    animateCharacters();
+    requestAnimationFrame(update);
+  }
+
+  initGrid();
+  update();
+</script>
+
+<style>
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>
