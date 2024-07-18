@@ -1,9 +1,5 @@
 ---
-import {
-  getCollection,
-  type CollectionEntry,
-  getEntries,
-} from 'astro:content';
+import { getCollection, type CollectionEntry, getEntries } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -19,35 +15,18 @@ type Props = {
 };
 
 const { project } = Astro.props;
-const { Content } = await project.render(); // Render the content of the project post
-
-const relatedProjects = project.data.relatedProjects
-  ? await getEntries(project.data.relatedProjects)
-  : [];
+const { Content } = await project.render(); 
 ---
+
 <Layout>
-    <div class='meta'>
-      <time datetime={(new Date(project.data.date)).toISOString()}>
-        {
-          (new Date(project.data.date)).toLocaleDateString(undefined, {
-            dateStyle: 'medium',
-            timeZone: 'UTC',
-          })
-        }
-      </time>
-    </div>
-    <Content />
-    {
-      relatedProjects.length > 0 && (
-        <div>
-          <h2>Related Projects</h2>
-          <div>
-            {relatedProjects.map((p) => (
-              <h3>{p.data.title}</h3>
-              <p>{p.data.description}</p>
-            ))}
-          </div>
-        </div>
-      )
-    }
-  </Layout>
+  <div class='meta'>
+    <time datetime={project.data.date.toISOString()}>
+      {project.data.date.toLocaleDateString(undefined, {
+        dateStyle: 'medium',
+        timeZone: 'UTC',
+      })}
+    </time>
+  </div>
+  <Content />
+</Layout>
+

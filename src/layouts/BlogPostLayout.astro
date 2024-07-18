@@ -58,7 +58,7 @@ import Layout from './Layout.astro';
               {frontmatter.attributedAuthor  || ''}
             </span> -->
           </header>
-          <time class='block mb-8 text-sm text-accents-6'>
+          <!-- <time class='block mb-8 text-sm text-accents-6'>
             {
               new Date(frontmatter.date).toLocaleDateString('en-US', {
                 month: 'long',
@@ -66,7 +66,7 @@ import Layout from './Layout.astro';
                 year: 'numeric',
               })
             }
-          </time>
+          </time> -->
           <slot />
         </main>
       </div>

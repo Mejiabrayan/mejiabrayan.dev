@@ -1,0 +1,57 @@
+<script>
+  let audio: HTMLAudioElement | null = null;
+  let isPlaying: boolean = false;
+
+  function toggleAudio(): void {
+    if (!audio) {
+      audio = new Audio('/bg.mp3');
+    }
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch((error: Error) => {
+        console.error('Error playing audio:', error);
+      });
+    }
+
+    isPlaying = !isPlaying;
+    const musicIcon: HTMLElement | null = document.getElementById('musicIcon');
+    if (musicIcon) {
+      musicIcon.classList.toggle('text-accents-7');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const musicPlayer: HTMLElement | null =
+      document.getElementById('musicPlayer');
+    if (musicPlayer) {
+      musicPlayer.addEventListener('click', toggleAudio);
+    }
+  });
+</script>
+<button
+  id='musicPlayer'
+  class='fixed top-4 right-4 z-50 p-2 rounded-full bg-transparent text-accents-6 hover:text-accents-3 transition-colors duration-200'
+  aria-label='Toggle music'
+>
+  <svg
+    id='musicIcon'
+    xmlns='http://www.w3.org/2000/svg'
+    width='24'
+    height='15'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    stroke-width='2'
+    stroke-linecap='round'
+    stroke-linejoin='round'
+    class='transition-colors duration-200'
+  >
+    <path d='M9 18V5l12-2v13'></path>
+    <circle cx='6' cy='18' r='3'></circle>
+    <circle cx='18' cy='16' r='3'></circle>
+  </svg>
+
+  
+</button>

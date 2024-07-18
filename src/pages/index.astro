@@ -5,13 +5,20 @@ import { getCollection } from 'astro:content';
 const blogPosts = await getCollection('blogs');
 const projectPosts = await getCollection('projects');
 
-import  ProjectCard  from '@/components/ProjectCard.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
 import PostCard from '@/components/PostCard.astro';
 
 import ScrambleTitle from '@/components/Scrambled';
+import MusicPlayer from '@/components/MusicPlayer.astro';
+import AnimatedBackground from '@/components/AnimatedBackground.astro';
+
+import { Image } from 'astro:assets';
+import avatar from '../assets/avatar.webp';
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
+  <AnimatedBackground />
+  <MusicPlayer />
 
   <section
     class='relative flex flex-col justify-center items-start h-screen gap-4'
@@ -19,11 +26,12 @@ import ScrambleTitle from '@/components/Scrambled';
     <div
       class='rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-20 lg:h-20'
     >
-      <img
-        src='/avatar.webp'
+      <Image
+        src={avatar}
         alt='Brayan Mejia Cuenca'
         class='object-center object-cover grayscale w-full h-full'
         draggable='false'
+        quality={'mid'}
       />
     </div>
     <ScrambleTitle

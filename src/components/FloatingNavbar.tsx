@@ -42,7 +42,7 @@ export const FloatingNav = ({ className }: { className?: string }) => {
             className={cn(
               'relative flex items-center space-x-1 text-base',
               isActive &&
-                'text-white hover:text-neutral-300 border-r border-white/[0.2] px-3 py-2 rounded-full'
+                'text-white hover:text-neutral-300 border-r border-white/10 md:border-white/10 px-3 py-2 rounded-full'
             )}
           >
             {isActive && (

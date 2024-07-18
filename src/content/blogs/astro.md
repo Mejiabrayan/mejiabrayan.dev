@@ -5,9 +5,8 @@ author: Brayan Mejia Cuenca
 description: 'Astro, the powerful static site builder, comes with built-in support for syntax highlighting, making it a breeze to showcase code snippets on your website'
 date: 10 May 2024
 image: '/syntax.webp'
-attributedImg:  mike diaz
----
 
+---
 Recently, I found myself digging through Contentful's documentation, spending too much time setting up proper formatting like syntax highlighting for my personal website. The inconvenience of navigating documentation just to achieve simple tasks like displaying code blocks can be a pain point. Most of the time, third-party libraries are required, which are quicker to set up but not the ideal route. When you factor in styling and other considerations, it can get complicated. Maybe it's a skill issue, but it would be preferable if functionality existed in frameworks natively.
 
 This experience led me to make the decision to move away from Contentful and leverage Markdown files instead, taking advantage of Astro's seamless integration with Shiki (a lightweight syntax highlighter). With just a few configurations, syntax highlighting is easily set up. This effortless experience allowed me to switch from my current CMS (Contentful) to pure Markdown files and Shiki in less than a day.

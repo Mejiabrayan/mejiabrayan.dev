@@ -1,6 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-const projectmd = await Astro.glob('/src/content/projects/*.md');
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <html lang='en'>
@@ -26,22 +30,21 @@ const projectmd = await Astro.glob('/src/content/projects/*.md');
       </div>
       <main class='relative container mx-auto px-4 py-8 overflow-hidden'>
         {
-          projectmd.map((md) => (
+          projects.map((project) => (
             <article class='mb-8'>
               <li>
-             
                 <a
-                
-                  href={md.url}
-                  aria-label={`Read more about ${md.frontmatter.title}`}
+                  href={`/projects/${project.slug}`}
+                  aria-label={`Read more about ${project.data.title}`}
                 >
-                  <h2 
-                  transition:name='title'
-                   class='text-accents-8 text-balance text-2xl font-bold transition duration-300 ease-in-out hover:text-primary-accent hover:cursor-pointer'>
-                    {md.frontmatter.title}
+                  <h2
+                    transition:name='title'
+                    class='text-accents-8 text-balance text-2xl font-bold transition duration-300 ease-in-out hover:text-primary-accent hover:cursor-pointer'
+                  >
+                    {project.data.title}
                   </h2>
                 </a>
-                <p class='mt-2 text-accents-6'>{md.frontmatter.overview}</p>
+                <p class='mt-2 text-accents-6'>{project.data.overview}</p>
               </li>
             </article>
           ))

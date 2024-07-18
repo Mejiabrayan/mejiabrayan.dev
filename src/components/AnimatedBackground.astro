@@ -49,10 +49,10 @@
   }
 
   function animateCharacters() {
-    const numToAnimate = Math.floor(charGrid.length * 0.01); // Animate 1% of characters
+    const numToAnimate = Math.floor(charGrid.length * 0.001); // Animate 1% of characters
     for (let i = 0; i < numToAnimate; i++) {
       const index = Math.floor(Math.random() * charGrid.length);
-      charGrid[index].opacity = 0.3; // Slightly darker
+      charGrid[index].opacity = 0.5; // Slightly darker
       setTimeout(
         () => {
           charGrid[index].opacity = 0.1; // Return to original opacity

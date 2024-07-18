@@ -1,8 +1,6 @@
 ---
-import AnimatedBackground from '@/components/AnimatedBackground.astro';
 import '../styles/globals.css';
 import { FloatingNav } from '@/components/FloatingNavbar';
-
 import { ViewTransitions } from 'astro:transitions';
 ---
 
@@ -11,14 +9,19 @@ import { ViewTransitions } from 'astro:transitions';
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    <meta property='og:image' content='/og-image.png' />
+    <meta property="twitter:image" content="/og-image.png" />
+
+
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
     <title>Brayan Mejia Cuenca's Website Portfolio</title>
+
     <ViewTransitions />
   </head>
   <body
     class='container mx-auto w-full max-w-4xl bg-geist-background space-y-12 antialiased selection:bg-primary-accent selection:text-black'
   >
-  <AnimatedBackground />
     <FloatingNav client:only />
     <main>
       <slot />
