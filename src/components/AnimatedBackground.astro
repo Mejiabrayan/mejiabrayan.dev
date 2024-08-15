@@ -1,75 +1,91 @@
 ---
-
 ---
 
 <canvas id='background'></canvas>
 
 <script>
-  const canvas = document.getElementById('background') as HTMLCanvasElement;
-  const ctx = canvas?.getContext('2d');
+  function initBackgroundAnimation() {
+    // Check if we're on the home page
+    if (window.location.pathname !== '/') {
+      return; // Exit if not on home page
+    }
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+    const canvas = document.getElementById('background') as HTMLCanvasElement;
+    const ctx = canvas?.getContext('2d');
 
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-  const characters =
-    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-={}[]|;:,.<>?/~▲`';
-  const gridSize = 20;
-  const charGrid: { x: number; y: number; char: string; opacity: number }[] =
-    [];
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-  function initGrid() {
-    for (let y = 0; y < canvas.height; y += gridSize) {
-      for (let x = 0; x < canvas.width; x += gridSize) {
-        charGrid.push({
-          x,
-          y,
-          char: characters[Math.floor(Math.random() * characters.length)],
-          opacity: 0.1,
+    const characters =
+      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-={}[]|;:,.<>?/~▲`';
+    const gridSize = 20;
+    const charGrid: { x: number; y: number; char: string; opacity: number }[] =
+      [];
+
+    function initGrid() {
+      charGrid.length = 0; // Clear the existing grid
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        for (let x = 0; x < canvas.width; x += gridSize) {
+          charGrid.push({
+            x,
+            y,
+            char: characters[Math.floor(Math.random() * characters.length)],
+            opacity: 0.1,
+          });
+        }
+      }
+    }
+
+    function drawBackground() {
+      if (ctx) {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = '12px monospace';
+
+        charGrid.forEach((item) => {
+          ctx.fillStyle = `rgba(100, 100, 100, ${item.opacity})`;
+          ctx.fillText(item.char, item.x, item.y);
         });
       }
     }
-  }
 
-  function drawBackground() {
-    if (ctx) {
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = '12px monospace';
-
-    charGrid.forEach((item) => {
-      ctx.fillStyle = `rgba(100, 100, 100, ${item.opacity})`;
-      ctx.fillText(item.char, item.x, item.y);
-    });
-  }
-  }
-
-  function animateCharacters() {
-    const numToAnimate = Math.floor(charGrid.length * 0.001); // Animate 1% of characters
-    for (let i = 0; i < numToAnimate; i++) {
-      const index = Math.floor(Math.random() * charGrid.length);
-      charGrid[index].opacity = 0.5; // Slightly darker
-      setTimeout(
-        () => {
-          charGrid[index].opacity = 0.1; // Return to original opacity
-        },
-        500 + Math.random() * 500
-      ); // Random duration between 500-1000ms
+    function animateCharacters() {
+      const numToAnimate = Math.floor(charGrid.length * 0.001); // Animate 0.1% of characters
+      for (let i = 0; i < numToAnimate; i++) {
+        const index = Math.floor(Math.random() * charGrid.length);
+        charGrid[index].opacity = 0.5; // Slightly darker
+        setTimeout(
+          () => {
+            charGrid[index].opacity = 0.1; // Return to original opacity
+          },
+          500 + Math.random() * 500
+        );
+      }
     }
+
+    function update() {
+      drawBackground();
+      animateCharacters();
+      requestAnimationFrame(update);
+    }
+
+    initGrid();
+    update();
   }
 
-  function update() {
-    drawBackground();
-    animateCharacters();
-    requestAnimationFrame(update);
-  }
+  initBackgroundAnimation(); // Initialize the animation on page load
 
-  initGrid();
-  update();
+  document.addEventListener('astro:after-swap', () => {   // Re-run the animation when navigating back to the home page
+
+    if (window.location.pathname === '/') {
+      initBackgroundAnimation();
+    }
+  });
 </script>
 
 <style>
@@ -81,5 +97,12 @@
     height: 100%;
     pointer-events: none;
     z-index: -1;
+  }
+
+  @media (max-width: 600px) {
+    canvas {
+      width: 100vw;
+      height: 100vh;
+    }
   }
 </style>
