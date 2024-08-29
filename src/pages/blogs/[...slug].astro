@@ -1,9 +1,5 @@
 ---
-import {
-  getCollection,
-  type CollectionEntry,
-  getEntries,
-} from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -18,19 +14,8 @@ type Props = {
 };
 const { blog } = Astro.props;
 const { Content } = await blog.render(); // Render the content of the blog post
-
 ---
-<Layout>
-    <div class='meta'>
-      <time datetime={(new Date(blog.data.date)).toISOString()}>
-        {
-          (new Date(blog.data.date)).toLocaleDateString(undefined, {
-            dateStyle: 'medium',
-            timeZone: 'UTC',
-          })
-        }
-      </time>
-    </div>
-    <Content />
-   
-  </Layout>
+
+<Layout title='blogs'>
+  <Content />
+</Layout>

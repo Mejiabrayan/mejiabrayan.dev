@@ -1,75 +1,62 @@
 ---
 import '../styles/globals.css';
+import Menu from '../components/Menu';
 const { frontmatter } = Astro.props;
-import Layout from './Layout.astro';
 ---
 
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{frontmatter.title}</title>
-
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta
-      name='description'
-      content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics."
-    />
-    <meta
-      name='keywords'
-      content='web development, front-end, full-stack, design, portfolio, blog'
-    />
-    <meta name='author' content='Brayan Mejia Cuenca' />
-    <meta property='og:title' content=`${frontmatter.title}` />
-    <meta
-      property='og:description'
-      content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics."
-    />
-    <meta property='og:url' content='https://mejiabrayan.dev/blogs' />
-    <meta property='og:image' content='/mejiabrayan.webp' />
+    <meta name="description" content={frontmatter.description || "Brayan's personal blog and portfolio website. I write about web development, design, and other topics."} />
+    <meta name="keywords" content="web development, front-end, full-stack, design, portfolio, blog" />
+    <meta name="author" content="Brayan Mejia Cuenca" />
+    <meta property="og:title" content={frontmatter.title} />
+    <meta property="og:description" content={frontmatter.description || "Brayan's personal blog and portfolio website. I write about web development, design, and other topics."} />
+    <meta property="og:url" content={`https://mejiabrayan.dev/blogs/${frontmatter.slug}`} />
+    <meta property="og:image" content={frontmatter.image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={frontmatter.image} />
   </head>
 
-  <body>
-    <Layout>
-      <div class='min-h-screen flex flex-col justify-center items-center' transition:name='img'
-      >
-        <main
-          class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
-        >
-          <header class='relative rounded-xl overflow-hidden mb-8'>
+  <body class="bg-[#08090B] text-accents-7">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main>
+        <article class="prose prose-invert prose-lg max-w-none">
+          <header class="mb-8">
             <img
-              class='w-full h-64 object-cover opacity-60 rounded-xl'
+              class="w-full h-64 object-cover rounded-xl mb-6"
               src={frontmatter.image}
               alt={frontmatter.title}
-              draggable='false'
+              draggable="false"
               loading="lazy"
             />
-            <div
-              class='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100'
-            >
+            <h1 class="text-3xl font-bold text-white mb-4">{frontmatter.title}</h1>
+            <div class="flex items-center text-sm text-accents-6">
+              <time datetime={(new Date(frontmatter.date)).toISOString()}>
+                {
+                  (new Date(frontmatter.date)).toLocaleDateString(undefined, {
+                    dateStyle: 'medium',
+                    timeZone: 'UTC',
+                  })
+                }
+              </time>
+              {frontmatter.tags && (
+                <div class="ml-4 flex">
+                  {frontmatter.tags.map((tag: any) => (
+                    <span class="mr-2 px-2 py-1 bg-accents-8 rounded-full text-xs">{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
-            <div class='absolute inset-0 flex items-center justify-center p-4'>
-              <h1
-                class='text-white text-3xl font-bold text-center'
-                
-              >
-                {frontmatter.title}
-              </h1>
-            </div>
-            <!-- <span class='block isolate text-xs text-gray-400 mt-2 text-center'>
-              {frontmatter.attributedAuthor  || ''}
-            </span> -->
           </header>
-          <!-- <time class='block mb-8 text-sm text-accents-6'>
-            {
-              new Date(frontmatter.date).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })
-            }
-          </time> -->
-          <slot />
-        </main>
-      </div>
-    </Layout>
+
+          <div class="text-accents-7 prose-headings:text-white prose-a:text-primary-accent prose-strong:text-accents-5 prose-code:text-accents-6 prose-pre:bg-accents-9 prose-blockquote:border-l-primary-accent prose-blockquote:text-accents-6">
+            <slot />
+          </div>
+        </article>
+      </main>
+    </div>
   </body>
 </html>

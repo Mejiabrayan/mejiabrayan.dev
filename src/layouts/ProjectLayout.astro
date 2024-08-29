@@ -1,7 +1,6 @@
 ---
 const { frontmatter } = Astro.props;
 import '../styles/globals.css';
-import Layout from './Layout.astro';
 ---
 
 <html>
@@ -29,7 +28,7 @@ import Layout from './Layout.astro';
   </head>
 
   <body>
-    <Layout>
+
       <main class='h-screen flex flex-col items-center justify-center'>
         <main
           class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
@@ -52,6 +51,5 @@ import Layout from './Layout.astro';
           <slot />
         </main>
       </main>
-    </Layout>
   </body>
 </html>

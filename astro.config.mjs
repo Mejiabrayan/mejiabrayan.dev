@@ -3,13 +3,11 @@ import tailwind from '@astrojs/tailwind';
 
 import react from '@astrojs/react';
 
-
-export default defineConfig({ 
+export default defineConfig({
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'pt-br'],
   },
-  output: 'static',
   image: {
     domains: ['astro.build'],
   },
@@ -32,7 +30,6 @@ export default defineConfig({
         'markdown',
       ],
       wrap: true,
-
       transformers: [],
     },
   },

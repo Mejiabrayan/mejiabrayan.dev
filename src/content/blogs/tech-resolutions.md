@@ -2,9 +2,7 @@
 title: 'Tech Resolutions: My 2024 Quest for New Skills and Tools'
 layout: src/layouts/BlogPostLayout.astro
 author: Brayan Mejia Cuenca
-description: "As we approach the end of the year, I find myself reflecting on the multitude of new tech tools emerging in l.
-
-"
+description: "As we approach the end of the year, I find myself reflecting on the multitude of new tech tools emerging in l."
 date: Dec 19 2023
 image: '/gradient-green.webp'
 attributedImg: mike

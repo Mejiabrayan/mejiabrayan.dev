@@ -17,16 +17,21 @@ const images = [
 ];
 ---
 
-<div class="grid grid-cols-3 gap-4 p-4 border border-white/10 rounded-2xl h-full">
-  {images.map((image) => (
-    <div class={`relative h-64 w-full ${image.class}`}>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 border border-white/10 rounded-2xl">
+  {images.map((image, index) => (
+    <div class={`relative md:h-64 lg:h-64 h-28  ${
+      index === 0 ? 'sm:col-span-2 sm:row-span-2' :
+      index === 2 ? 'sm:row-span-2' :
+      index === 4 ? 'sm:col-span-2' :
+      ''
+    } `}>
       <Image
         src={image.src}
         alt={image.alt}
         class="absolute inset-0 w-full h-full object-cover z-0 grayscale rounded-2xl"
         format="webp"
       />
-      <div class="absolute inset-0 z-10 bg-[radial-gradient(transparent_1px,#000_0.5px)] [background-size:3px_3px] opacity-50 mix-blend-overlay" />
+      <div class="absolute inset-0 z-10 bg-[radial-gradient(transparent_0.5px,#000_0.5px)] [background-size:3px_3px] opacity-55 mix-blend-overlay " />
     </div>
   ))}
 </div>

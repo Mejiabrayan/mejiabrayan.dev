@@ -20,6 +20,7 @@
 * {
   margin: 0;
   padding: 0;
+  
 }
 
 body,
@@ -49,4 +50,13 @@ html {
 #name {
   font-family: 'Pixelify', system-ui;
 }
+
+#pyramid, #code {
+  transition: transform 0.3s ease-in-out;
+}
+
+#pyramid:hover, #code:hover {
+  transform: perspective(2000px) rotateY(150deg);
+}
+
 

@@ -5,13 +5,13 @@ const posts = await getCollection('blogs');
 ---
 
 <div
-  class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center'
+  class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 justify-items-center'
 >
   {
     posts.map((post) => (
       <article
         id='card-component'
-        class='group relative max-w-2xl lg:max-w-[350px] w-full rounded-xl bg-neutral-950 flex flex-col'
+        class='group relative max-w-2xl lg:max-w-[350px] w-full rounded-xl flex flex-col'
         style={{ height: '450px' }}
       >
         <div class='absolute right-5 top-0 h-px w-80 bg-gradient-to-l from-transparent via-white/30 via-10% to-transparent' />

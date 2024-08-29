@@ -1,39 +1,23 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 
+import ScrambleTitle from '@/components/Scrambled';
+import AnimatedBackground from '@/components/AnimatedBackground.astro';
+import ImageGallery from '../components/Image-Gallery.astro';
 const blogPosts = await getCollection('blogs');
 const projectPosts = await getCollection('projects');
 
 import ProjectCard from '@/components/ProjectCard.astro';
 import PostCard from '@/components/PostCard.astro';
-
-import ScrambleTitle from '@/components/Scrambled';
-import MusicPlayer from '@/components/MusicPlayer.astro';
-import AnimatedBackground from '@/components/AnimatedBackground.astro';
-
-import { Image } from 'astro:assets';
-import avatar from '../assets/avatar.webp';
+import { getCollection } from 'astro:content';
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
   <AnimatedBackground />
-  <MusicPlayer />
 
   <section
-    class='relative flex flex-col justify-center items-start h-screen gap-4'
+    class='relative flex flex-col justify-center items-start h-screen gap-2'
   >
-    <div
-      class='rounded-full overflow-hidden w-10 h-10 md:w-10 md:h-10 lg:w-20 lg:h-20'
-    >
-      <Image
-        src={avatar}
-        alt='Brayan Mejia Cuenca'
-        class='object-center object-cover grayscale w-full h-full'
-        draggable='false'
-        quality={'mid'}
-      />
-    </div>
     <ScrambleTitle
       title='Brayan Mejia Cuenca'
       animationDelay={600}
@@ -42,7 +26,7 @@ import avatar from '../assets/avatar.webp';
       client:load
     />
 
-    <p class='text-xl md:text-2xl lg:text-4xl text-accents-7 tracking-tighter'>
+    <p class='text-xl md:text-xl lg:text-3xl text-accents-7 tracking-tighter'>
       I'm a <span class='italic'>Full-Stack</span>
       <span class='text-primary-accent font-pixelify text-balance'>
         Developer
@@ -54,7 +38,8 @@ import avatar from '../assets/avatar.webp';
     </p>
   </section>
 
-  <section
+
+<section
     id='projects'
     class='flex flex-col justify-center items-start space-y-6'
   >
@@ -67,10 +52,19 @@ import avatar from '../assets/avatar.webp';
     <ProjectCard projects={projectPosts} />
   </section>
 
-  <section class='space-y-6 h-screen mt-6 mb-8' id='blog'>
+  <section class='space-y-6 mt-12 mb-8' id='blog'>
     <h2 class='text-2xl lg:text-2xl xl:text-5xl text-accents-7 italic'>Blog</h2>
     <p class='text-accents-6 text-base lg:text-lg'>A collection of thoughts</p>
 
     <PostCard post={blogPosts} />
   </section>
+  <section class='space-y-6 mt-12 mb-8' id='gallery'>
+    <h3 class='text-2xl lg:text-3xl xl:text-5xl text-accents-7 italic'>
+      Memories
+    </h3>
+    <p class='text-accents-6 text-base lg:text-lg'>
+      A collection of images from my life
+    </p>
+    <ImageGallery />
+  </section> 
 </Layout>

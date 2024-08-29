@@ -4,7 +4,7 @@ layout: src/layouts/BlogPostLayout.astro
 author: Brayan Mejia Cuenca
 description: "Learn how to create a captivating dither-like effect by overlaying a radial gradient on images using Tailwind CSS. This tutorial will guide you through the process of adding a unique, textured look to your web projects."
 date: 1 August 2024
-image: '/dither.png'
+image: '/dither-effect.png'
 tags: ['Tailwind CSS', 'CSS Effects', 'Web Design']
 ---
 

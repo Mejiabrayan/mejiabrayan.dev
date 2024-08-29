@@ -23,7 +23,7 @@ const relatedPosts = blog.data.relatedPosts
   ? await getEntries(blog.data.relatedPosts)
   : [];
 ---
-<Layout>
+<Layout title="blogs">
     <div class='meta'>
       <time datetime={(new Date(blog.data.date)).toISOString()}>
         {

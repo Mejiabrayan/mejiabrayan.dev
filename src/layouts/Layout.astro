@@ -1,30 +1,45 @@
 ---
 import '../styles/globals.css';
-import { FloatingNav } from '@/components/FloatingNavbar';
 import { ViewTransitions } from 'astro:transitions';
+import MenuComponent from '../components/Menu';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' class="bg-[#08090B] text-white">
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name='description' content="Brayan Mejia Cuenca's Portfolio - Full-Stack Developer" />
 
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content="Full-Stack Developer specializing in intuitive and dynamic web apps" />
     <meta property='og:image' content='/og-image.png' />
-    <meta property="twitter:image" content="/og-image.png" />
-
+    <meta property='og:type' content='website' />
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:image' content='/og-image.png' />
 
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
-    <title>Brayan Mejia Cuenca's Website Portfolio</title>
+    <title>{title}</title>
 
     <ViewTransitions />
   </head>
-  <body
-    class='container mx-auto w-full max-w-4xl bg-geist-background space-y-12 antialiased selection:bg-primary-accent selection:text-black'
-  >
-    <FloatingNav client:only />
-    <main>
+  <body class="min-h-screen flex flex-col">
+    <MenuComponent client:only />
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
       <slot />
     </main>
+    <footer class="mt-12 pb-6 text-center text-sm text-accents-5">
+      <p>
+        &copy; {new Date().getFullYear()} Brayan Mejia Cuenca. All rights reserved.
+        <br /> 
+        Built with <a href="https://astro.build" class="text-primary-accent hover:underline">Astro</a> 
+      </p>
+    </footer>
   </body>
 </html>
