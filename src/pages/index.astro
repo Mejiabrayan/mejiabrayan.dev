@@ -1,70 +1,21 @@
 ---
+
 import Layout from '@/layouts/Layout.astro';
-
-import ScrambleTitle from '@/components/Scrambled';
-import AnimatedBackground from '@/components/AnimatedBackground.astro';
-import ImageGallery from '../components/Image-Gallery.astro';
-const blogPosts = await getCollection('blogs');
-const projectPosts = await getCollection('projects');
-
-import ProjectCard from '@/components/ProjectCard.astro';
-import PostCard from '@/components/PostCard.astro';
-import { getCollection } from 'astro:content';
 ---
 
 <Layout title='Brayan M. Cuenca Portfolio'>
-  <AnimatedBackground />
-
-  <section
-    class='relative flex flex-col justify-center items-start h-screen gap-2'
-  >
-    <ScrambleTitle
-      title='Brayan Mejia Cuenca'
-      animationDelay={600}
-      paused={false}
-      once={true}
-      client:load
-    />
-
-    <p class='text-xl md:text-xl lg:text-3xl text-accents-7 tracking-tighter'>
-      I'm a <span class='italic'>Full-Stack</span>
-      <span class='text-primary-accent font-pixelify text-balance'>
-        Developer
-      </span>
-      who loves to craft on the web. My work is focused on creating
-      <span class='text-primary-accent font-pixelify'>intuitive</span>
-      <span class='italic'>&</span>
-      <span class='text-primary-accent font-pixelify'>dynamic</span> web apps.
-    </p>
-  </section>
-
-
-<section
-    id='projects'
-    class='flex flex-col justify-center items-start space-y-6'
-  >
-    <h2 class='italic text-accents-7 text-2xl lg:text-3xl xl:text-5xl'>
-      Projects
-    </h2>
-    <p class='text-accents-6 text-base lg:text-lg'>
-      A curated list of projects
-    </p>
-    <ProjectCard projects={projectPosts} />
-  </section>
-
-  <section class='space-y-6 mt-12 mb-8' id='blog'>
-    <h2 class='text-2xl lg:text-2xl xl:text-5xl text-accents-7 italic'>Blog</h2>
-    <p class='text-accents-6 text-base lg:text-lg'>A collection of thoughts</p>
-
-    <PostCard post={blogPosts} />
-  </section>
-  <section class='space-y-6 mt-12 mb-8' id='gallery'>
-    <h3 class='text-2xl lg:text-3xl xl:text-5xl text-accents-7 italic'>
-      Memories
-    </h3>
-    <p class='text-accents-6 text-base lg:text-lg'>
-      A collection of images from my life
-    </p>
-    <ImageGallery />
-  </section> 
 </Layout>
+
+<script>
+  function parallax() {
+    const bg = document.getElementById('parallax-bg');
+    if (bg) {
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        bg.style.transform = `translateY(${scrollPosition * 0.5}px) scale(0.5)`;
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', parallax);
+</script>

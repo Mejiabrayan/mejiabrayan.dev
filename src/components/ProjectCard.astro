@@ -19,7 +19,7 @@ const getColSpanClasses = (index: number): string => {
   {
     projects.map((project, index) => (
       <div
-        class={`border border-white/20 rounded-xl relative after:absolute after:top-0 after:right-5 after:h-px after:w-80 after:bg-gradient-to-l after:from-transparent after:via-white/30 after:via-10% after:to-transparent ${getColSpanClasses(index)}`}
+        class={`border border-white/20 rounded-xl bg-black relative after:absolute after:top-0 after:right-5 after:h-px after:w-80 after:bg-gradient-to-l after:from-transparent after:via-white/30 after:via-10% after:to-transparent ${getColSpanClasses(index)}`}
       >
         <div class='p-8 space-y-2'>
           <div class='pointer-events-none bottom-0 absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100' />

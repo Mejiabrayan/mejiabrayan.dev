@@ -3,53 +3,50 @@ const { frontmatter } = Astro.props;
 import '../styles/globals.css';
 ---
 
-<html>
+<html lang="en">
   <head>
-    <title></title>
-
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta
-      name='description'
-      content="Brayan's curated list of projects and portfolio website. Crafted with love and passion."
-    />
-    <meta
-      name='keywords'
-      content='web development, front-end, full-stack, design, portfolio, blog, UI, UX'
-    />
-    <meta name='author' content='Brayan Mejia Cuenca' />
-    <meta property='og:title' content={`${frontmatter.title}`} />
-    <meta
-      property='og:description'
-      content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics."
-    />
-    <meta property='og:url' content={frontmatter.image} />
- 
-    <meta property='og:image' content='/mejiabrayan.webp' />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.title}</title>
+    <meta name="description" content={frontmatter.description || "Brayan's curated list of projects and portfolio website. Crafted with love and passion."} />
+    <meta name="keywords" content="web development, front-end, full-stack, design, portfolio, blog, UI, UX" />
+    <meta name="author" content="Brayan Mejia Cuenca" />
+    <meta property="og:title" content={frontmatter.title} />
+    <meta property="og:description" content="Brayan's personal blog and portfolio website. I write about web development, design, and other topics." />
+    <meta property="og:url" content={frontmatter.image} />
+    <meta property="og:image" content="/mejiabrayan.webp" />
   </head>
 
-  <body>
-
-      <main class='h-screen flex flex-col items-center justify-center'>
-        <main
-          class='max-w-3xl px-4 prose text-accents-7 prose-headings:text-accents-7 prose-blockquote:text-accents-8 prose-a:text-blue-500 prose-blockquote:bg-neutral-900'
-        >
-          <header class='relative rounded-xl overflow-hidden mb-8'>
+  <body class="bg-[#08090B] text-accents-7">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main>
+        <article class="prose prose-invert prose-lg max-w-none sm:prose-xl lg:prose-xl">
+          <header class="mb-8">
             <img
-              class='w-full h-64 rounded-xl object-cover object-center'
+              class="w-full h-64 object-cover rounded-xl mb-6"
               src={frontmatter.cover}
-              alt='hero image'
-              draggable='false'
-              transition:name='title'
+              alt={frontmatter.title}
+              draggable="false"
               loading="lazy"
-
             />
-            <div
-              class='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-20'
-            >
-            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{frontmatter.title}</h1>
+            {frontmatter.link && (
+              <a
+                href={frontmatter.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-accent hover:underline"
+              >
+                Visit Project
+              </a>
+            )}
           </header>
-          <slot />
-        </main>
+
+          <div class="text-accents-7 prose-headings:text-white prose-a:text-primary-accent prose-strong:text-accents-5 prose-code:text-accents-6 prose-pre:bg-accents-9 prose-blockquote:border-l-primary-accent prose-blockquote:text-accents-6">
+            <slot />
+          </div>
+        </article>
       </main>
+    </div>
   </body>
 </html>

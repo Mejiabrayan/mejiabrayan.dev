@@ -1,5 +1,6 @@
 ---
 title: 'Galleria'
+link: 'https://github.com/Mejiabrayan/galleria'
 layout: src/layouts/ProjectLayout.astro
 overview: 'Galleria is a photo management platform designed to optimize and streamline the handling of digital assets.'
 date: 10 May 2024

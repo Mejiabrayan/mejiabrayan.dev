@@ -8,8 +8,6 @@ image: '/dither-effect.png'
 tags: ['Tailwind CSS', 'CSS Effects', 'Web Design']
 ---
 
-# Creating a Dither Effect Using Tailwind CSS
-
 In this tutorial, we'll explore how to achieve a striking dither-like effect by overlaying a radial gradient on top of an image using Tailwind CSS. This technique adds a textured, pixelated look to your images, bringing a unique visual flair to your web projects.
 
 ## What is a Dither Effect?

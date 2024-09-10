@@ -1,7 +1,7 @@
 ---
+import MenuComponent from '../components/Menu';
 import '../styles/globals.css';
 import { ViewTransitions } from 'astro:transitions';
-import MenuComponent from '../components/Menu';
 
 interface Props {
   title: string;
@@ -11,7 +11,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en' class="bg-[#08090B] text-white">
+<html lang='en' >
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -30,16 +30,10 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body class="min-h-screen flex flex-col">
-    <MenuComponent client:only />
-    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl selection:bg-primary-accent selection:text-black">
+      <MenuComponent client:only />
+
       <slot />
     </main>
-    <footer class="mt-12 pb-6 text-center text-sm text-accents-5">
-      <p>
-        &copy; {new Date().getFullYear()} Brayan Mejia Cuenca. All rights reserved.
-        <br /> 
-        Built with <a href="https://astro.build" class="text-primary-accent hover:underline">Astro</a> 
-      </p>
-    </footer>
   </body>
 </html>

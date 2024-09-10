@@ -1,4 +1,5 @@
 ---
+import AnimatedBackground from '../components/AnimatedBackground.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/globals.css';
 ---
@@ -10,13 +11,10 @@ import '../styles/globals.css';
     <title>404 Page</title>
   </head>
   <body>
-    <Layout title="404 error">
-      <div class='relative flex flex-col items-center justify-center h-screen'>
-        <div
-          class='absolute inset-0 -z-10 opacity-15 bg-[linear-gradient(to_left,#C9FF18_0.5px,transparent_0.5px),linear-gradient(to_top,#999_1px,transparent_0.5px)] bg-[size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_50%_50%_at_50%_0%,#000_70%,transparent_110%)]'
-        >
-        </div>
+    <Layout title='404 error'>
+      <div class='flex flex-col items-center justify-center min-h-screen gap-4'>
+      
+        <AnimatedBackground />
         <h1 class='text-5xl text-center text-accents-6 font-pixelify'>
           404 Page Not Found
         </h1>

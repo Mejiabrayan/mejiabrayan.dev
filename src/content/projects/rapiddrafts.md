@@ -1,5 +1,6 @@
 ---
 title: 'RapidDrafts.com'
+link: 'https://rapiddrafts.com/'
 layout: src/layouts/ProjectLayout.astro
 overview: 'RapidDrafts is your comprehensive AI drafting assistant, designed to streamline your content creation process.'
 date: 10 May 2024

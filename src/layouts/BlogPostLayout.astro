@@ -23,7 +23,7 @@ const { frontmatter } = Astro.props;
   <body class="bg-[#08090B] text-accents-7">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <main>
-        <article class="prose prose-invert prose-lg max-w-none">
+        <article class="prose prose-invert prose-lg max-w-none sm:prose-xl lg:prose-xl">
           <header class="mb-8">
             <img
               class="w-full h-64 object-cover rounded-xl mb-6"
@@ -32,8 +32,8 @@ const { frontmatter } = Astro.props;
               draggable="false"
               loading="lazy"
             />
-            <h1 class="text-3xl font-bold text-white mb-4">{frontmatter.title}</h1>
-            <div class="flex items-center text-sm text-accents-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{frontmatter.title}</h1>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center text-sm text-accents-6">
               <time datetime={(new Date(frontmatter.date)).toISOString()}>
                 {
                   (new Date(frontmatter.date)).toLocaleDateString(undefined, {
@@ -43,9 +43,9 @@ const { frontmatter } = Astro.props;
                 }
               </time>
               {frontmatter.tags && (
-                <div class="ml-4 flex">
+                <div class="mt-2 sm:mt-0 sm:ml-4 flex flex-wrap">
                   {frontmatter.tags.map((tag: any) => (
-                    <span class="mr-2 px-2 py-1 bg-accents-8 rounded-full text-xs">{tag}</span>
+                    <span class="mr-2 mb-2 px-2 py-1 bg-accents-8 rounded-full text-xs">{tag}</span>
                   ))}
                 </div>
               )}

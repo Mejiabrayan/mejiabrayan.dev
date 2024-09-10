@@ -1,7 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-
 import react from '@astrojs/react';
+import fs from 'fs';
+import path from 'path';
+
+// Read the custom theme file
+const themePath = path.join(process.cwd(), 'src/themes/theme.json');
+const theme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
 
 export default defineConfig({
   i18n: {
@@ -14,7 +19,7 @@ export default defineConfig({
   integrations: [tailwind({ applyBaseStyles: false }), react()],
   markdown: {
     shikiConfig: {
-      theme: 'vitesse-dark',
+      theme: theme,
       tailwind: true,
       langs: [
         'typescript',
@@ -29,7 +34,7 @@ export default defineConfig({
         'yaml',
         'markdown',
       ],
-      wrap: true,
+      wrap: false,
       transformers: [],
     },
   },

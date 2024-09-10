@@ -17,7 +17,7 @@ const ScrambleTitle: React.FC<Props> = ({
   const letters = useScrambleText({ title, animationDelay, paused, once });
 
   return (
-    <div className='text-base lg:text-xl xl:text-2xl text-accents-7'>
+    <div className='text-base lg:text-xl xl:text-2xl text-black'>
       <span key={title}>{letters}</span>
     </div>
   );

@@ -14,7 +14,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        pixelify: ['"Pixelify"', 'system-ui', 'sans-serif'], // Add your custom font here     },
+        pixelify: ['"Pixelify"', 'system-ui', 'sans-serif'],
+        geist: ['"Geist"', 'system-ui', 'sans-serif'],
       },
       colors: {
         'geist-background': 'hsl(var(--geist-background))',

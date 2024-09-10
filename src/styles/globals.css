@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* --geist-alternative: #010202; */
+  --geist-alternative: #010202;
   --geist-background: 0, 0%, 0%; /* #000 */
   --geist-secondary: 3.5%, 3.5%, 3.5%; /* #0e0e0e */
   --accents-1: 0, 0%, 6.7%; /* #111 */
@@ -17,46 +17,46 @@
   --geist-foreground: 0, 0%, 100%; /* #fff */
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  
+@layer base {
+  html {
+    @apply font-geist scroll-smooth;
+  }
+
+  body {
+    @apply bg-black m-0 p-0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-accents-8 font-bold;
+  }
 }
 
-body,
-html {
-  font-family: 'Geist', sans-serif;
-  scroll-behavior: smooth;
+@layer components {
+  a, span, #icon {
+    @apply text-accents-8 hover:text-blue-700 transition duration-300 ease-in-out text-base md:text-lg lg:text-xl;
+  }
 }
 
-::-webkit-scrollbar {
-  display: none;
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/Geist/Geist-Thin.otf') format('otf');
+  src: url('/fonts/Geist/Geist-regular.otf') format('opentype');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Pixelify';
-  src: url('/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf')
-    format('truetype');
+  src: url('/fonts/Pixelify/PixelifySans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
-#name {
-  font-family: 'Pixelify', system-ui;
-}
-
-#pyramid, #code {
-  transition: transform 0.3s ease-in-out;
-}
-
-#pyramid:hover, #code:hover {
-  transform: perspective(2000px) rotateY(150deg);
-}
-
-

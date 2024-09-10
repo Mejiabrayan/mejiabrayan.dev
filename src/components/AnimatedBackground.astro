@@ -13,23 +13,15 @@
     const canvas = document.getElementById('background') as HTMLCanvasElement;
     const ctx = canvas?.getContext('2d');
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
     const characters =
       '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-={}[]|;:,.<>?/~▲`';
-    const gridSize = 20;
-    const charGrid: { x: number; y: number; char: string; opacity: number }[] =
-      [];
+    let gridSize = 20;
+    let charGrid: { x: number; y: number; char: string; opacity: number }[] = [];
 
     function initGrid() {
-      charGrid.length = 0; // Clear the existing grid
-      for (let y = 0; y < canvas.height; y += gridSize) {
+      charGrid = []; // Clear the existing grid
+      const maxY = canvas.height * 0.5; // Only fill about 50% of the height
+      for (let y = 0; y < maxY; y += gridSize) {
         for (let x = 0; x < canvas.width; x += gridSize) {
           charGrid.push({
             x,
@@ -41,24 +33,53 @@
       }
     }
 
+    function resizeCanvas() {
+      const pixelRatio = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * pixelRatio;
+      canvas.height = window.innerHeight * pixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx?.scale(pixelRatio, pixelRatio);
+
+      // Adjust grid size for smaller screens
+      gridSize = window.innerWidth < 600 ? 15 : 20;
+
+      initGrid(); // Reinitialize the grid when resizing
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
     function drawBackground() {
       if (ctx) {
-        ctx.fillStyle = '#08090B';
+        ctx.fillStyle = '#0A0A0A';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = '12px monospace';
+        ctx.font = `${gridSize * 0.6}px monospace`;
 
         charGrid.forEach((item) => {
           ctx.fillStyle = `rgba(100, 100, 100, ${item.opacity})`;
           ctx.fillText(item.char, item.x, item.y);
         });
+
+        // Add a gradient fade-out effect
+        const gradient = ctx.createLinearGradient(
+          0,
+          canvas.height * 4,
+          0,
+          canvas.height * 5
+        );
+        gradient.addColorStop(0, 'rgba(8, 9, 11, 0)');
+        gradient.addColorStop(1, 'rgba(8, 9, 11, 1)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, canvas.height * 0.4, canvas.width, canvas.height * 0.1);
       }
     }
 
     function animateCharacters() {
-      const numToAnimate = Math.floor(charGrid.length * 0.001); // Animate 0.1% of characters
+      const numToAnimate = Math.max(1, Math.floor(charGrid.length * 0.001)); // Animate at least 1 character
       for (let i = 0; i < numToAnimate; i++) {
         const index = Math.floor(Math.random() * charGrid.length);
-        charGrid[index].opacity = 0.5; // Slightly darker
+        charGrid[index].opacity = 0.3; // Slightly darker
         setTimeout(
           () => {
             charGrid[index].opacity = 0.1; // Return to original opacity
@@ -74,14 +95,13 @@
       requestAnimationFrame(update);
     }
 
-    initGrid();
     update();
   }
 
   initBackgroundAnimation(); // Initialize the animation on page load
 
-  document.addEventListener('astro:after-swap', () => {   // Re-run the animation when navigating back to the home page
-
+  document.addEventListener('astro:after-swap', () => {
+    // Re-run the animation when navigating back to the home page
     if (window.location.pathname === '/') {
       initBackgroundAnimation();
     }
@@ -97,12 +117,5 @@
     height: 100%;
     pointer-events: none;
     z-index: -1;
-  }
-
-  @media (max-width: 600px) {
-    canvas {
-      width: 100vw;
-      height: 100vh;
-    }
   }
 </style>

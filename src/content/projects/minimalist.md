@@ -1,5 +1,6 @@
 ---
 title: 'Minimalist Notes'
+link: 'https://github.com/Mejiabrayan/minimalist-notes'
 layout: src/layouts/ProjectLayout.astro
 overview: 'A simple note-taking app designed for users who prefer a minimalist interface with out-of-the-box Markdown support..'
 date: 10 May 2024
