@@ -1,24 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Container from '@/components/container.astro';
 
-// Get all blog posts and sort them by date
+// Get all blog posts and sort them by date because yes bro
 const posts = (await getCollection('blogs')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+	(a:any, b: any) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
 
+
 <Layout title='Brayan M. Cuenca Portfolio | Blogs'>
-  <div class='absolute inset-0 z-[-1] overflow-hidden'>
-    <div
-      id='parallax-bg'
-      class="absolute inset-0 bg-[url('/bluetwo.jpeg')] bg-cover bg-center opacity-45 scale-110 blur-2xl"
-      style='mask-image: radial-gradient(ellipse 50% 50% at 50% 0%, #000 70%, transparent 110%);'
-    >
-    </div>
-  </div>
-  <body class='bg-[#08090B] text-accents-7'>
-    <header class='text-accents-8 py-20 sm:py-40'>
+<Container as="section" class="min-h-screen gap-4">
+    <header >
       <div class='container mx-auto px-4'>
         <h1 class='text-3xl sm:text-4xl font-bold tracking-tight text-center'>
           Blogs
@@ -28,10 +22,10 @@ const posts = (await getCollection('blogs')).sort(
         </p>
       </div>
     </header>
-    <main class='relative container mx-auto px-4 py-8 overflow-hidden h-screen'>
+    <main>
       <ul>
         {
-          posts.map((post) => (
+          posts.map((post: any) => (
             <li class='mb-8'>
               <article>
                 <a
@@ -39,28 +33,14 @@ const posts = (await getCollection('blogs')).sort(
                   aria-label={`Read more about ${post.data.title}`}
                   class='block'
                 >
-                  {post.data.title}
+                 <h3> {post.data.title}</h3>
                 </a>
-                <p class='text-accents-6 text-base'>{post.data.description}</p>
+                <p >{post.data.description}</p>
               </article>
             </li>
           ))
         }
       </ul>
     </main>
-  </body>
+  </Container>
 </Layout>
-
-<script>
-  function parallax() {
-    const bg = document.getElementById('parallax-bg');
-    if (bg) {
-      window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        bg.style.transform = `translateY(${scrollPosition * 0.5}px) scale(1.1)`;
-      });
-    }
-  }
-
-  document.addEventListener('astro:page-load', parallax);
-</script>

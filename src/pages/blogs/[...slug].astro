@@ -4,18 +4,36 @@ import Layout from '@/layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blogs');
-  return blogPosts.map((blog) => ({
+  return blogPosts.map((blog: CollectionEntry<'blogs'>) => ({
     params: { slug: blog.slug },
     props: { blog },
   }));
 }
-type Props = {
+
+interface Props {
   blog: CollectionEntry<'blogs'>;
-};
-const { blog } = Astro.props;
-const { Content } = await blog.render(); // Render the content of the blog post
+}
+
+const { slug } = Astro.params as { slug: string };
+let blog: CollectionEntry<'blogs'> | undefined;
+
+if (Astro.request.method === 'GET') {
+  // Server-side rendering
+  const blogPosts = await getCollection('blogs');
+  blog = blogPosts.find((post: CollectionEntry<'blogs'>) => post.slug === slug);
+} else {
+  // Static rendering
+  blog = Astro.props.blog as Props['blog'];
+}
+
+if (!blog) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await blog.render();
+const { title } = blog.data;
 ---
 
-<Layout title='blogs'>
-  <Content />
+<Layout title={`${title} | Brayan M. Cuenca Blog`}>
+    <Content />
 </Layout>

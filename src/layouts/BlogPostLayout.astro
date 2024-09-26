@@ -1,62 +1,55 @@
 ---
-import '../styles/globals.css';
-import Menu from '../components/Menu';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
+import Layout from './Layout.astro';
+import Container from '@/components/container.astro';
+
 const { frontmatter } = Astro.props;
+
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 ---
-
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title}</title>
-    <meta name="description" content={frontmatter.description || "Brayan's personal blog and portfolio website. I write about web development, design, and other topics."} />
-    <meta name="keywords" content="web development, front-end, full-stack, design, portfolio, blog" />
-    <meta name="author" content="Brayan Mejia Cuenca" />
-    <meta property="og:title" content={frontmatter.title} />
-    <meta property="og:description" content={frontmatter.description || "Brayan's personal blog and portfolio website. I write about web development, design, and other topics."} />
-    <meta property="og:url" content={`https://mejiabrayan.dev/blogs/${frontmatter.slug}`} />
-    <meta property="og:image" content={frontmatter.image} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={frontmatter.image} />
-  </head>
-
-  <body class="bg-[#08090B] text-accents-7">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <main>
-        <article class="prose prose-invert prose-lg max-w-none sm:prose-xl lg:prose-xl">
-          <header class="mb-8">
-            <img
-              class="w-full h-64 object-cover rounded-xl mb-6"
-              src={frontmatter.image}
-              alt={frontmatter.title}
-              draggable="false"
-              loading="lazy"
-            />
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{frontmatter.title}</h1>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center text-sm text-accents-6">
-              <time datetime={(new Date(frontmatter.date)).toISOString()}>
-                {
-                  (new Date(frontmatter.date)).toLocaleDateString(undefined, {
-                    dateStyle: 'medium',
-                    timeZone: 'UTC',
-                  })
-                }
-              </time>
-              {frontmatter.tags && (
-                <div class="mt-2 sm:mt-0 sm:ml-4 flex flex-wrap">
-                  {frontmatter.tags.map((tag: any) => (
-                    <span class="mr-2 mb-2 px-2 py-1 bg-accents-8 rounded-full text-xs">{tag}</span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </header>
-
-          <div class="text-accents-7 prose-headings:text-white prose-a:text-primary-accent prose-strong:text-accents-5 prose-code:text-accents-6 prose-pre:bg-accents-9 prose-blockquote:border-l-primary-accent prose-blockquote:text-accents-6">
-            <slot />
+<Layout title={`${frontmatter.title} | Brayan M. Cuenca Blog`}>
+  <AnimatedBackground />
+  <Container as='article' class="min-h-screen gap-8 mt-40">
+    <header class="w-full">
+      {frontmatter.image && (
+        <img
+          class="w-full h-80 object-cover rounded-xl mb-8 shadow-lg"
+          src={frontmatter.image}
+          alt={frontmatter.title}
+          draggable="false"
+          loading="lazy"
+        />
+      )}
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{frontmatter.title}</h1>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center text-sm text-accents-5 mt-4">
+        <time datetime={frontmatter.date}>
+          {formatDate(frontmatter.date)}
+        </time>
+        {frontmatter.tags && (
+          <div class="mt-3 sm:mt-0 sm:ml-6 flex flex-wrap">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="mr-3 mb-2 px-3 py-1 bg-primary-accent bg-opacity-10 border border-primary-accent border-opacity-20 rounded-full text-xs text-primary-accent">{tag}</span>
+            ))}
           </div>
-        </article>
-      </main>
-    </div>
-  </body>
-</html>
+        )}
+      </div>
+    </header>
+
+    <main class="max-w-2xl prose prose-lg sm:prose-xl lg:prose-2xl prose-headings:text-white prose-a:text-primary-accent prose-strong:text-accents-5 prose-code:text-accents-6 prose-pre:bg-zinc-900 prose-blockquote:border-l-primary-accent prose-blockquote:text-accents-6">
+      <slot />
+    </main>
+
+    <footer class="w-full pt-8 border-t border-accents-8">
+      <p class="text-sm text-accents-5">
+        Written by {frontmatter.author || 'Brayan M. Cuenca'}. 
+        Last updated on {formatDate(frontmatter.lastUpdated || frontmatter.date)}.
+      </p>
+    </footer>
+  </Container>
+</Layout>

@@ -34,7 +34,6 @@ Create a section in your HTML where you want to apply the dither effect. Here's 
   <div
     class="relative z-10 bg-[radial-gradient(transparent_1px,#000_0.5px)] [background-size:3px_3px] opacity-50 mix-blend-overlay h-full"
   >
-    <!-- Additional content can go here -->
   </div>
 </section>
 ```

@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { ViewTransitions } from 'astro:transitions';
+import ContactForm from '../../components/contact-form';
+
+
+---
+
+<Layout title='Brayan M. Cuenca | Contact'>
+  <ViewTransitions />
+  <section
+    class='container mx-auto flex flex-col items-center justify-center min-h-screen p-4 sm:mt-0 mt-16'
+  >
+    <h2 class='mb-4 font-semibold'>
+      <a href='/' transition:name='contact'>Contact Me</a>
+    </h2>
+    <p class='text-accents-6 mb-8 text-center max-w-md'>
+      I'm always excited to connect with new people and explore potential collaborations. 
+      Feel free to reach out!
+    </p>
+    
+    <div class='w-full max-w-md mb-8'>
+      <ContactForm client:load />
+    </div>
+    
+  </section>
+</Layout>

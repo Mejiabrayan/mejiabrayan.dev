@@ -13,7 +13,7 @@ const MusicPlayer: React.FC = () => {
   const progressIntervalRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const audio = new Audio('/imagination.mp3');
+    const audio = new Audio('/her.mp3');
     // @ts-ignore
     audioRef.current = audio as AudioElementWithSrcObject;
 
@@ -68,13 +68,12 @@ const MusicPlayer: React.FC = () => {
     <div className='rounded-full w-full h-full flex items-center px-3 space-x-3'>
       <div className='flex items-center space-x-2'>
         <button 
-          className='text-white'
           onClick={togglePlayPause}
         >
           {isPlaying ? (
-            <Pause size={16} fill='currentColor' className='hover:text-blue-700'/>
+            <Pause size={16} fill='currentColor' className='text-white hover:text-blue-700'/>
           ) : (
-            <Play size={16} fill='currentColor'  className='hover:text-blue-700' />
+            <Play size={16} fill='currentColor'  className=' text-white hover:text-blue-700' />
           )}
         </button>
         <div className='text-xs text-white font-medium'>

@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<Layout title='Brayan M. Cuenca | Work'>
+  <ViewTransitions />
+  <section
+    class='container mx-auto flex flex-col items-center justify-center h-screen'
+  >
+    <h3 class='mb-4'>
+      <a href='/' transition:name='working'>Working</a> on exciting projects
+    </h3>
+    <p class='max-w-lg text-yellow-300'>
+      Page Work in Progress. Check back soon for updates.
+      <p>
+    </p>
+  </section>
+
+  <style>
+    [transition:name='working'] {
+      view-transition-name: working;
+    }
+  </style>
+</Layout>

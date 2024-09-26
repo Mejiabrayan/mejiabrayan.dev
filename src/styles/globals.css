@@ -11,10 +11,15 @@
   --accents-3: 0, 0%, 26.7%; /* #444 */
   --accents-4: 0, 0%, 40%; /* #666 */
   --accents-5: 0, 0%, 53.3%; /* #888 */
-  --accents-6: 0, 0%, 60%; /* #999 */
+  --accents-6: 0, 0%, 63.1%; /* #A1A1A1 */
   --accents-7: 0, 0%, 92%; /* #eaeaea */
-  --accents-8: 0, 0%, 98%; /* #fafafa */
+  --accents-8: 0, 0%, 93%; /* #EDEDED */
   --geist-foreground: 0, 0%, 100%; /* #fff */
+}
+
+input,
+textarea {
+  @apply w-full border border-white/10 bg-geist-background rounded p-2 text-accents-4 focus:outline-none focus:border-blue-700;
 }
 
 @layer base {
@@ -23,17 +28,58 @@
   }
 
   body {
-    @apply bg-black m-0 p-0;
+    @apply bg-black m-0 p-0 selection:text-white selection:bg-blue-400;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-accents-8 font-bold;
+  h1 {
+    @apply text-accents-8 text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-accents-8 text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-accents-8 text-xl md:text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-accents-8 text-lg md:text-xl lg:text-2xl;
+  }
+
+  h5 {
+    @apply text-accents-8 text-base md:text-lg lg:text-xl;
+  }
+
+  h6 {
+    @apply text-accents-8 text-sm md:text-base lg:text-lg;
+  }
+
+  p {
+    @apply text-accents-6 leading-relaxed tracking-tight;
+  }
+
+  a {
+    @apply text-blue-400 transition duration-300 ease-in-out;
+  }
+
+  a:has(:hover),
+  a:hover {
+    @apply text-blue-500;
   }
 }
 
 @layer components {
-  a, span, #icon {
-    @apply text-accents-8 hover:text-blue-700 transition duration-300 ease-in-out text-base md:text-lg lg:text-xl;
+  span,
+  #icon {
+    @apply text-accents-8 transition duration-300 ease-in-out text-base;
+  }
+
+  span:has(:hover),
+  span:hover,
+  #icon:has(:hover),
+  #icon:hover {
+    @apply text-blue-700;
   }
 }
 
@@ -44,6 +90,33 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+  .mask {
+    --padding: 6px;
+    padding: var(--padding) 0;
+    margin: calc(var(--padding) * -1) 0;
+    mask-image: linear-gradient(
+      0deg,
+      transparent,
+      #000 35%,
+      #000 65%,
+      transparent 85%
+    );
+  }
+  
+  .shimmer {
+    -webkit-mask: linear-gradient(-60deg, #000 40%, #0005, #000 60%) right/200% 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 4s infinite;
+    line-height: 16px;
+    vertical-align: middle;
+    pointer-events: none;
+  }
+  
+  @keyframes shimmer {
+    100% {
+      -webkit-mask-position: left;
+    }
   }
 }
 

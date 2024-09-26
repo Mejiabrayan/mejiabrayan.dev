@@ -1,21 +1,29 @@
 ---
-
 import Layout from '@/layouts/Layout.astro';
+import { ViewTransitions } from 'astro:transitions';
+import Container from '@/components/container.astro';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
 ---
 
-<Layout title='Brayan M. Cuenca Portfolio'>
+<Layout title='Brayan M. Cuenca | Full-Stack Developer'>
+  <ViewTransitions />
+  <Container as="section" class='text-center min-h-screen'>
+    <AnimatedBackground />
+    <div id="content-wrapper">
+      <h1>Brayan Mejia</h1>
+      <h4>
+        Full-Stack Web Developer
+      </h4>
+      <div id='content' class='max-w-2xl text-balance'>
+        <p>Crafting innovative web solutions <span class="text-green-500">line by line</span>. 
+          Currently <a href='/work' transition:name='working'>developing</a> cutting-edge projects and exploring AI. 
+          Interested in <span class="text-purple-400 hover:text-purple-500 hover:cursor-pointer">collaboration</span>? 
+          <a href='/contact' transition:name='contact'>Let's connect</a>.
+        </p>
+      </div>
+    </div>
+  </Container>
+
 </Layout>
 
-<script>
-  function parallax() {
-    const bg = document.getElementById('parallax-bg');
-    if (bg) {
-      window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        bg.style.transform = `translateY(${scrollPosition * 0.5}px) scale(0.5)`;
-      });
-    }
-  }
-
-  document.addEventListener('astro:page-load', parallax);
 </script>
