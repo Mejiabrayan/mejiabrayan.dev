@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause } from 'lucide-react';
-
-interface AudioElementWithSrcObject extends HTMLAudioElement {
-  srcObject: MediaStream | null;
-}
+import { Play, Pause, ArrowLeft } from 'lucide-react';
 
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const audioRef = useRef<AudioElementWithSrcObject>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressIntervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     const audio = new Audio('/her.mp3');
-    // @ts-ignore
-    audioRef.current = audio as AudioElementWithSrcObject;
+    audioRef.current = audio;
 
-    audio.addEventListener('loadedmetadata', () => {
+    const handleLoadedMetadata = () => {
       setDuration(audio.duration);
-    });
+    };
 
-    audio.addEventListener('ended', () => {
+    const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
-    });
+    };
+
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.pause();
       audio.currentTime = 0;
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('ended', handleEnded);
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
@@ -46,16 +46,24 @@ const MusicPlayer: React.FC = () => {
       }
     } else {
       audio.play().catch(error => console.error("Playback failed", error));
-      progressIntervalRef.current = window.setInterval(updateProgress, 1000);
+      progressIntervalRef.current = window.setInterval(() => {
+        setCurrentTime(audio.currentTime);
+      }, 1000);
     }
     setIsPlaying(!isPlaying);
   };
 
-  const updateProgress = (): void => {
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
-    if (audio) {
-      setCurrentTime(audio.currentTime);
-    }
+    if (!audio) return;
+
+    const progressBar = e.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const clickPosition = (e.clientX - rect.left) / rect.width;
+    const newTime = clickPosition * duration;
+
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
   };
 
   const formatTime = (time: number): string => {
@@ -65,26 +73,31 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className='rounded-full w-full h-full flex items-center px-3 space-x-3'>
-      <div className='flex items-center space-x-2'>
-        <button 
-          onClick={togglePlayPause}
-        >
-          {isPlaying ? (
-            <Pause size={16} fill='currentColor' className='text-white hover:text-blue-700'/>
-          ) : (
-            <Play size={16} fill='currentColor'  className=' text-white hover:text-blue-700' />
-          )}
-        </button>
-        <div className='text-xs text-white font-medium'>
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </div>
+    <div className="flex items-center w-full gap-4 px-4 py-2">
+      <button
+        onClick={togglePlayPause}
+        className="text-white"
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+      >
+        {isPlaying ? (
+          <Pause className="h-5 w-5" />
+        ) : (
+          <Play className="h-5 w-5" />
+        )}
+      </button>
+      <div className="text-sm text-white whitespace-nowrap">
+        {formatTime(currentTime)} / {formatTime(duration)}
       </div>
-      <div className='flex-grow bg-white/20 rounded-full h-1'>
-        <div 
-          className='bg-white rounded-full h-1' 
-          style={{ width: `${(currentTime / duration) * 100}%` }}
-        ></div>
+      <div 
+        className="flex-1 cursor-pointer"
+        onClick={handleProgressClick}
+      >
+        <div className="w-full bg-white/20 rounded-full h-1">
+          <div
+            className="bg-white rounded-full h-1 transition-all duration-100"
+            style={{ width: `${(currentTime / duration) * 100}%` }}
+          />
+        </div>
       </div>
     </div>
   );
