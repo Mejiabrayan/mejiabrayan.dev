@@ -1,46 +1,54 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 import Container from '@/components/container.astro';
+import { getCollection } from 'astro:content';
+import { gradients } from '@/lib/animations';
 
-// Get all blog posts and sort them by date because yes bro
-const posts = (await getCollection('blogs')).sort(
-	(a:any, b: any) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = await getCollection('blogs');
 ---
 
-
-<Layout title='Brayan M. Cuenca Portfolio | Blogs'>
-<Container as="section" class="min-h-screen gap-4">
-    <header >
-      <div class='container mx-auto px-4'>
-        <h1 class='text-3xl sm:text-4xl font-bold tracking-tight text-center'>
-          Blogs
+<Layout title='Blog Posts | Brayan M. Cuenca'>
+  <Container>
+    <div class='w-full max-w-4xl mx-auto'>
+      <header class='text-center mb-32 mt-56 md:mt-20 lg:mt-24'>
+        <h1
+          class='text-2xl font-bold text-cyan-100'
+          transition:name='blog-link'
+          transition:animate='initial'
+        >
+          I like to write about stuff
         </h1>
-        <p class='mt-4 text-center text-accents-6'>
-          I like to write about things I learn.
-        </p>
-      </div>
-    </header>
-    <main>
-      <ul>
+      </header>
+
+      <div class='grid gap-8'>
         {
-          posts.map((post: any) => (
-            <li class='mb-8'>
-              <article>
-                <a
-                  href={`/blogs/${post.slug}`}
-                  aria-label={`Read more about ${post.data.title}`}
-                  class='block'
-                >
-                 <h3> {post.data.title}</h3>
-                </a>
-                <p >{post.data.description}</p>
-              </article>
-            </li>
+          posts.map((post) => (
+            <article class='group mb-12 md:mb-8 lg:mb-0'>
+              <a href={`/blogs/${post.slug}`} class='block'>
+                <div class='space-y-3 '>
+                  <h2 class='text-xl font-semibold tracking-tight group-hover:text-cyan-100 transition-colors'>
+                    {post.data.title}
+                  </h2>
+                  <div class='flex items-center gap-x-4 text-sm text-accents-5'>
+                    {post.data.tags && (
+                      <div class='flex items-center gap-x-2'>
+                        {post.data.tags.map((tag: string) => (
+                          <span class='inline-block px-2 py-0.5 bg-accents-1 rounded-full text-xs'>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  {post.data.description && (
+                    <p class='text-accents-5'>{post.data.description}</p>
+                  )}
+                </div>
+              </a>
+            </article>
           ))
         }
-      </ul>
-    </main>
+      </div>
+    </div>
   </Container>
 </Layout>

@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 import fs from 'fs';
 import path from 'path';
 import vercel from '@astrojs/vercel/serverless';
+import tailwindcss from '@tailwindcss/vite';
+
 
 
 const themePath = path.join(process.cwd(), 'src/themes/theme.json');
@@ -16,14 +18,14 @@ export default defineConfig({
       enabled: true,
     },
   }),
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'es', 'pt-br'],
-  },
+ 
   image: {
     domains: ['astro.build'],
   },
-  integrations: [tailwind({ applyBaseStyles: false }), react()],
+  vit: {
+    plugins: [tailwindcss()],
+  },
+  integrations: [react()],
   markdown: {
     shikiConfig: {
       theme: theme,

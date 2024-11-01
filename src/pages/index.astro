@@ -1,29 +1,47 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import { ViewTransitions } from 'astro:transitions';
 import Container from '@/components/container.astro';
-import AnimatedBackground from '../components/AnimatedBackground.astro';
+import { ViewTransitions } from 'astro:transitions';
+import { gradients } from '@/lib/animations';
 ---
 
-<Layout title='Brayan M. Cuenca | Full-Stack Developer'>
+<Layout title='Brayan M. Cuenca | Full-Stack Web Developer'>
+  <div 
+    class="w-[500px] h-[500px] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    style={`background: ${gradients.cyan.blob}; filter: ${gradients.cyan.blur};`}
+    slot="gradient"
+  >
+  </div>
+
   <ViewTransitions />
-  <Container as="section" class='text-center min-h-screen'>
-    <AnimatedBackground />
-    <div id="content-wrapper">
-      <h1>Brayan Mejia</h1>
-      <h4>
-        Full-Stack Web Developer
-      </h4>
-      <div id='content' class='max-w-2xl text-balance'>
-        <p>Crafting innovative web solutions <span class="text-green-500">line by line</span>. 
-          Currently <a href='/work' transition:name='working'>developing</a> cutting-edge projects and exploring AI. 
-          Interested in <span class="text-purple-400 hover:text-purple-500 hover:cursor-pointer">collaboration</span>? 
-          <a href='/contact' transition:name='contact'>Let's connect</a>.
+  <Container>
+    <header class=' space-y-6 relative z-10'>
+      <h1 class='text-3xl md:text-3xl lg:text-4xl font-medium tracking-tight'>
+        Hi, my name is Brayan,
+      </h1>
+      
+      <div class="space-y-2 text-sm md:text-base lg:text-base">
+        <p class='text-accents-6 font-mono'>
+          Full-Stack Web Developer based in the Bay Area.
+        </p>
+        <p class='text-accents-6 font-mono'>
+          Constantly crafting. Always evolving.
         </p>
       </div>
-    </div>
+
+      <nav class="mt-8">
+        <ul class="flex items-center justify-start space-x-6">
+          <li>
+            <a 
+              href="/blogs" 
+              class='text-sm text-cyan-100 hover:text-cyan-200 transition-colors'
+              transition:name="blog-link"
+              transition:animate="fade">
+              I like to write about stuff
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   </Container>
-
 </Layout>
-
-</script>

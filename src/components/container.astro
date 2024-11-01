@@ -1,24 +1,7 @@
 ---
-
-
-const { 
-  as: Element = 'div', 
-  class: className = '', 
-  maxWidth = '2xl' 
-} = Astro.props;
-
-const containerClass = [
-  'container',
-  'mx-auto',
-  `max-w-${maxWidth}`,
-  'flex',
-  'flex-col',
-  'items-center',
-  'justify-center',
-  className
-].filter(Boolean).join(' ');
+const { class: className = '' } = Astro.props;
 ---
 
-<Element class={containerClass}>
+<div class={`w-full max-w-2xl mx-auto  ${className}`}>
   <slot />
-</Element>
+</div>

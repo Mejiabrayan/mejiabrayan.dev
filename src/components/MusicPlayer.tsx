@@ -1,105 +1,160 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, ArrowLeft } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const animations = {
+  container: {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.2 }
+  },
+  playButton: {
+    whileHover: { scale: 1.1 },
+    whileTap: { scale: 0.9 },
+    transition: { type: "spring", stiffness: 400, damping: 17 }
+  },
+  playButtonWrapper: {
+    whileHover: { scale: 1.05 },
+    whileTap: { scale: 0.95 }
+  },
+  icon: {
+    initial: { scale: 0 },
+    animate: { scale: 1 },
+    exit: { scale: 0 },
+    transition: { duration: 0.15 }
+  },
+  content: {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.3 }
+  },
+  albumCover: {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: (isPlaying: boolean) => ({
+      opacity: 1,
+      scale: isPlaying ? [1, 1.02, 1] : 1,
+      transition: {
+        opacity: { duration: 0.3 },
+        scale: {
+          repeat: isPlaying ? Infinity : 0,
+          duration: 1.6,
+          ease: "easeInOut"
+        }
+      }
+    })
+  }
+};
 
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [duration, setDuration] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressIntervalRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const audio = new Audio('/her.mp3');
+    const AUDIO_SOURCE = '/100.mp3';
+    const audio = new Audio(AUDIO_SOURCE);
     audioRef.current = audio;
-
-    const handleLoadedMetadata = () => {
-      setDuration(audio.duration);
-    };
 
     const handleEnded = () => {
       setIsPlaying(false);
-      setCurrentTime(0);
     };
 
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('ended', handleEnded);
 
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnded);
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.removeEventListener('ended', handleEnded);
+      }
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
     };
   }, []);
 
-  const togglePlayPause = (): void => {
+  const togglePlayPause = async (): Promise<void> => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying) {
-      audio.pause();
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
+    try {
+      if (isPlaying) {
+        audio.pause();
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
+      } else {
+        await audio.play();
       }
-    } else {
-      audio.play().catch(error => console.error("Playback failed", error));
-      progressIntervalRef.current = window.setInterval(() => {
-        setCurrentTime(audio.currentTime);
-      }, 1000);
+      setIsPlaying(!isPlaying);
+    } catch (error) {
+      console.error('Playback failed:', error);
     }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const progressBar = e.currentTarget;
-    const rect = progressBar.getBoundingClientRect();
-    const clickPosition = (e.clientX - rect.left) / rect.width;
-    const newTime = clickPosition * duration;
-
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  const formatTime = (time: number): string => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   return (
-    <div className="flex items-center w-full gap-4 px-4 py-2">
-      <button
-        onClick={togglePlayPause}
-        className="text-white"
-        aria-label={isPlaying ? 'Pause' : 'Play'}
+    <motion.div 
+      className="flex items-center justify-between w-full h-full px-4"
+      {...animations.container}
+    >
+      <motion.div 
+        className="flex items-center gap-4"
+        {...animations.playButtonWrapper}
       >
-        {isPlaying ? (
-          <Pause className="h-5 w-5" />
-        ) : (
-          <Play className="h-5 w-5" />
-        )}
-      </button>
-      <div className="text-sm text-white whitespace-nowrap">
-        {formatTime(currentTime)} / {formatTime(duration)}
-      </div>
-      <div 
-        className="flex-1 cursor-pointer"
-        onClick={handleProgressClick}
+        <motion.button 
+          onClick={togglePlayPause}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+          {...animations.playButton}
+        >
+          <AnimatePresence mode="wait">
+            {isPlaying ? (
+              <motion.div
+                key="pause"
+                {...animations.icon}
+              >
+                <Pause className="h-4 w-4 text-white" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="play"
+                {...animations.icon}
+              >
+                <Play className="h-4 w-4 text-white" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </motion.div>
+
+      <motion.div 
+        className="flex flex-col"
+        {...animations.content}
       >
-        <div className="w-full bg-white/20 rounded-full h-1">
-          <div
-            className="bg-white rounded-full h-1 transition-all duration-100"
-            style={{ width: `${(currentTime / duration) * 100}%` }}
-          />
-        </div>
-      </div>
-    </div>
+        <span className="text-white text-sm font-medium">
+          100
+        </span>
+        <span className="text-[var(--text-accent)] text-sm">
+          Dean Blunt
+        </span>
+      </motion.div>
+      
+      <motion.div 
+        className="h-12 w-12 rounded-lg overflow-hidden"
+        custom={isPlaying}
+        variants={animations.albumCover}
+        initial="initial"
+        animate="animate"
+      >
+        <img 
+          src="/album-cover.jpeg" 
+          alt="Album Cover - 100 by Dean Blunt" 
+          className="h-full w-full object-cover"
+          loading="eager"
+          draggable={false}
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 
