@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, MotionConfig, AnimatePresence } from 'framer-motion';
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '~/hooks/useClickOutside';
 import { ArrowLeft, Music, Home, Code, Library } from 'lucide-react';
 import MusicPlayer from './MusicPlayer';
-import { menuTransition, menuAnimations } from '@/lib/animations';
+import { menuTransition, menuAnimations } from '~/lib/animations';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ const Button = ({ children, onClick, disabled, ariaLabel }: ButtonProps) => (
 
 const menuItems = [
   { label: 'Home', href: '/', icon: Home },
-  { label: 'Projects', href: '/work', icon: Code },
+  { label: 'Projects', href: '/projects', icon: Code },
   { label: 'Blogs', href: '/blogs', icon: Library },
 ];
 
@@ -128,7 +128,7 @@ const MenuContent = ({
                   </Button>
                 </motion.div>
                 <motion.div variants={menuAnimations.item}>
-                  <div className='flex items-center gap-2 px-2 group-hover:opacity-80 transition-opacity'>
+                  <div className=' flex items-center gap-2 px-2 group-hover:opacity-80 transition-opacity'>
                     <div className='w-8 h-8 md:w-9 md:h-9 rounded-lg overflow-hidden'>
                       <img
                         src='/profile.jpeg'
@@ -179,3 +179,5 @@ export default function MenuComponent() {
     </MotionConfig>
   );
 }
+
+

@@ -1,26 +1,26 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Container from '@/components/container.astro';
+import Layout from '~/layouts/Layout.astro';
+import Container from '~/components/container.astro';
 import { ViewTransitions } from 'astro:transitions';
-import { gradients } from '@/lib/animations';
+import { gradients } from '~/lib/animations';
 ---
 
 <Layout title='Brayan M. Cuenca | Full-Stack Web Developer'>
-  <div 
-    class="w-[500px] h-[500px] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+  <div
+    class='w-[500px] h-[500px] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
     style={`background: ${gradients.cyan.blob}; filter: ${gradients.cyan.blur};`}
-    slot="gradient"
+    slot='gradient'
   >
   </div>
 
   <ViewTransitions />
   <Container>
-    <header class=' space-y-6 relative z-10'>
+    <header class='space-y-6 relative z-10'>
       <h1 class='text-3xl md:text-3xl lg:text-4xl font-medium tracking-tight'>
         Hi, my name is Brayan,
       </h1>
-      
-      <div class="space-y-2 text-sm md:text-base lg:text-base">
+
+      <div class='space-y-2 text-sm md:text-base lg:text-base'>
         <p class='text-accents-6 font-mono'>
           Full-Stack Web Developer based in the Bay Area.
         </p>
@@ -29,14 +29,15 @@ import { gradients } from '@/lib/animations';
         </p>
       </div>
 
-      <nav class="mt-8">
-        <ul class="flex items-center justify-start space-x-6">
+      <nav class='mt-8'>
+        <ul class='flex items-center justify-start space-x-6'>
           <li>
-            <a 
-              href="/blogs" 
+            <a
+              href='/blogs'
               class='text-sm text-cyan-100 hover:text-cyan-200 transition-colors'
-              transition:name="blog-link"
-              transition:animate="fade">
+              transition:name='blog-link'
+              transition:animate='fade'
+            >
               I like to write about stuff
             </a>
           </li>

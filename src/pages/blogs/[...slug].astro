@@ -1,11 +1,14 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-export const prerender = true
+import Layout from '~/layouts/Layout.astro';
+import Container from '~/components/container.astro';
 
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blogs');
-  return blogPosts.map((blog: CollectionEntry<'blogs'>) => ({
+  const blogPosts = await getCollection('blogs', ({ id }: any) => {
+    return id.endsWith('.md') || id.endsWith('.mdx');
+  });
+
+  return blogPosts.map((blog: any) => ({
     params: { slug: blog.slug },
     props: { blog },
   }));
@@ -15,26 +18,25 @@ interface Props {
   blog: CollectionEntry<'blogs'>;
 }
 
-const { slug } = Astro.params as { slug: string };
-let blog: CollectionEntry<'blogs'> | undefined;
-
-if (Astro.request.method === 'GET') {
-  // Server-side rendering
-  const blogPosts = await getCollection('blogs');
-  blog = blogPosts.find((post: CollectionEntry<'blogs'>) => post.slug === slug);
-} else {
-  // Static rendering
-  blog = Astro.props.blog as Props['blog'];
-}
-
-if (!blog) {
-  return Astro.redirect('/404');
-}
-
+const { blog } = Astro.props;
 const { Content } = await blog.render();
-const { title } = blog.data;
+const { title, description, date, image } = blog.data;
 ---
 
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
-    <Content />
+  <Container>
+    <article class="max-w-3xl mx-auto pt-16 pb-16">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold">{title}</h1>
+        <time class="text-accents-5 font-mono">
+          {new Date(date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+      </header>
+      <Content />
+    </article>
+  </Container>
 </Layout>

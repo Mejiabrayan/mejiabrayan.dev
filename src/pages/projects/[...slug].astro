@@ -1,23 +1,86 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
+import Layout from '~/layouts/Layout.astro';
+import Container from '~/components/container.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 export async function getStaticPaths() {
   const projectPosts = await getCollection('projects');
-  return projectPosts.map((project) => ({
+  return projectPosts.map((project: CollectionEntry<'projects'>) => ({
     params: { slug: project.slug },
     props: { project },
   }));
 }
 
-type Props = {
+interface Props {
   project: CollectionEntry<'projects'>;
-};
+}
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const { title, overview, cover, link } = project.data;
 ---
 
-<Layout title="blog">
-  <Content />
+<Layout title={`${title} | Project`}>
+  <ViewTransitions />
+  <Container>
+    <article class='max-w-3xl mx-auto pt-16 sm:pt-24 pb-16'>
+      <header class='space-y-8'>
+        <div class='space-y-4'>
+          <h1
+            class='text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight'
+            transition:name={`project-${title}`}
+          >
+            {title}
+          </h1>
+          <p
+            class='text-accents-6 font-mono text-base sm:text-lg leading-relaxed'
+          >
+            {overview}
+          </p>
+          {
+            link && (
+              <a
+                href={link}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='inline-flex items-center text-sm text-cyan-100 hover:text-cyan-200 transition-colors font-mono'
+              >
+                View Project →
+              </a>
+            )
+          }
+        </div>
+
+        {
+          cover && (
+            <div class='relative aspect-[16/9] overflow-hidden rounded-xl border border-white/10'>
+              <img
+                src={cover}
+                alt={title}
+                class='w-full h-full object-cover hover:scale-105 transition-transform duration-500'
+                draggable='false'
+                loading='lazy'
+              />
+            </div>
+          )
+        }
+      </header>
+
+      <main
+        class='mt-16 prose prose-invert prose-lg max-w-none
+        prose-p:text-accents-6 prose-p:font-mono
+        prose-headings:text-accents-7 prose-headings:font-medium
+        prose-a:text-cyan-100 prose-a:no-underline hover:prose-a:text-cyan-200
+        prose-strong:text-accents-7 prose-strong:font-medium
+        prose-code:text-cyan-100 prose-code:font-mono
+        prose-pre:bg-[#0A0A0A] prose-pre:border prose-pre:border-white/10
+        prose-blockquote:border-l-cyan-100 prose-blockquote:text-accents-6
+        prose-img:rounded-xl prose-img:border prose-img:border-white/10
+        prose-li:text-accents-6 font-mono'
+      >
+        <Content />
+      </main>
+    </article>
+  </Container>
 </Layout>

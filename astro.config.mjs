@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import fs from 'fs';
 import path from 'path';
 import vercel from '@astrojs/vercel/serverless';
 import tailwindcss from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
 
 
 
@@ -12,7 +12,7 @@ const themePath = path.join(process.cwd(), 'src/themes/theme.json');
 const theme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
 
 export default defineConfig({
-  output: 'server',
+  output: 'hybrid',
   adapter: vercel({
     webAnalytics: {
       enabled: true,
@@ -25,7 +25,7 @@ export default defineConfig({
   vit: {
     plugins: [tailwindcss()],
   },
-  integrations: [react()],
+  integrations: [react(), mdx()],
   markdown: {
     shikiConfig: {
       theme: theme,

@@ -49,14 +49,30 @@ export const keyframes = {
   },
 }
 
-// Gradient Configurations
+// Gradient Animations
 export const gradients = {
   cyan: {
     blob: "radial-gradient(circle at center, oklch(0.6 0.15 195), transparent 40%)",
     blur: "blur(100px)",
+    animation: {
+      initial: {
+        scale: 0.8,
+        opacity: 0,
+        filter: "blur(100px)",
+      },
+      animate: {
+        scale: [1, 1.1, 0.9, 1],
+        opacity: [0.5, 0.7, 0.5],
+        filter: ["blur(100px)", "blur(120px)", "blur(100px)"],
+        transition: {
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        },
+      },
+    },
   },
-
-}
+} as const;
 
 // Menu Animations
 export const menuTransition = {

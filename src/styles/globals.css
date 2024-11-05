@@ -104,6 +104,7 @@ h6 {
 
 /* Custom box shadows */
 @theme{
+
   --shadow-input: 
     0px 1px 0px -1px var(--tw-shadow-color),
     0px 1px 1px -1px var(--tw-shadow-color),
