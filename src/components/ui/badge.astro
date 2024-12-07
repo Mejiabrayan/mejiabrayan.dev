@@ -1,0 +1,14 @@
+---
+interface Props {
+  text: string;
+  color?: string;
+}
+
+const { text, color = 'bg-transparent' } = Astro.props;
+---
+
+<div
+  class={`flex h-6 items-center whitespace-nowrap rounded-full border border-white/10 px-2 text-sm sm:h-7 ${color}`}
+>
+  {text}
+</div>

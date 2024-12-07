@@ -29,7 +29,7 @@ const {
 ---
 
 <!doctype html>
-<html lang='en' class='dark'>
+<html lang='en'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -58,20 +58,37 @@ const {
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body
-    class='bg-[var(--alternative-black)] dark:text-[var(--text-accent)]'
-  >
+  <body>
     <main class='flex min-h-screen w-full justify-center px-4'>
-      <section class='flex w-full max-w-3xl flex-col pb-36'>
+      <section class='flex w-full max-w-2xl flex-col pb-36'>
         <nav
           class='mb-16 flex w-full items-center justify-between py-6 text-base sm:text-lg'
         >
-          <a href='/' class='transition-all hover:text-white italic font-bold'
-            >Brayan Mejia</a
+          <a
+            href='/'
+            class='font-bold transition-colors duration-200 hover:text-white hover:bg-transparent'
           >
+            Brayan Mejia
+          </a>
           <div class='flex items-center gap-6'>
-            <a href='/work' class='transition-all hover:text-white'>Work</a>
-            <a href='mailto:mejiabrayan@protonmail.com' class='transition-all hover:text-white'>Contact</a>
+            <a
+              href='/work'
+              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
+            >
+              Work
+            </a>
+            <a
+              href='mailto:mejiabrayan@protonmail.com'
+              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
+            >
+              Contact
+            </a>
+            <a
+              href='/blogs'
+              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
+            >
+              Blogs
+            </a>
           </div>
         </nav>
         <slot />

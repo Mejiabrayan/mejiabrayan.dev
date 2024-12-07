@@ -2,94 +2,34 @@
 @plugin "@tailwindcss/typography";
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-4.0/InterVariable.ttf') format('truetype');
+  font-family: 'Geist';
+  src: url('/fonts/Geist/Geist-Light.otf') format('truetype');
   font-weight: 100 900;
   font-display: swap;
+  font-style: normal;
 }
 
 :root {
-  --font-Inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+  --font-Geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, sans-serif;
-  --font-geist-mono: 'GeistMono', monospace;
-
-  --alternative-black: #08090b;
-  --text-accent: #d4d4d8;
+  --bg-color: #08090b;
+  --text-color: #d4d4d8;
 }
 
 body {
-  font-family: var(--font-Inter);
+  font-family: var(--font-Geist);
   line-height: 1.5;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
-.font-mono {
-  font-family: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --alternative-black: #08090b;
-    --text-accent: #d4d4d8;
-  }
-}
-
+/* Base styles */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-* {
-  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-variant-ligatures: common-ligatures;
-  text-wrap: pretty;
-  text-rendering: optimizelegibility;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-p {
-  text-wrap: pretty;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
-
-#root,
-#__next {
-  isolation: isolate;
 }
 
 ::selection {
@@ -97,18 +37,11 @@ h6 {
   color: #fff;
 }
 
-::-moz-selection {
-  background-color: oklch(0.6 0.15 195);
-  color: #fff;
-}
 
-@theme {
-  --shadow-input: 0px 1px 0px -1px var(--tw-shadow-color),
-    0px 1px 1px -1px var(--tw-shadow-color),
-    0px 1px 2px -1px var(--tw-shadow-color),
-    0px 2px 4px -2px var(--tw-shadow-color),
-    0px 3px 6px -3px var(--tw-shadow-color);
 
-  --shadow-highlight: inset 0px 0px 0px 1px var(--tw-shadow-color),
-    inset 0px 1px 0px var(--tw-shadow-color);
-}
+
+
+
+
+
+
