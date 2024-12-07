@@ -1,47 +1,53 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
-/* Custom colors */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-4.0/InterVariable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
-  --alternative-black: #08090B;
+  --font-Inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+  --font-geist-mono: 'GeistMono', monospace;
+
+  --alternative-black: #08090b;
   --text-accent: #d4d4d8;
 }
 
-.dark {
-  --alternative-black: #08090B;
-  --text-accent: #d4d4d8;
+body {
+  font-family: var(--font-Inter);
+  line-height: 1.5;
 }
 
-/* Force dark mode */
+.font-mono {
+  font-family: var(--font-geist-mono);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --alternative-black: #08090B;
-    --text-accent:  #d4d4d8;
-    /* other dark mode variables... */
+    --alternative-black: #08090b;
+    --text-accent: #d4d4d8;
   }
 }
 
-/* https://www.joshwcomeau.com/css/custom-css-reset/ */
-/* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* 2. Remove default margin */
 * {
-  /* border: dashed 0.5px white; */
   margin: 0;
-}
-
-body {
-  /* 3. Add accessible line-height */
-  line-height: 1.5;
-  /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: common-ligatures;
+  text-wrap: pretty;
+  text-rendering: optimizelegibility;
 }
 
-/* 5. Improve media defaults */
 img,
 picture,
 video,
@@ -51,7 +57,6 @@ svg {
   max-width: 100%;
 }
 
-/* 6. Inherit fonts for form controls */
 input,
 button,
 textarea,
@@ -59,7 +64,6 @@ select {
   font: inherit;
 }
 
-/* 7. Avoid text overflows */
 p,
 h1,
 h2,
@@ -70,10 +74,10 @@ h6 {
   overflow-wrap: break-word;
 }
 
-/* 8. Improve line wrapping */
 p {
   text-wrap: pretty;
 }
+
 h1,
 h2,
 h3,
@@ -83,15 +87,11 @@ h6 {
   text-wrap: balance;
 }
 
-/*
-  9. Create a root stacking context
-*/
 #root,
 #__next {
   isolation: isolate;
 }
 
-/* Selection styles */
 ::selection {
   background-color: oklch(0.6 0.15 195);
   color: #fff;
@@ -102,17 +102,13 @@ h6 {
   color: #fff;
 }
 
-/* Custom box shadows */
-@theme{
-
-  --shadow-input: 
-    0px 1px 0px -1px var(--tw-shadow-color),
+@theme {
+  --shadow-input: 0px 1px 0px -1px var(--tw-shadow-color),
     0px 1px 1px -1px var(--tw-shadow-color),
     0px 1px 2px -1px var(--tw-shadow-color),
     0px 2px 4px -2px var(--tw-shadow-color),
     0px 3px 6px -3px var(--tw-shadow-color);
-    
-  --shadow-highlight:
-    inset 0px 0px 0px 1px var(--tw-shadow-color),
+
+  --shadow-highlight: inset 0px 0px 0px 1px var(--tw-shadow-color),
     inset 0px 1px 0px var(--tw-shadow-color);
 }

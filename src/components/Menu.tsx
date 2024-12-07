@@ -91,19 +91,19 @@ const MenuContent = ({
       <div className='absolute inset-px rounded-2xl !outline-none' />
 
       <motion.div
-        animate={{ 
+        animate={{
           width: isOpen ? '320px' : 'auto',
           transition: {
             type: 'spring',
             stiffness: 400,
-            damping: 30
-          }
+            damping: 30,
+          },
         }}
         initial={false}
         className='relative ring-[0.5px] ring-white/10 rounded-2xl'
       >
         <div className='overflow-hidden p-3'>
-          <AnimatePresence mode='wait'>
+          <AnimatePresence mode='popLayout'>
             {!isOpen ? (
               <motion.div
                 className='flex items-center space-x-2'
@@ -137,9 +137,7 @@ const MenuContent = ({
                         draggable={false}
                       />
                     </div>
-                    <span className='sr-only'>
-                      Profile
-                    </span>
+                    <span className='sr-only'>Profile</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -179,5 +177,3 @@ export default function MenuComponent() {
     </MotionConfig>
   );
 }
-
-

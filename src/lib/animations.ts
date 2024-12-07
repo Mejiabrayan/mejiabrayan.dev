@@ -11,8 +11,8 @@ export const slideInFromRight = {
     duration: '0.3s',
     easing: 'ease-out',
     fillMode: 'backwards',
-  }
-}
+  },
+};
 
 export const fadeInOut = {
   old: {
@@ -26,8 +26,8 @@ export const fadeInOut = {
     duration: '0.3s',
     easing: 'ease-out',
     fillMode: 'backwards',
-  }
-}
+  },
+};
 
 // Keyframe Animations
 export const keyframes = {
@@ -47,30 +47,12 @@ export const keyframes = {
     from: { opacity: 1 },
     to: { opacity: 0 },
   },
-}
-
+};
 // Gradient Animations
 export const gradients = {
-  cyan: {
-    blob: "radial-gradient(circle at center, oklch(0.6 0.15 195), transparent 40%)",
-    blur: "blur(100px)",
-    animation: {
-      initial: {
-        scale: 0.8,
-        opacity: 0,
-        filter: "blur(100px)",
-      },
-      animate: {
-        scale: [1, 1.1, 0.9, 1],
-        opacity: [0.5, 0.7, 0.5],
-        filter: ["blur(100px)", "blur(120px)", "blur(100px)"],
-        transition: {
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      },
-    },
+  color: {
+    blob: 'radial-gradient(circle at center, oklch(90.67 0 0), transparent 30%)',
+    blur: 'blur(100px)',
   },
 } as const;
 

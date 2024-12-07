@@ -29,7 +29,7 @@ const {
 ---
 
 <!doctype html>
-<html lang='en' class="dark">
+<html lang='en' class='dark'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -37,8 +37,8 @@ const {
     <meta name='keywords' content={keywords} />
     <meta name='author' content={author} />
     <link rel='canonical' href={canonicalURL} />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#08090B" />
+    <meta name='color-scheme' content='dark' />
+    <meta name='theme-color' content='#08090B' />
 
     <!-- Open Graph / Facebook -->
     <meta property='og:title' content={title} />
@@ -58,15 +58,24 @@ const {
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="bg-[var(--alternative-black)] text-[var(--text-accent)] dark:bg-[var(--alternative-black)] dark:text-[var(--text-accent)]">
-    <MenuComponent client:only='react' />
-    <div class="relative min-h-screen">
-      <div class="fixed inset-0 pointer-events-none">
-        <slot name="gradient" />
-      </div>
-      <main class="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8">
+  <body
+    class='bg-[var(--alternative-black)] dark:text-[var(--text-accent)]'
+  >
+    <main class='flex min-h-screen w-full justify-center px-4'>
+      <section class='flex w-full max-w-3xl flex-col pb-36'>
+        <nav
+          class='mb-16 flex w-full items-center justify-between py-6 text-base sm:text-lg'
+        >
+          <a href='/' class='transition-all hover:text-white italic font-bold'
+            >Brayan Mejia</a
+          >
+          <div class='flex items-center gap-6'>
+            <a href='/work' class='transition-all hover:text-white'>Work</a>
+            <a href='mailto:mejiabrayan@protonmail.com' class='transition-all hover:text-white'>Contact</a>
+          </div>
+        </nav>
         <slot />
-      </main>
-    </div>
+      </section>
+    </main>
   </body>
 </html>

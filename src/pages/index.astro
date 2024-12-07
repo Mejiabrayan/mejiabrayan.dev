@@ -1,48 +1,49 @@
 ---
 import Layout from '~/layouts/Layout.astro';
-import Container from '~/components/container.astro';
 import { ViewTransitions } from 'astro:transitions';
-import { gradients } from '~/lib/animations';
+import { Image } from 'astro:assets';
+import minimalistNotes from '~/assets/minimalist-notes.webp';
 ---
 
 <Layout title='Brayan M. Cuenca | Full-Stack Web Developer'>
-  <div
-    class='w-[500px] h-[500px] rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-    style={`background: ${gradients.cyan.blob}; filter: ${gradients.cyan.blur};`}
-    slot='gradient'
-  >
-  </div>
-
   <ViewTransitions />
-  <Container>
-    <header class='space-y-6 relative z-10'>
-      <h1 class='text-3xl md:text-3xl lg:text-4xl font-medium tracking-tight'>
-        Hi, my name is Brayan,
-      </h1>
-
-      <div class='space-y-2 text-sm md:text-base lg:text-base'>
-        <p class='text-accents-6 font-mono'>
-          Full-Stack Web Developer based in the Bay Area.
-        </p>
-        <p class='text-accents-6 font-mono'>
-          Constantly crafting. Always evolving.
-        </p>
+  <div class='flex flex-col gap-3 text-xl text-primary'>
+    <h1>Hello, I'm Brayan. I'm a full-stack web developer.</h1>
+    <div>
+      I'm a tech enthusiast and love to build things using my favorite
+      technologies.
+    </div>
+    <div>
+      I'm currently studying for my Comptia SYS 701+ certification while also
+      working on my own projects.
+    </div>
+  </div>
+  <div id='work' class='mt-12 flex flex-col gap-4 text-primary'>
+    <div class='mb-8 h-px border-t border-white/10'></div>
+    <div class='italic text-lg'>Work</div>
+    <a class='group mt-8 text-lg' href=''>
+      <div class='aspect-video w-full overflow-hidden rounded-lg'>
+        <Image
+          src={minimalistNotes}
+          alt='Minimalist Notes App Preview'
+          class='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
+          quality={100}
+          loading='lazy'
+          format='webp'
+        />
       </div>
-
-      <nav class='mt-8'>
-        <ul class='flex items-center justify-start space-x-6'>
-          <li>
-            <a
-              href='/blogs'
-              class='text-sm text-cyan-100 hover:text-cyan-200 transition-colors'
-              transition:name='blog-link'
-              transition:animate='fade'
-            >
-              I like to write about stuff
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  </Container>
+      <div class='mt-4 flex items-center justify-between gap-4'>
+        <div class='whitespace-nowrap underline-offset-2 group-hover:underline'>
+          Minimalist Notes App
+        </div>
+        <div class='flex gap-2'>
+          <div
+            class='flex h-6 items-center whitespace-nowrap rounded-full border border-white/10 px-2 text-sm sm:h-7'
+          >
+           Project
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 </Layout>
