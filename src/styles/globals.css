@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/Geist/Geist-Light.otf') format('truetype');
+  src: url('/fonts/Geist/Geist-Regular.otf') format('truetype');
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
@@ -12,8 +12,8 @@
 :root {
   --font-Geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, sans-serif;
-  --bg-color: #08090b;
-  --text-color: #d4d4d8;
+  --bg-color: #08090B;
+  --text-primary: #d4d4d8;
 }
 
 body {
@@ -32,10 +32,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background-color: oklch(0.6 0.15 195);
+/* ::selection {
+  background-color: oklch(80% 0.15 195);
   color: #fff;
-}
+} */
 
 
 
