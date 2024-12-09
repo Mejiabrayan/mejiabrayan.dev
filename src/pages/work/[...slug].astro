@@ -1,6 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import Galleria from '~/assets/galleria.webp';
 
 import { ViewTransitions } from 'astro:transitions';
 
@@ -27,8 +29,28 @@ const { title, overview, cover, link } = project.data;
     class='prose prose-neutral prose-invert z-0 mt-8 max-w-none leading-normal prose-headings:font-normal prose-h1:mt-16 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:text-white prose-a:font-normal prose-a:text-white prose-a:underline-offset-2 prose-strong:font-normal prose-strong:text-white prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-primaryy/50 prose-code:px-0.5 prose-code:font-medium prose-code:text-white prose-code:before:hidden prose-code:after:hidden prose-ul:text-white prose-img:m-0 prose-video:m-0'
   >
     <div class='z-10 spacey-1'>
-      <div class='text-center italic text-primary text-4xl'>{title}</div>
-      <div class='text-center text-primary text-lg'>{overview}</div>
+      <div class='text-center text-white text-4xl'>{title}</div>
+      <div class='text-center text-white italic text-lg'>{overview}</div>
+    </div>
+    <div class='relative isolate my-8 aspect-video w-full'>
+      <Image
+        src={Galleria}
+        alt={title}
+        width={1000}
+        height={1000}
+        class='z-10 w-full h-full object-cover rounded-lg'
+        loading={'lazy'}
+        style='color: transparent'
+      />
+      <Image
+        src={Galleria}
+        alt={title}
+        width={1000}
+        height={1000}
+        class='absolute inset-0 -z-10 w-full h-full object-cover blur-3xl opacity-60 scale-105'
+        loading={'lazy'}
+        style='color: transparent'
+      />
     </div>
     <Content />
   </article>
