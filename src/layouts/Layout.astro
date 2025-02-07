@@ -1,5 +1,4 @@
 ---
-import MenuComponent from '../components/Menu';
 import '../styles/globals.css';
 import { ViewTransitions } from 'astro:transitions';
 
@@ -21,9 +20,9 @@ const {
   image = '/og-image.png',
   type = 'website',
   canonicalURL = Astro.url.href,
-  keywords = 'full-stack developer, web development, react, typescript, javascript',
+  keywords = 'Full-Stack Developer, Self-taught Developer, Web Development, React, Typescript, Javascript, AI',
   author = 'Brayan Mejia Cuenca',
-  ogDescription = 'Full-Stack Developer specializing in intuitive and dynamic web apps',
+  ogDescription = 'Full-Stack Developer based in the San Francisco Bay Area',
   twitterHandle = '@brayancodes',
 } = Astro.props;
 ---
@@ -58,19 +57,17 @@ const {
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body>
-    <main class='flex min-h-screen w-full justify-center px-4'>
-      <section class='flex w-full max-w-2xl flex-col pb-36'>
+  <body class="antialiased bg-black">
+    <main class='isolate flex w-full justify-center px-4 relative'>
+      <section
+        class='flex max-w-screen justify-center min-h-screen flex-col items-center'
+      >
         <nav
+          aria-label='Main Navigation'
           class='mb-16 flex w-full items-center justify-between py-6 text-base sm:text-lg'
         >
-          <a
-            href='/'
-            class='font-bold transition-colors duration-200 hover:text-white hover:bg-transparent'
-          >
-            Brayan Mejia
-          </a>
-          <div class='flex items-center gap-6'>
+        
+          <div class='flex items-center gap-4'>
             <a
               href='/work'
               class='transition-colors duration-200 hover:text-white hover:bg-transparent'
@@ -86,13 +83,28 @@ const {
             <a
               href='/blogs'
               class='transition-colors duration-200 hover:text-white hover:bg-transparent'
+              transition:name='blog-link'
+              transition:animate='initial'
             >
               Blogs
             </a>
           </div>
         </nav>
+
         <slot />
       </section>
     </main>
   </body>
 </html>
+
+
+<script>
+  const blogLink = document.querySelector('.blog-link');
+  if (blogLink) {
+    blogLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '/blogs';
+    });
+  }
+    
+</script>

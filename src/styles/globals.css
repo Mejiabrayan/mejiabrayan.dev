@@ -12,8 +12,36 @@
 :root {
   --font-Geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, sans-serif;
-  --bg-color: #08090B;
+  --bg-color: #08090b;
   --text-primary: #d4d4d8;
+
+  /* Shimmer variables */
+  --duration: 3s;
+  --offset: calc(6 * 0.5ch);
+  --shimmer-angle: -45deg;
+  --shimmer-classic: linear-gradient(
+    var(--shimmer-angle),
+    rgba(255, 255, 255, 0) calc(50% - var(--offset)),
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0) calc(50% + var(--offset))
+  );
+  --shimmer-aurora: linear-gradient(
+    var(--shimmer-angle),
+    rgba(169, 96, 238, 0) calc(50% - var(--offset)),
+    rgba(169, 96, 238, 0.9),
+    rgba(255, 51, 61, 0.9),
+    rgba(255, 203, 87, 0.9),
+    rgba(144, 224, 255, 0.9),
+    rgba(144, 224, 255, 0) calc(50% + var(--offset))
+  );
+  --shimmer-flame: linear-gradient(
+    var(--shimmer-angle),
+    transparent calc(50% - var(--offset)),
+    hsl(45 100% 60%),
+    hsl(0 100% 50%),
+    transparent calc(50% + var(--offset))
+  );
+  --shimmer-bg: var(--shimmer-classic) 0 0 / 300% 100% no-repeat;
 }
 
 body {
@@ -23,7 +51,6 @@ body {
   color: var(--text-primary);
 }
 
-/* Base styles */
 *,
 *::before,
 *::after {
@@ -32,16 +59,56 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ::selection {
-  background-color: oklch(80% 0.15 195);
-  color: #fff;
-} */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: brightness(1.05) blur(0.3px);
+}
 
+a:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
+a:hover svg {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
 
+.text-shine {
+  display: inline-block;
+  position: relative;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
 
+.text-shine:hover {
+  background: var(--shimmer-bg);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgba(255, 255, 255, 0.9);
+  animation: shimmer var(--duration) infinite both ease-in-out;
+  cursor: pointer;
+}
 
+/* Variants */
+.text-shine[data-style='aurora']:hover {
+  --shimmer-bg: var(--shimmer-aurora) 0 0 / 300% 100% no-repeat;
+  color: rgba(255, 255, 255, 0.95);
+}
 
+.text-shine[data-style='flame']:hover {
+  --shimmer-bg: var(--shimmer-flame) 0 0 / 300% 100% no-repeat;
+}
 
-
-
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  50%,
+  100% {
+    background-position: 0% 0;
+  }
+}

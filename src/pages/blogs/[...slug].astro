@@ -2,6 +2,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '~/layouts/Layout.astro';
 import Container from '~/components/container.astro';
+import { Image } from 'astro:assets';
+import { ViewTransitions } from 'astro:transitions';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blogs', ({ id }: any) => {
@@ -24,11 +26,20 @@ const { title, description, date, image } = blog.data;
 ---
 
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
+  <ViewTransitions />
   <Container>
-    <article class="max-w-3xl mx-auto py-16 mt-12">
-      <header class="mb-8 space-y-4">
-        <h1 class="text-4xl font-bold tracking-tight text-cyan-100">{title}</h1>
-        <time class="text-sm text-accents-5 font-mono">
+    <article class="prose prose-neutral prose-invert z-0 mt-8 max-w-none leading-normal prose-h2:text-white prose-h3:text-white prose-h4:text-white prose-h5:text-white prose-h6:text-white 
+      prose-headings:font-normal prose-h1:mt-16 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg 
+      prose-p:text-white prose-a:font-normal prose-a:text-white prose-a:underline-offset-2 
+      prose-strong:font-normal prose-strong:text-white 
+      prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-primaryy/50 
+      prose-code:px-0.5 prose-code:font-medium prose-code:text-white prose-code:before:hidden 
+      prose-code:after:hidden prose-ul:text-white prose-img:m-0 prose-video:m-0">
+      
+      <div class="z-10 spacey-1">
+        <div class="text-center text-white text-4xl">{title}</div>
+        <div class="text-center text-white italic text-lg">{description}</div>
+        <time class="block text-center text-sm text-accents-5 font-mono mt-2">
           {
             new Date(date).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -37,19 +48,32 @@ const { title, description, date, image } = blog.data;
             })
           }
         </time>
-      </header>
-
-      <div class="prose prose-lg prose-invert max-w-none
-        prose-headings:text-cyan-100
-        prose-a:text-cyan-100 prose-a:no-underline hover:prose-a:underline
-        prose-strong:text-cyan-100
-        prose-code:text-cyan-100 prose-code:bg-gray-800/50 prose-code:rounded prose-code:px-1
-        prose-blockquote:text-cyan-100 prose-blockquote:border-l-cyan-100
-        prose-pre:bg-gray-800/50
-        prose-img:rounded-lg
-        prose-hr:border-gray-800">
-        <Content />
       </div>
+
+      {image && (
+        <div class="relative isolate my-8 aspect-video w-full">
+          <Image
+            src={image}
+            alt={title}
+            width={1000}
+            height={1000}
+            class="z-10 w-full h-full object-cover rounded-lg"
+            loading="lazy"
+            style="color: transparent"
+          />
+          <Image
+            src={image}
+            alt={title}
+            width={1000}
+            height={1000}
+            class="absolute inset-0 -z-10 w-full h-full object-cover blur-3xl opacity-60 scale-105"
+            loading="lazy"
+            style="color: transparent"
+          />
+        </div>
+      )}
+
+      <Content />
     </article>
   </Container>
 </Layout>

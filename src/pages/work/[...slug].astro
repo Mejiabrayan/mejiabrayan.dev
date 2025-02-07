@@ -2,7 +2,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import Galleria from '~/assets/galleria.webp';
 
 import { ViewTransitions } from 'astro:transitions';
 
@@ -20,13 +19,13 @@ interface Props {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
-const { title, overview, cover, link } = project.data;
+const { title, overview, cover } = project.data;
 ---
 
 <Layout title={`${title} | Project`}>
   <ViewTransitions />
   <article
-    class='prose prose-neutral prose-invert z-0 mt-8 max-w-none leading-normal prose-headings:font-normal prose-h1:mt-16 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:text-white prose-a:font-normal prose-a:text-white prose-a:underline-offset-2 prose-strong:font-normal prose-strong:text-white prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-primaryy/50 prose-code:px-0.5 prose-code:font-medium prose-code:text-white prose-code:before:hidden prose-code:after:hidden prose-ul:text-white prose-img:m-0 prose-video:m-0'
+    class='prose prose-neutral prose-invert z-0 mt-8 max-w-none leading-normal prose-headings:font-normal prose-h1:mt-16 prose-h1:text-2xl prose-h2:text-xl prose-h2:text-white/50 prose-h3:text-lg prose-p:text-white prose-a:font-normal prose-a:text-white prose-a:underline-offset-2 prose-strong:font-normal prose-strong:text-white prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-primaryy/50 prose-code:px-0.5 prose-code:font-medium prose-code:text-white prose-code:before:hidden prose-code:after:hidden prose-ul:text-white prose-img:m-0 prose-video:m-0'
   >
     <div class='z-10 spacey-1'>
       <div class='text-center text-white text-4xl'>{title}</div>
@@ -34,7 +33,7 @@ const { title, overview, cover, link } = project.data;
     </div>
     <div class='relative isolate my-8 aspect-video w-full'>
       <Image
-        src={Galleria}
+        src={cover}
         alt={title}
         width={1000}
         height={1000}
@@ -43,7 +42,7 @@ const { title, overview, cover, link } = project.data;
         style='color: transparent'
       />
       <Image
-        src={Galleria}
+        src={cover}
         alt={title}
         width={1000}
         height={1000}
