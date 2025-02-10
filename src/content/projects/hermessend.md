@@ -3,7 +3,7 @@ title: 'HermesSend'
 link: 'https://github.com/Mejiabrayan/hermesend'
 overview: 'A user-friendly email platform built on AWS SES that simplifies domain verification and email campaigns.'
 date: 2024-17-12
-cover: '/assets/hermessend.png'
+cover: '/assets/hermes.webp'
 ---
 
 HermesSend is a modern email platform that eliminates the complexity of AWS SES by providing an intuitive dashboard for managing your email operations. Skip the convoluted AWS console and start sending emails through a streamlined interface designed for efficiency.

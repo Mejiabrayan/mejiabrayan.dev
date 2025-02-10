@@ -28,52 +28,83 @@ const { title, description, date, image } = blog.data;
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
   <ViewTransitions />
   <Container>
-    <article class="prose prose-neutral prose-invert z-0 mt-8 max-w-none leading-normal prose-h2:text-white prose-h3:text-white prose-h4:text-white prose-h5:text-white prose-h6:text-white 
-      prose-headings:font-normal prose-h1:mt-16 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg 
-      prose-p:text-white prose-a:font-normal prose-a:text-white prose-a:underline-offset-2 
-      prose-strong:font-normal prose-strong:text-white 
-      prose-code:rounded-sm prose-code:border prose-code:border-white/10 prose-code:bg-primaryy/50 
-      prose-code:px-0.5 prose-code:font-medium prose-code:text-white prose-code:before:hidden 
-      prose-code:after:hidden prose-ul:text-white prose-img:m-0 prose-video:m-0">
-      
-      <div class="z-10 spacey-1">
-        <div class="text-center text-white text-4xl">{title}</div>
-        <div class="text-center text-white italic text-lg">{description}</div>
-        <time class="block text-center text-sm text-accents-5 font-mono mt-2">
+    <article class='max-w-3xl mx-auto'>
+      <!-- Header -->
+      <header class='text-center space-y-4 mb-12'>
+        <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
+        <p class='text-lg text-neutral-300/90'>{description}</p>
+        <time class='block text-sm text-neutral-300/70 font-mono'>
           {
             new Date(date).toLocaleDateString('en-US', {
               year: 'numeric',
-              month: 'long', 
+              month: 'long',
               day: 'numeric'
             })
           }
         </time>
+      </header>
+
+      {
+        image && (
+          <div class='reflection-wrapper'>
+            <!-- Original Image -->
+            <div class='relative isolate aspect-video w-full rounded-lg overflow-hidden'>
+              <Image
+                src={image}
+                alt={title}
+                width={1000}
+                height={1000}
+                class='w-full h-full object-cover'
+                loading='lazy'
+              />
+            </div>
+
+            <!-- Reflection -->
+            <div class='relative isolate aspect-video w-full overflow-hidden reflection'>
+              <Image
+                src={image}
+                alt={`${title} reflection`}
+                width={1000}
+                height={1000}
+                class='w-full h-[75%] object-cover'
+                loading='lazy'
+              />
+            </div>
+          </div>
+        )
+      }
+
+      <!-- Content -->
+      <div
+        class='prose prose-neutral prose-invert max-w-none leading-normal mt-12
+        prose-headings:font-[Tobias] prose-headings:italic
+        prose-h1:text-neutral-300 prose-h1:text-2xl 
+        prose-h2:text-neutral-300 prose-h2:text-xl
+        prose-h3:text-neutral-300 prose-h3:text-lg
+        prose-p:text-neutral-300
+        prose-a:text-white prose-a:no-underline hover:prose-a:text-neutral-200
+        prose-strong:text-white
+        prose-code:rounded-sm prose-code:border prose-code:border-white/10
+        prose-code:bg-neutral-800/50 prose-code:px-1
+        prose-ul:text-neutral-300'
+      >
+        <Content />
       </div>
-
-      {image && (
-        <div class="relative isolate my-8 aspect-video w-full">
-          <Image
-            src={image}
-            alt={title}
-            width={1000}
-            height={1000}
-            class="z-10 w-full h-full object-cover rounded-lg"
-            loading="lazy"
-            style="color: transparent"
-          />
-          <Image
-            src={image}
-            alt={title}
-            width={1000}
-            height={1000}
-            class="absolute inset-0 -z-10 w-full h-full object-cover blur-3xl opacity-60 scale-105"
-            loading="lazy"
-            style="color: transparent"
-          />
-        </div>
-      )}
-
-      <Content />
     </article>
   </Container>
 </Layout>
+
+<style>
+  .reflection-wrapper {
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  .reflection {
+    transform: rotateX(180deg) translateY(20%);
+    mask-image: linear-gradient(transparent 40%, white 90%);
+    -webkit-mask-image: linear-gradient(transparent 40%, white 90%);
+    opacity: 0.5;
+    filter: blur(1.5px) brightness(1.5);
+  }
+</style>

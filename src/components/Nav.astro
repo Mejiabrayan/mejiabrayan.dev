@@ -6,24 +6,18 @@
     <a
       href='/'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:name="home"
-      transition:animate="slide"
     >
       Home
     </a>
     <a
       href='/work'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:name="work"
-      transition:animate="slide"
     >
       Work
     </a>
     <a
       href='/blogs'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
-      transition:name="blog"
-      transition:animate="slide"
     >
       Blogs
     </a>
@@ -31,7 +25,7 @@
 
   <a
     href='mailto:mejiabrayan@protonmail.com'
-    class='nav-link px-4 py-2 border border-neutral-800 rounded-lg hover:bg-neutral-800/30 transition-all duration-300'
+    class='nav-link px-4 py-2 font-[Tobias] text-neutral-400 italic hover:text-white'
   >
     Contact Me
   </a>
@@ -49,7 +43,7 @@
       this.audio = new Audio('/btn-sound.mp3');
       this.audio.volume = 0.3;
       this.audio.preload = 'auto';
-      
+
       // Add ended event listener to reset state
       this.audio.addEventListener('ended', () => {
         this.isPlaying = false;
@@ -86,16 +80,25 @@
   const soundManager = SoundManager.getInstance();
 
   // Use event delegation for better performance
-  document.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    if (target.closest('.nav-link')) {
-      soundManager.playSound();
-    }
-  }, { passive: true });
+  document.addEventListener(
+    'click',
+    (event) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('.nav-link')) {
+        soundManager.playSound();
+      }
+    },
+    { passive: true }
+  );
 
   // Preload audio on page load
-  window.addEventListener('load', () => {
-    const audio = new Audio('/btn-sound.mp3');
-    audio.preload = 'auto';
-  }, { once: true });
-</script> 
+  window.addEventListener(
+    'load',
+    () => {
+      const audio = new Audio('/btn-sound.mp3');
+      audio.preload = 'auto';
+    },
+    { once: true }
+  );
+</script>
+
