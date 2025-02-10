@@ -1,6 +1,7 @@
 ---
 import '../styles/globals.css';
 import { ViewTransitions } from 'astro:transitions';
+import Nav from '~/components/Nav.astro';
 
 interface Props {
   title: string;
@@ -62,49 +63,10 @@ const {
       <section
         class='flex max-w-screen justify-center min-h-screen flex-col items-center'
       >
-        <nav
-          aria-label='Main Navigation'
-          class='mb-16 flex w-full items-center justify-between py-6 text-base sm:text-lg'
-        >
-        
-          <div class='flex items-center gap-4'>
-            <a
-              href='/work'
-              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
-            >
-              Work
-            </a>
-            <a
-              href='mailto:mejiabrayan@protonmail.com'
-              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
-            >
-              Contact
-            </a>
-            <a
-              href='/blogs'
-              class='transition-colors duration-200 hover:text-white hover:bg-transparent'
-              transition:name='blog-link'
-              transition:animate='initial'
-            >
-              Blogs
-            </a>
-          </div>
-        </nav>
-
+        <Nav />
         <slot />
       </section>
     </main>
   </body>
 </html>
 
-
-<script>
-  const blogLink = document.querySelector('.blog-link');
-  if (blogLink) {
-    blogLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '/blogs';
-    });
-  }
-    
-</script>

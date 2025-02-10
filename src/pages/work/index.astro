@@ -1,49 +1,34 @@
 ---
 import Layout from '~/layouts/Layout.astro';
-import Filipe from '~/assets/felipe.jpg';
-import Sculpture from '~/assets/sculpture.jpg';
-import Cathedral from '~/assets/cathedral.jpg';
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
-const images = [
-  {
-    src: Filipe,
-    alt: 'Felipe profile',
-    width: 200,
-    height: 200,
-  },
-
-  {
-    src: Sculpture,
-    alt: 'Sculpture', 
-    width: 200,
-    height: 200,
-  },
-
-  {
-    src: Cathedral,
-    alt: 'Cathedral',
-    width: 200,
-    height: 200,
-  },
-];
+const projects = await getCollection('projects');
 ---
 
 <Layout title='Work | Brayan M. Cuenca'>
-  <div class='flex items-center justify-center w-full'>
-    <div class='max-w-6xl w-full px-4 overflow-hidden'>
-      <div class='flex flex-nowrap overflow-x-auto overscroll-x-contain snap-x snap-mandatory gap-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
+  <div class='relative max-w-3xl mx-auto px-4'>
+    <div class='relative'>
+      <div
+        id='slider'
+        class='flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth'
+        style='scroll-padding: 0 1rem; view-timeline-name: --slider; view-timeline-axis: inline;'
+      >
         {
-          images.map((image) => (
-            <div class="flex-shrink-0 snap-center min-w-[200px]">
+          projects.map((project) => (
+            <div
+              class='flex-none w-[300px] snap-start px-2 project-card'
+              style='view-timeline-name: --reveal; view-timeline-axis: inline;'
+            >
               <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
+                src={project.data.cover}
+                alt={project.data.title}
+                width={300}
+                height={300}
                 quality={100}
-                class='rounded- w-[200px] h-[200px] object-cover'
+                class='rounded-lg w-full h-[300px] object-cover image-reveal'
               />
+              <p class='mt-2 text-sm text-neutral-400 title-reveal'>{project.data.title}</p>
             </div>
           ))
         }

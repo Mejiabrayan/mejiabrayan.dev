@@ -69,6 +69,78 @@ canvas {
   filter: brightness(1.05) blur(0.3px);
 }
 
+/* Project Card Animations */
+.project-card {
+  view-timeline: --reveal inline;
+}
+
+.image-reveal {
+  animation-name: image-slide;
+  animation-timeline: --reveal;
+  animation-range: entry 25% cover 40%;
+  animation-fill-mode: both;
+}
+
+.title-reveal {
+  animation-name: title-slide;
+  animation-timeline: --reveal;
+  animation-range: entry 30% cover 45%;
+  animation-fill-mode: both;
+}
+
+@keyframes image-slide {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes title-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Project Card Hover Effects */
+@media (hover: hover) {
+  .project-card:has(.image-reveal:hover) {
+    .title-reveal {
+      color: white;
+      transform: translateY(-2px);
+      filter: blur(0);
+    }
+    .image-reveal {
+      transform: scale(1.02);
+      filter: blur(0);
+    }
+  }
+}
+
+/* Scrollbar Utilities */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Text Shine Effect */
 a:hover {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
@@ -93,7 +165,7 @@ a:hover svg {
   cursor: pointer;
 }
 
-/* Variants */
+/* Text Shine Variants */
 .text-shine[data-style='aurora']:hover {
   --shimmer-bg: var(--shimmer-aurora) 0 0 / 300% 100% no-repeat;
   color: rgba(255, 255, 255, 0.95);
