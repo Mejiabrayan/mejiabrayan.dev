@@ -28,7 +28,7 @@ const { title, description, date, image } = blog.data;
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
   <ViewTransitions />
   <Container>
-    <article class='max-w-3xl mx-auto'>
+    <article class='max-w-sm md:max-w-3xl lg:max-4xl mx-auto'>
       <!-- Header -->
       <header class='text-center space-y-4 mb-12'>
         <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
@@ -47,7 +47,6 @@ const { title, description, date, image } = blog.data;
       {
         image && (
           <div class='reflection-wrapper'>
-            <!-- Original Image -->
             <div class='relative isolate aspect-video w-full rounded-lg overflow-hidden'>
               <Image
                 src={image}
@@ -81,11 +80,13 @@ const { title, description, date, image } = blog.data;
         prose-h1:text-neutral-300 prose-h1:text-2xl 
         prose-h2:text-neutral-300 prose-h2:text-xl
         prose-h3:text-neutral-300 prose-h3:text-lg
+        prose-h4:text-neutral-300 prose-h4:text-base
         prose-p:text-neutral-300
         prose-a:text-white prose-a:no-underline hover:prose-a:text-neutral-200
         prose-strong:text-white
+        prose-li:text-neutral-300
         prose-code:rounded-sm prose-code:border prose-code:border-white/10
-        prose-code:bg-neutral-800/50 prose-code:px-1
+        prose-code:bg-transparent prose-code:text-neutral-300 prose-code:px-1
         prose-ul:text-neutral-300'
       >
         <Content />

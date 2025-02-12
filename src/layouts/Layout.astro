@@ -13,6 +13,7 @@ interface Props {
   author?: string;
   ogDescription?: string;
   twitterHandle?: string;
+  linkedIn?: string;
 }
 
 const {
@@ -21,10 +22,11 @@ const {
   image = '/og-image.png',
   type = 'website',
   canonicalURL = Astro.url.href,
-  keywords = 'Full-Stack Developer, Self-taught Developer, Web Development, React, Typescript, Javascript, AI',
+  keywords = 'Software Engineer, Full-Stack Developer, Web Development, React, Next.js, TypeScript, JavaScript, Node.js, Astro, TailwindCSS, UI/UX Design, Frontend Development, Backend Development, API Development, Cloud Computing, AWS, AI Integration, Web Performance, Responsive Design, Modern Web Development, San Francisco Bay Area Developer, Portfolio',
   author = 'Brayan Mejia Cuenca',
   ogDescription = 'Full-Stack Developer based in the San Francisco Bay Area',
   twitterHandle = '@brayancodes',
+  linkedIn = 'https://www.linkedin.com/in/brayan-mejia/',
 } = Astro.props;
 ---
 
@@ -54,11 +56,18 @@ const {
     <meta property='twitter:description' content={ogDescription} />
     <meta property='twitter:image' content={image} />
 
+    <!-- LinkedIn -->
+    <meta property='linkedin:card' content='summary_large_image' />
+    <meta property='linkedin:creator' content={linkedIn} />
+    <meta property='linkedin:title' content={title} />
+    <meta property='linkedin:description' content={ogDescription} />
+    <meta property='linkedin:image' content={image} />
+
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="antialiased bg-black">
+  <body class='antialiased bg-black'>
     <main class='isolate flex w-full justify-center px-4 relative'>
       <section
         class='flex max-w-screen justify-center min-h-screen flex-col items-center'
@@ -69,4 +78,3 @@ const {
     </main>
   </body>
 </html>
-

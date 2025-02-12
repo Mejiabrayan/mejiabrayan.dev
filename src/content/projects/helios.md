@@ -22,7 +22,7 @@ Key Features:
 
 - Next.js 15
 - Tailwind CSS
-- shadcn/ui
+- Shadcn/ui
 - Vercel AI SDK
 - OpenAI
 - Google APIs

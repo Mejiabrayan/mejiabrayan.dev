@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 const DitherDemo = () => {
-  const [size, setSize] = useState(3);
+  const [size, setSize] = useState(5);
   const [opacity, setOpacity] = useState(50);
-  const [color, setColor] = useState('#000000');
+  const [color, setColor] = useState('#ffffff');
 
   return (
     <div className="space-y-6 bg-[#0A0A0A] p-4 sm:p-6 rounded-2xl shadow-md border border-white/10">

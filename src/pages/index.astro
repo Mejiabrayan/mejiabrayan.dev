@@ -2,6 +2,8 @@
 import Layout from '~/layouts/Layout.astro';
 import { ViewTransitions } from 'astro:transitions';
 import ShimmerBackground from '~/components/shimmer-background';
+import Avatar from '~/assets/profile.jpg';
+import { Image } from 'astro:assets';
 ---
 
 <Layout title='Brayan M. Cuenca | Full-Stack Web Developer'>
@@ -13,10 +15,30 @@ import ShimmerBackground from '~/components/shimmer-background';
 
   <div
     id='main-content'
-    class='relative flex flex-col gap-3 text-xl text-primary tracking-tighter'
+    class='relative flex flex-col  text-xl text-primary tracking-tighter'
   >
-    <div class='flex flex-col gap-2 text-shine'>
-      <h1 class='text-neutral-400 font-[Tobias] italic text-lg md:text-xl lg:text-2xl'>Brayan Mejia Cuenca</h1>
+    <div class="relative w-10 h-10 md:w-20 md:h-20 lg:w-24 lg:h-24">
+      <Image
+        src={Avatar}
+        alt='Brayan Mejia Cuenca'
+        width={256}
+        height={256}
+        class='w-full h-full object-cover rounded-lg grayscale hover:grayscale-0 transition-all duration-500'
+        quality={100}
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
+          maskComposite: 'intersect',
+          WebkitMaskComposite: 'source-in',
+          filter: 'contrast(1.1) brightness(0.9)',
+        }}
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+    </div>
+    <div class='flex flex-col gap-2 text-shine items-start whitespace-pre-line'>
+      <h1 class='text-neutral-400 font-[Tobias] italic text-lg md:text-xl lg:text-2xl'>
+        Brayan Mejia Cuenca
+      </h1>
 
       <p
         class='max-w-sm md:max-w-2xl lg:max-w-3xl text-base md:text-lg lg:text-xl'
