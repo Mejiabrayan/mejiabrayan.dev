@@ -28,7 +28,7 @@ const projects = await getCollection('projects');
         style='scroll-padding: 0 1rem; view-timeline-name: --slider; view-timeline-axis: inline;'
       >
         {
-          projects.map((project) => (
+          projects.map((project: any) => (
             <a
               href={`/work/${project.slug}`}
               class='block flex-none w-[300px] snap-start px-2 project-card group'

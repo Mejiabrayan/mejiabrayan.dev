@@ -47,7 +47,7 @@ const ShimmerBackground = (): JSX.Element => {
     window.addEventListener('resize', setSize);
 
     const dotSpacing = 15;
-    const chars = '.*$+#:▲';
+    const chars = '.*+#:▲';
     let shimmerProgress = 0;
 
     ctx.font = `${dotSpacing / 1.5}px "Courier New", monospace`;

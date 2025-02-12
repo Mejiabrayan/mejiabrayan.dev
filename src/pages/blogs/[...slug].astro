@@ -33,15 +33,22 @@ const { title, description, date, image } = blog.data;
       <header class='text-center space-y-4 mb-12'>
         <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
         <p class='text-lg text-neutral-300/90'>{description}</p>
-        <time class='block text-sm text-neutral-300/70 font-mono'>
-          {
-            new Date(date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })
-          }
-        </time>
+        <div class="flex items-center justify-center gap-4 text-sm text-neutral-300/70 font-mono">
+          <time>
+            {
+              new Date(date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })
+            }
+          </time>
+          <span class="text-neutral-300/40">•</span>
+          <span id="viewCount" class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>--</span>
+          </span>
+        </div>
       </header>
 
       {
@@ -94,6 +101,21 @@ const { title, description, date, image } = blog.data;
     </article>
   </Container>
 </Layout>
+
+<script define:vars={{ slug: blog.slug }}>
+  // Fetch view count on page load
+  fetch(`/api/${slug}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.views) {
+        const viewCount = document.getElementById('viewCount')?.lastElementChild;
+        if (viewCount) {
+          viewCount.textContent = `${data.views.toLocaleString()} views`;
+        }
+      }
+    })
+    .catch((err) => console.error('Failed to fetch views:', err));
+</script>
 
 <style>
   .reflection-wrapper {

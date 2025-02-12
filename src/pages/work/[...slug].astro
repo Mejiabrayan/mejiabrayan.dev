@@ -109,3 +109,17 @@ const { title, overview, cover, link } = project.data;
     filter: blur(1.5px) brightness(1.5);
   }
 </style>
+
+
+<script define:vars={{ slug: post.slug }}>
+  // Fetch view count on page load
+  fetch(`/api/${slug}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.views) {
+        document.getElementById('viewCount').textContent = 
+          `${data.views.toLocaleString()} views`;
+      }
+    })
+    .catch(err => console.error('Failed to fetch views:', err));
+</script>
