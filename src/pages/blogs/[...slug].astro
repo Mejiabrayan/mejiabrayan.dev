@@ -1,9 +1,8 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Layout from '~/layouts/Layout.astro';
 import Container from '~/components/container.astro';
 import { Image } from 'astro:assets';
-import { ClientRouter } from 'astro:transitions';
 
 const { slug } = Astro.params;
 const blogs = await getCollection('blogs');
@@ -21,7 +20,6 @@ const { Content } = await blog.render();
 ---
 
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
-  <ClientRouter />
   <Container>
     <article class='max-w-sm md:max-w-3xl lg:max-4xl mx-auto'>
       <!-- Header -->
@@ -94,7 +92,7 @@ const { Content } = await blog.render();
   </Container>
 </Layout>
 
-<script define:vars={{ slug }}>
+<script is:inline define:vars={{ slug }}>
   // Increment view count
   fetch(`/api/blogs/${slug}`, { method: 'POST' })
     .then(res => res.json())

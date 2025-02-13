@@ -3,7 +3,7 @@ import react from '@astrojs/react';
 import fs from 'fs';
 import path from 'path';
 import vercel from '@astrojs/vercel';
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 import mdx from '@astrojs/mdx';
 import db from '@astrojs/db';
 import { envField } from 'astro/config';
@@ -12,11 +12,16 @@ const themePath = path.join(process.cwd(), 'src/themes/theme.json');
 const theme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
 
 export default defineConfig({
+  site: 'https://brayancodes.com',
+  base: '/',
+  trailingSlash: 'never',
   output: 'server',
   adapter: vercel({
     webAnalytics: {
       enabled: true,
-      speedInsights: true,
+    },
+    isr: {
+      expiration: 60 * 60 * 24,
     },
   }),
 
@@ -53,12 +58,12 @@ export default defineConfig({
       ASTRO_DB_REMOTE_URL: envField.string({
         context: 'server',
         access: 'public',
-        optional: true, // Make optional to allow local development
+        optional: false,
       }),
       ASTRO_DB_APP_TOKEN: envField.string({
         context: 'server',
-        access: 'secret', // Keep this secret since it's an auth token
-        optional: true, // Make optional to allow local development
+        access: 'secret',
+        optional: false,
       }),
     },
   },

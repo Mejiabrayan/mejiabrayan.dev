@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
+
+
 @font-face {
   font-family: 'Geist';
   src: url('/fonts/Geist/Geist-Regular.otf') format('truetype');
