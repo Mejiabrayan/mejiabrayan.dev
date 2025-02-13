@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const DitherDemo = () => {
+const HalftoneDemo = () => {
   const [size, setSize] = useState(5);
   const [opacity, setOpacity] = useState(50);
   const [color, setColor] = useState('#ffffff');
@@ -64,4 +64,4 @@ const DitherDemo = () => {
   );
 };
 
-export default DitherDemo;
+export default HalftoneDemo; 

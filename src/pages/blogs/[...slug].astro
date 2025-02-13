@@ -3,37 +3,32 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '~/layouts/Layout.astro';
 import Container from '~/components/container.astro';
 import { Image } from 'astro:assets';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
-export async function getStaticPaths() {
-  const blogPosts = await getCollection('blogs', ({ id }: any) => {
-    return id.endsWith('.md') || id.endsWith('.mdx');
+const { slug } = Astro.params;
+const blogs = await getCollection('blogs');
+const blog = blogs.find((blog) => blog.slug === slug);
+
+if (!blog) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not found'
   });
-
-  return blogPosts.map((blog: any) => ({
-    params: { slug: blog.slug },
-    props: { blog },
-  }));
 }
 
-interface Props {
-  blog: CollectionEntry<'blogs'>;
-}
-
-const { blog } = Astro.props;
-const { Content } = await blog.render();
 const { title, description, date, image } = blog.data;
+const { Content } = await blog.render();
 ---
 
 <Layout title={`${title} | Brayan M. Cuenca Blog`}>
-  <ViewTransitions />
+  <ClientRouter />
   <Container>
     <article class='max-w-sm md:max-w-3xl lg:max-4xl mx-auto'>
       <!-- Header -->
       <header class='text-center space-y-4 mb-12'>
         <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
         <p class='text-lg text-neutral-300/90'>{description}</p>
-        <div class="flex items-center justify-center gap-4 text-sm text-neutral-300/70 font-mono">
+        <div class="flex items-center justify-center gap-4 text-sm text-neutral-400">
           <time>
             {
               new Date(date).toLocaleDateString('en-US', {
@@ -44,10 +39,7 @@ const { title, description, date, image } = blog.data;
             }
           </time>
           <span class="text-neutral-300/40">•</span>
-          <span id="viewCount" class="flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            <span>--</span>
-          </span>
+          <span id="viewCount">0 views</span>
         </div>
       </header>
 
@@ -89,7 +81,7 @@ const { title, description, date, image } = blog.data;
         prose-h3:text-neutral-300 prose-h3:text-lg
         prose-h4:text-neutral-300 prose-h4:text-base
         prose-p:text-neutral-300
-        prose-a:text-white prose-a:no-underline hover:prose-a:text-neutral-200
+        prose-a:text-neutral-300 prose-a:no-underline hover:prose-a:text-neutral-200
         prose-strong:text-white
         prose-li:text-neutral-300
         prose-code:rounded-sm prose-code:border prose-code:border-white/10
@@ -102,19 +94,17 @@ const { title, description, date, image } = blog.data;
   </Container>
 </Layout>
 
-<script define:vars={{ slug: blog.slug }}>
-  // Fetch view count on page load
-  fetch(`/api/${slug}`)
-    .then((res) => res.json())
-    .then((data) => {
+<script define:vars={{ slug }}>
+  // Increment view count
+  fetch(`/api/blogs/${slug}`, { method: 'POST' })
+    .then(res => res.json())
+    .then(data => {
       if (data.views) {
-        const viewCount = document.getElementById('viewCount')?.lastElementChild;
-        if (viewCount) {
-          viewCount.textContent = `${data.views.toLocaleString()} views`;
-        }
+        document.getElementById('viewCount').textContent = 
+          `${data.views.toLocaleString()} views`;
       }
     })
-    .catch((err) => console.error('Failed to fetch views:', err));
+    .catch(err => console.error('Failed to update views:', err));
 </script>
 
 <style>

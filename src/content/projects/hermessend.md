@@ -1,6 +1,6 @@
 ---
 title: 'HermesSend'
-link: 'https://github.com/Mejiabrayan/hermesend'
+link: 'https://hermessend.xyz/'
 overview: 'A user-friendly email platform built on AWS SES that simplifies domain verification and email campaigns.'
 date: 2024-17-12
 cover: '/assets/hermes.webp'

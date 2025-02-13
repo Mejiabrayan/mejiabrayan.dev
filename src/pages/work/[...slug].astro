@@ -2,46 +2,47 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Container from '../../components/container.astro';
 
-export async function getStaticPaths() {
-  const projectPosts = await getCollection('projects');
-  return projectPosts.map((project: CollectionEntry<'projects'>) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+const { slug } = Astro.params;
+const projects = await getCollection('projects');
+const project = projects.find((project) => project.slug === slug);
+
+if (!project) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not found'
+  });
 }
 
-interface Props {
-  project: CollectionEntry<'projects'>;
-}
-
-const { project } = Astro.props;
 const { Content } = await project.render();
 const { title, overview, cover, link } = project.data;
 ---
 
 <Layout title={`${title} | Project`}>
-  <ViewTransitions />
+  <ClientRouter />
   <Container>
     <article class='max-w-3xl mx-auto'>
       <!-- Header -->
       <header class='text-center space-y-4 mb-12'>
         <h1 class='text-4xl font-[Tobias] italic text-neutral-300'>{title}</h1>
         <p class='text-lg text-neutral-300/90'>{overview}</p>
-        {
-          link && (
-            <a
-              href={link}
-              target='_blank'
-              rel='noopener noreferrer'
-              class='inline-block text-sm text-neutral-300 hover:text-white transition-colors duration-200'
-            >
-              View Project →
-            </a>
-          )
-        }
+        <div class="flex items-center justify-center gap-4 text-sm text-neutral-400">
+          <span id="viewCount">0 views</span>
+          {
+            link && (
+              <a
+                href={link}
+                target='_blank'
+                rel='noopener noreferrer'
+                class='text-neutral-300 hover:text-white transition-colors duration-200'
+              >
+                View Project →
+              </a>
+            )
+          }
+        </div>
       </header>
 
       <!-- Project Image with Reflection -->
@@ -110,10 +111,9 @@ const { title, overview, cover, link } = project.data;
   }
 </style>
 
-
-<script define:vars={{ slug: post.slug }}>
-  // Fetch view count on page load
-  fetch(`/api/${slug}`)
+<script define:vars={{ slug }}>
+  // Increment view count
+  fetch(`/api/projects/${slug}`, { method: 'POST' })
     .then(res => res.json())
     .then(data => {
       if (data.views) {
@@ -121,5 +121,7 @@ const { title, overview, cover, link } = project.data;
           `${data.views.toLocaleString()} views`;
       }
     })
-    .catch(err => console.error('Failed to fetch views:', err));
+    .catch(err => console.error('Failed to update views:', err));
 </script>
+
+

@@ -1,6 +1,6 @@
 ---
 import '../styles/globals.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Nav from '~/components/Nav.astro';
 
 interface Props {
@@ -65,7 +65,7 @@ const {
 
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class='antialiased bg-black'>
     <main class='isolate flex w-full justify-center px-4 relative'>
