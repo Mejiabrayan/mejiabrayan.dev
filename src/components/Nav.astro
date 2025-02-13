@@ -6,28 +6,32 @@
     <a
       href='/'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
+      transition:animate="slide"
     >
-      Home
+      <span transition:name="nav-home">Home</span>
     </a>
     <a
       href='/work'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
+      transition:animate="slide"
     >
-      Work
+      <span transition:name="nav-work">Work</span>
     </a>
     <a
       href='/blogs'
       class='nav-link transition-colors duration-200 hover:text-white hover:bg-transparent'
+      transition:animate="slide"
     >
-      Blogs
+      <span transition:name="nav-blogs">Blogs</span>
     </a>
   </div>
 
   <a
     href='mailto:mejiabrayan@protonmail.com'
     class='nav-link px-4 py-2 font-[Tobias] text-neutral-400 italic hover:text-white'
+    transition:animate="fade"
   >
-    Contact Me
+    <span transition:name="nav-contact">Contact Me</span>
   </a>
 </nav>
 

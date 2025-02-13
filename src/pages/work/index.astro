@@ -3,7 +3,6 @@ import Layout from '~/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
-export const prerender = true;
 
 
 const projects = await getCollection('projects');
@@ -39,6 +38,7 @@ const projects = await getCollection('projects');
             >
               <div class="relative">
                 <Image
+                  loading='eager'
                   src={project.data.cover}
                   alt={project.data.title}
                   width={300}

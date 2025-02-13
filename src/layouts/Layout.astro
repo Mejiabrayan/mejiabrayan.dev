@@ -1,6 +1,7 @@
 ---
 import '~/styles/globals.css';
 import Nav from '~/components/Nav.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -64,15 +65,16 @@ const {
 
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
-  <body class='antialiased bg-black '>
+  <body class='antialiased bg-black'>
     <main class='isolate flex w-full justify-center px-4 relative'>
-      <section
+      <div
         class='flex max-w-screen justify-center min-h-screen flex-col items-center'
       >
         <Nav />
         <slot />
-      </section>
+    </div>
     </main>
   </body>
 </html>
