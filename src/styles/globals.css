@@ -2,6 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 
+* {
+  box-sizing: border-box;
+}
 
 @font-face {
   font-family: 'Geist';

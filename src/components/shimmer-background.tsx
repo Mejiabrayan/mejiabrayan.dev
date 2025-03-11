@@ -17,7 +17,7 @@ const ShimmerBackground = (): JSX.Element => {
     const VIBRATION_COOLDOWN = 1000;
     let animationFrameId: number;
     let lastFrameTime = 0;
-    const TARGET_FPS = 30;
+    const TARGET_FPS = 60;
     const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
     const requestVibrationPermission = async () => {
@@ -50,7 +50,7 @@ const ShimmerBackground = (): JSX.Element => {
     };
 
     const dotSpacing = isMobile ? 20 : 15; // Increase spacing on mobile
-    const chars = '.*+:▲';
+    const chars = '▲*+~.';
     let shimmerProgress = 0;
     let dots: Array<Array<{
       x: number;
@@ -65,14 +65,14 @@ const ShimmerBackground = (): JSX.Element => {
       const displayWidth = canvas.width / (window.devicePixelRatio || 1);
       const displayHeight = canvas.height / (window.devicePixelRatio || 1);
       
-      ctx.font = `${dotSpacing / 1.5}px "Courier New", monospace`;
+      ctx.font = `${dotSpacing / 1.5}px var(--font-Geist)`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       for (let x = 0; x < displayWidth; x += dotSpacing) {
         const column = [];
         for (let y = 0; y < displayHeight; y += dotSpacing) {
-          const baseOpacity = 0.015;
+          const baseOpacity = 0.02; // Slightly increased base opacity
           column.push({
             x,
             y,
@@ -125,7 +125,7 @@ const ShimmerBackground = (): JSX.Element => {
           if (distanceSquared < shimmerRadiusSquared) {
             const shimmerFactor = 1 - Math.sqrt(distanceSquared) / shimmerRadius;
             const shimmerEffect = Math.pow(shimmerFactor, 4) * 0.5;
-            ctx.fillStyle = `rgba(255, 255, 255, ${dot.baseOpacity + shimmerEffect})`;
+            ctx.fillStyle = `rgba(300, 300, 400, ${dot.baseOpacity + shimmerEffect})`;
           } else {
             ctx.fillStyle = dot.fillStyle;
           }

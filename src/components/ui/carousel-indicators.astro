@@ -1,0 +1,121 @@
+---
+interface Props {
+  count: number;
+  slideWidth?: number;
+}
+
+const { count, slideWidth = 300 } = Astro.props;
+---
+
+<div
+  class='carousel-indicators absolute bottom-0 left-0 right-0 flex justify-center gap-3 mt-4 pb-4'
+>
+  {
+    Array.from({ length: count }).map((_, index) => (
+      <button
+        class='carousel-dot w-2.5 h-2.5 rounded-full bg-neutral-800/50 transition-all duration-300'
+        data-index={index}
+        aria-label={`Go to slide ${index + 1}`}
+      />
+    ))
+  }
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', initializeCarousel);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      initializeCarousel();
+    }
+  });
+
+  document.addEventListener('astro:page-load', initializeCarousel);
+
+  function initializeCarousel() {
+    const slider = document.getElementById('slider');
+    if (!slider) return;
+
+    const dots = document.querySelectorAll('.carousel-dot');
+    if (!dots.length) return;
+
+    dots.forEach((d) => d.classList.remove('active'));
+    dots[0].classList.add('active');
+
+    const updateActiveDot = () => {
+      if (!slider) return;
+
+      const slideWidth = slider.firstElementChild?.clientWidth || 0;
+      const scrollPosition = slider.scrollLeft;
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+      if (Math.abs(scrollPosition - maxScroll) < 20) {
+        const lastIndex = dots.length - 1;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === lastIndex);
+        });
+        return;
+      }
+
+      const activeIndex = Math.round(scrollPosition / slideWidth);
+
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    };
+
+    slider.addEventListener('scroll', updateActiveDot);
+
+    dots.forEach((dot, index) => {
+      dot.removeEventListener('click', dotClickHandler);
+
+      dot.addEventListener('click', dotClickHandler);
+
+      function dotClickHandler() {
+        if (!slider || !slider.children[index]) return;
+
+        const slideWidth = slider.firstElementChild?.clientWidth || 0;
+
+        if (index === dots.length - 1) {
+          slider.scrollTo({
+            left: slider.scrollWidth - slider.clientWidth,
+            behavior: 'smooth',
+          });
+        } else {
+          slider.scrollTo({
+            left: slideWidth * index,
+            behavior: 'smooth',
+          });
+        }
+
+        // Update active state
+        dots.forEach((d) => d.classList.remove('active'));
+        dot.classList.add('active');
+      }
+    });
+
+    updateActiveDot();
+  }
+</script>
+
+<style>
+  .carousel-dot {
+    cursor: pointer;
+  }
+
+  .carousel-dot.active {
+    background-color: rgb(255 255 255 / 0.7);
+    transform: scale(1.2);
+  }
+
+  @supports selector(:has(.active)) {
+    .carousel-indicators:has(.carousel-dot.active) .carousel-dot:not(.active) {
+      opacity: 0.5;
+    }
+  }
+</style>

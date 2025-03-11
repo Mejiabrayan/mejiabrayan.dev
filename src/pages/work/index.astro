@@ -1,9 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
+import Carousel from '~/components/ui/carousel.astro';
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-
-
 
 const projects = await getCollection('projects');
 ---
@@ -23,42 +21,6 @@ const projects = await getCollection('projects');
       </p>
     </header>
 
-    <div class='relative pb-20'>
-      <div
-        id='slider'
-        class='flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth'
-        style='scroll-padding: 0 1rem; view-timeline-name: --slider; view-timeline-axis: inline;'
-      >
-        {
-          projects.map((project: any) => (
-            <a
-              href={`/work/${project.slug}`}
-              class='block flex-none w-[300px] snap-start px-2 project-card group'
-              style='view-timeline-name: --reveal; view-timeline-axis: inline;'
-            >
-              <div class="relative">
-                <Image
-                  loading='eager'
-                  src={project.data.cover}
-                  alt={project.data.title}
-                  width={300}
-                  height={300}
-                  quality={100}
-                  class='rounded-lg w-full h-[300px] object-cover image-reveal group-hover:scale-105 transition-transform duration-500'
-                />
-                <div class="mt-4 space-y-1">
-                  <h2 class='text-lg font-[Tobias] italic text-neutral-300 title-reveal group-hover:text-white transition-colors'>
-                    {project.data.title}
-                  </h2>
-                  <p class="text-sm text-neutral-300/90 line-clamp-2 title-reveal">
-                    {project.data.overview}
-                  </p>
-                </div>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
+    <Carousel items={projects} basePath="work" type="project" />
   </div>
 </Layout>

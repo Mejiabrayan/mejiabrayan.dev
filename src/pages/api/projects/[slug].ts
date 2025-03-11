@@ -6,8 +6,6 @@ const RATE_LIMIT_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
 const MAX_REQUESTS = 10; // Maximum requests per IP per slug per window
 const requestMap = new Map();
 
-// Set this endpoint to be server-side rendered
-export const prerender = false;
 
 export const GET: APIRoute = async ({ params, request }) => {
   try {

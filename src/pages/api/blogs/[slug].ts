@@ -7,7 +7,6 @@ const MAX_REQUESTS = 10; // Maximum requests per IP per slug per window
 const requestMap = new Map();
 
 // Set this endpoint to be server-side rendered
-export const prerender = false;
 
 export const GET: APIRoute = async ({ params, request }) => {
   try {
@@ -56,13 +55,25 @@ export const GET: APIRoute = async ({ params, request }) => {
         headers: {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-store, must-revalidate',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
         },
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error handling view count:', error);
+    console.error('Error details:', JSON.stringify({
+      error: error.message,
+      stack: error.stack,
+      params: params,
+      env: {
+        hasUrl: Boolean(process.env.ASTRO_DB_REMOTE_URL),
+        hasToken: Boolean(process.env.ASTRO_DB_APP_TOKEN)
+      }
+    }));
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Internal server error', message: error.message }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -108,17 +119,42 @@ export const POST: APIRoute = async ({ params, request }) => {
         headers: {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-store, must-revalidate',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
         },
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error handling view count:', error);
+    console.error('Error details:', JSON.stringify({
+      error: error.message,
+      stack: error.stack,
+      params: params,
+      env: {
+        hasUrl: Boolean(process.env.ASTRO_DB_REMOTE_URL),
+        hasToken: Boolean(process.env.ASTRO_DB_APP_TOKEN)
+      }
+    }));
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Internal server error', message: error.message }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       }
     );
   }
+};
+
+// Handle OPTIONS requests for CORS
+export const OPTIONS: APIRoute = async () => {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '86400',
+    },
+  });
 }; 

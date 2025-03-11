@@ -3,7 +3,7 @@ import react from '@astrojs/react';
 import fs from 'fs';
 import path from 'path';
 import vercel from '@astrojs/vercel';
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import db from '@astrojs/db';
 import { envField } from 'astro/config';
